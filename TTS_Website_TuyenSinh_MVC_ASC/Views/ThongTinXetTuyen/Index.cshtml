@@ -1,0 +1,472 @@
+﻿@{
+    ViewData["Title"] = "Thông tin sinh viên";
+    ViewData["CurrentStep"] = 3;
+    ViewData["CompletedSteps"] = 2;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+/*    Test*/
+    .form-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 1px 6px rgba(0,0,0,.07);
+        padding: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-card-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: .2rem;
+    }
+
+    .form-card-subtitle {
+        font-size: .8rem;
+        color: var(--text-muted);
+        margin-bottom: 1.25rem;
+    }
+
+    .badge-done {
+        background: #dcfce7;
+        color: var(--success);
+        font-size: .75rem;
+        font-weight: 600;
+        padding: .3rem .75rem;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: .3rem;
+    }
+
+    /* Labels */
+    .form-label {
+        font-size: .82rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: .3rem;
+    }
+
+    .required-star {
+        color: var(--danger);
+    }
+
+    /* Inputs */
+    .form-control, .form-select {
+        font-size: .85rem;
+        border: 1.5px solid var(--border);
+        border-radius: 7px;
+        padding: .5rem .75rem;
+        transition: border-color .2s, box-shadow .2s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+        }
+
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+    /* Section heading inside card */
+    .section-label {
+        font-size: .78rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        margin: 1.2rem 0 .75rem;
+        padding-bottom: .35rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* Alert notice */
+    .alert-info-custom {
+        background: #fff7f7;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+        color: #b91c1c;
+        font-size: .82rem;
+        padding: .65rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    /* Navigation buttons */
+    .btn-back {
+        border: 1.5px solid var(--border);
+        color: #374151;
+        background: #fff;
+        border-radius: 8px;
+        padding: .55rem 1.4rem;
+        font-size: .87rem;
+        font-weight: 600;
+        transition: all .2s;
+    }
+
+        .btn-back:hover {
+            background: var(--bg-light);
+        }
+
+    .btn-next {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: .55rem 1.4rem;
+        font-size: .87rem;
+        font-weight: 600;
+        transition: background .2s;
+    }
+
+        .btn-next:hover {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+    /* Date input icon helper */
+    .input-date-wrap {
+        position: relative;
+    }
+
+    .input-date-icon {
+        position: absolute;
+        right: .75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        pointer-events: none;
+        font-size: .95rem;
+    }
+
+    .input-date-wrap .form-control {
+        padding-right: 2.2rem;
+    }
+</style>
+
+<div class="form-card">
+
+    <!-- Card header -->
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-1">
+        <div>
+            <div class="form-card-title">Thông tin sinh viên</div>
+            <div class="form-card-subtitle">Vui lòng điền chính xác thông tin cá nhân theo giấy khai sinh và CCCD</div>
+        </div>
+        <span class="badge-done"><i class="bi bi-check-circle-fill"></i> Đã hoàn thành</span>
+    </div>
+
+    <!-- ══ FORM ═════════════════════════════════════════ -->
+    <form id="frmThongTinSinhVien" novalidate>
+
+        @Html.AntiForgeryToken()
+
+        <!-- Row 1: Họ tên / Ngày sinh / Giới tính -->
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Họ và tên <span class="required-star">*</span></label>
+                <input type="text" id="HoVaTen" name="HoVaTen"
+                       class="form-control" placeholder="Nhập Họ và tên" required />
+                <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Ngày sinh <span class="required-star">*</span></label>
+                <div class="input-date-wrap">
+                    <input type="date" id="NgaySinh" name="NgaySinh"
+                           class="form-control" value="2004-01-01" required />
+                    <span class="input-date-icon"><i class="bi bi-calendar3"></i></span>
+                </div>
+                <div class="invalid-feedback">Vui lòng nhập ngày sinh.</div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Giới tính <span class="required-star">*</span></label>
+                <div class="d-flex gap-4 mt-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="GioiTinh" id="radNam" value="Nam" />
+                        <label class="form-check-label" for="radNam">Nam</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="GioiTinh" id="radNu" value="Nữ" checked />
+                        <label class="form-check-label" for="radNu">Nữ</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: CCCD / Ngày cấp / Nơi cấp -->
+        <div class="row g-3 mt-1">
+            <div class="col-md-4">
+                <label class="form-label">Số CCCD <span class="required-star">*</span></label>
+                <input type="text" id="SoCCCD" name="SoCCCD"
+                       class="form-control" placeholder="Nhập Số CMND/CCCD"
+                       maxlength="12" required />
+                <div class="invalid-feedback">Vui lòng nhập số CCCD.</div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Ngày cấp</label>
+                <div class="input-date-wrap">
+                    <input type="date" id="NgayCap" name="NgayCap" class="form-control" />
+                    <span class="input-date-icon"><i class="bi bi-calendar3"></i></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Nơi cấp</label>
+                <select id="NoiCap" name="NoiCap" class="form-select">
+                    <option value="">Chọn Nơi cấp</option>
+                    <option>Cục Cảnh sát QLHC về TTXH</option>
+                    <option>Công an tỉnh / thành phố</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Row 3: SĐT / Email / Dân tộc -->
+        <div class="row g-3 mt-1">
+            <div class="col-md-4">
+                <label class="form-label">Số điện thoại <span class="required-star">*</span></label>
+                <input type="tel" id="SoDienThoai" name="SoDienThoai"
+                       class="form-control" placeholder="Nhập số điện thoại"
+                       maxlength="10" required />
+                <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Email <span class="required-star">*</span></label>
+                <input type="email" id="Email" name="Email"
+                       class="form-control" placeholder="Nhập Email" required />
+                <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Dân tộc</label>
+                <select id="DanToc" name="DanToc" class="form-select">
+                    <option value="Kinh" selected>Kinh</option>
+                    <option value="Tày">Tày</option>
+                    <option value="Thái">Thái</option>
+                    <option value="Mường">Mường</option>
+                    <option value="Khmer">Khmer</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Row 4: Năm tốt nghiệp / Tên trường THPT / Đối tượng ưu tiên -->
+        <div class="row g-3 mt-1">
+            <div class="col-md-4">
+                <label class="form-label">Năm tốt nghiệp</label>
+                <select id="NamTotNghiep" name="NamTotNghiep" class="form-select">
+                    <option value="">Chọn Năm tốt nghiệp</option>
+                    @for (int y = DateTime.Now.Year; y >= 2015; y--)
+                    {
+                        <option value="@y">@y</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Tên Trường THPT lớp 12</label>
+                <select id="TruongTHPT" name="TruongTHPT" class="form-select">
+                    <option value="">Chọn Tên Trường THPT lớp 12</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Đối tượng ưu tiên tuyển sinh</label>
+                <select id="DoiTuongUuTien" name="DoiTuongUuTien" class="form-select">
+                    <option value="">Chọn Đối tượng ưu tiên tuyển sinh</option>
+                    <option>UT1 – Con liệt sĩ</option>
+                    <option>UT2 – Anh hùng lực lượng vũ trang</option>
+                    <option>UT3 – Con thương binh</option>
+                    <option>Không</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Row 5: Khu vực tuyển sinh -->
+        <div class="row g-3 mt-1">
+            <div class="col-md-4">
+                <label class="form-label">Khu vực tuyển sinh</label>
+                <select id="KhuVuc" name="KhuVuc" class="form-select">
+                    <option value="">Chọn Khu vực tuyển sinh</option>
+                    <option>Khu vực 1 (KV1)</option>
+                    <option>Khu vực 2 nông thôn (KV2-NT)</option>
+                    <option>Khu vực 2 (KV2)</option>
+                    <option>Khu vực 3 (KV3)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ── Hộ khẩu thường trú ───────────────────────── -->
+        <div class="section-label">Hộ khẩu thường trú</div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Thành phố / Tỉnh <span class="required-star">*</span></label>
+                <select id="TinhHK" name="TinhHK" class="form-select" required>
+                    <option value="">Chọn Thành phố/ Tỉnh</option>
+                </select>
+                <div class="invalid-feedback">Vui lòng chọn tỉnh/thành phố.</div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phường / Xã</label>
+                <select id="PhuongXaHK" name="PhuongXaHK" class="form-select">
+                    <option value="">Chọn Phường/ Xã</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-1">
+            <div class="col-12">
+                <label class="form-label">Số nhà / Tên đường <span class="required-star">*</span></label>
+                <input type="text" id="SoNhaHK" name="SoNhaHK"
+                       class="form-control" placeholder="Nhập Số nhà/ Tên đường" required />
+                <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
+            </div>
+        </div>
+
+        <!-- ── Địa chỉ liên hệ ──────────────────────────── -->
+        <div class="section-label">Địa chỉ liên hệ của thí sinh</div>
+
+        <!-- Warning notice -->
+        <div class="alert-info-custom mb-3">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            Lớp học phần có chia nhóm thực hành, vui lòng chọn lịch có nhóm.
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Thành phố / Tỉnh <span class="required-star">*</span></label>
+                <select id="TinhLH" name="TinhLH" class="form-select" required>
+                    <option value="">Chọn Thành phố/ Tỉnh</option>
+                </select>
+                <div class="invalid-feedback">Vui lòng chọn tỉnh/thành phố.</div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phường / Xã</label>
+                <select id="PhuongXaLH" name="PhuongXaLH" class="form-select">
+                    <option value="">Chọn Phường/ Xã</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-1">
+            <div class="col-12">
+                <label class="form-label">Số nhà / Tên đường <span class="required-star">*</span></label>
+                <input type="text" id="SoNhaLH" name="SoNhaLH"
+                       class="form-control" placeholder="Nhập Số nhà/ Tên đường" required />
+                <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
+            </div>
+        </div>
+
+        <!-- ── Navigation buttons ──────────────────────── -->
+        <div class="d-flex justify-content-end gap-3 mt-4 pt-3 border-top">
+            <button type="button" class="btn btn-back" id="btnQuayVe">
+                <i class="bi bi-arrow-left me-1"></i> Quay về
+            </button>
+            <button type="submit" class="btn btn-next" id="btnTiepTuc">
+                Hoàn thành &amp; tiếp tục <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>$(function () {
+
+    /* ── Populate province dropdowns via API (example) ── */
+    const tinhSelects = ['#TinhHK', '#TinhLH'];
+
+    // Dummy provinces (replace with real AJAX call)
+    const provinces = [
+        { code: '79', name: 'TP. Hồ Chí Minh' },
+        { code: '01', name: 'Hà Nội' },
+        { code: '48', name: 'Đà Nẵng' },
+        { code: '92', name: 'Cần Thơ' },
+    ];
+
+    tinhSelects.forEach(sel => {
+        provinces.forEach(p => {
+            $(sel).append(`<option value="${p.code}">${p.name}</option>`);
+        });
+    });
+
+    $('#TinhHK').on('change', function () {
+        loadWards($(this).val(), '#PhuongXaHK');
+    });
+    $('#TinhLH').on('change', function () {
+        loadWards($(this).val(), '#PhuongXaLH');
+    });
+
+    function loadWards(provinceCode, targetSel) {
+        $(targetSel).empty().append('<option value="">Chọn Phường/ Xã</option>');
+        if (!provinceCode) return;
+
+        $(targetSel).append('<option value="demo">-- Phường mẫu --</option>');
+    }
+
+
+    $('#NamTotNghiep').on('change', function () {
+        $('#TruongTHPT').empty().append('<option value="">Chọn Tên Trường THPT lớp 12</option>');
+
+    });
+
+    $('#frmThongTinSinhVien').on('submit', function (e) {
+        e.preventDefault();
+        const form = this;
+        if (!form.checkValidity()) {
+            e.stopPropagation();
+            $(form).addClass('was-validated');
+            return;
+        }
+
+        const payload = {
+            hoVaTen:       $('#HoVaTen').val(),
+            ngaySinh:      $('#NgaySinh').val(),
+            gioiTinh:      $('input[name="GioiTinh"]:checked').val(),
+            soCCCD:        $('#SoCCCD').val(),
+            ngayCap:       $('#NgayCap').val(),
+            noiCap:        $('#NoiCap').val(),
+            soDienThoai:   $('#SoDienThoai').val(),
+            email:         $('#Email').val(),
+            danToc:        $('#DanToc').val(),
+            namTotNghiep:  $('#NamTotNghiep').val(),
+            truongTHPT:    $('#TruongTHPT').val(),
+            doiTuongUuTien:$('#DoiTuongUuTien').val(),
+            khuVuc:        $('#KhuVuc').val(),
+            diaChiHK: {
+                tinh:   $('#TinhHK').val(),
+                phuong: $('#PhuongXaHK').val(),
+                soNha:  $('#SoNhaHK').val()
+            },
+            diaChiLH: {
+                tinh:   $('#TinhLH').val(),
+                phuong: $('#PhuongXaLH').val(),
+                soNha:  $('#SoNhaLH').val()
+            }
+        };
+
+        $.ajax({
+            url:         '/DangKy/LuuThongTinSinhVien',
+            type:        'POST',
+            contentType: 'application/json',
+            data:        JSON.stringify(payload),
+            headers: {
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+            },
+            success: function (res) {
+                if (res.success) {
+                    window.location.href = res.redirectUrl || '/DangKy/Step/4';
+                } else {
+                    alert(res.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            },
+            error: function () {
+                alert('Không thể kết nối máy chủ. Vui lòng thử lại.');
+            }
+        });
+    });
+
+    $('#btnQuayVe').on('click', function () {
+        window.history.back();
+    });
+
+});</script>
+}

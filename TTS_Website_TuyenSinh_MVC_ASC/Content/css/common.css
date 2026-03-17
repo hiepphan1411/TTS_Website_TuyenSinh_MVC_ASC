@@ -1,0 +1,88 @@
+﻿/* Theme chung */
+
+:root {
+    /* Border */
+    --border-color: #e4e4e4;
+    --border-color-e0: #e0e0e0;
+    --border-color-d0: #d0d0d0;
+    --gray-icon-color: #656565;
+    --border-blue-light: #dee2e6;
+    /* Hover */
+    --primary-blue-hover: #0052a3;
+    /* Layout */
+    --sidebar-width: 260px;
+    --header-height: 60px;
+    /* Primary colors */
+    --primary-blue: #3a74f0;
+    --secondary-blue: #153898;
+    --primary-yellow: #ffb800;
+    --primary-color: #3a74f0;
+    --secondary-color: #1976d2;
+    --primary-gray: #9ba9bd;
+    /* Status colors */
+    --success-green: #28a745;
+    --success-color: #2e7d32;
+    --warning-color: #ff9800;
+    --warning-orange: #ffa500;
+    --danger-color: #d32f2f;
+    --color-danger: #f65050;
+    --info-color: #2196f3;
+    /* Progress / Legend */
+    --color-completed: #4a90e2;
+    --color-completed-heavy: #2a4591;
+    --color-current: #ffc107;
+    --color-remaining: #c5c5c5;
+    --color-green-completed: #70ad47;
+    --color-yellow-active: #ffc107;
+    --color-brown-heavy: #7c2d12;
+    /* Background */
+    --light-gray: #f5f5f5;
+    --light-bg: #f5f7fa;
+    --blue-bg-light: #e8f4fd;
+    --orange-bg-light: #fff4e6;
+    --color-blue-light: #f8f9fa;
+    --color-blue-lighter: #f0f5ff;
+    --color-blue-lightest: #e8f0fe;
+    --color-blue-heavy: #e3f2fd;
+    --color-blue-between: #e5e7eb;
+    --blue-between-heavy: #b0b8c1;
+    --color-red-light: #f0f0f0;
+    --color-red-lighter: #fef2f2;
+    --color-green-light: #d3f9d8;
+    --color-yellow-light: #fff9db;
+    --color-bg-light: #fbfcfd;
+    --selected-bg-color: #f3fafe;
+    --dark-bg: #1a1a1a;
+    /* Text */
+    --color-text-primary: #505050;
+    --color-text-secondary: #8e8e8e;
+    --text-light: #666666;
+    --text-muted: #6c757d;
+    --text-blue: #56a2e8;
+    --red-text: #dc0000;
+    --color-gray-lighter: #cbd5e1;
+    /* Table */
+    --table-border-color: #f7f7f7;
+    --table-header-bg: #f9fafb;
+    --color-bg-light: #fbfcfd;
+    --selected-bg-color: #f3fafe;
+    /* Borders */
+    --border-color: #e4e4e4;
+    --border-color-e0: #e0e0e0;
+    --border-blue-light: #dee2e6;
+    --border-gray: #e8edf3;
+    --table-border-color: #f7f7f7;
+    --table-header-bg: #f9fafb;
+    --border-thickness: 5px;
+    /* Badge */
+    --red-badge: #dc3545;
+    /* Icons */
+    --gray-icon-color: #656565;
+    /* Shadows */
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: #e7ecf0 !important;
+}
