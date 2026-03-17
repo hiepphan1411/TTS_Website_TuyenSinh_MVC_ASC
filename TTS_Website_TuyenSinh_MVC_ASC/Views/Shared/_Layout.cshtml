@@ -3,127 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Tuyển Sinh Đại Học</title>
+    <title>@ViewBag.Title</title>
 
-    <!-- Bootstrap 5.3.8 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Library CSS -->
 
-    <style>
-        :root {
-            --primary:       #2563eb;
-            --primary-light: #3b82f6;
-            --primary-dark:  #1d4ed8;
-            --accent:        #f59e0b;
-            --accent-hover:  #d97706;
-            --success:       #16a34a;
-            --warning:       #f59e0b;
-            --danger:        #dc2626;
-            --text-muted:    #6b7280;
-            --border:        #e5e7eb;
-            --bg-light:      #f9fafb;
-            --sidebar-w:     220px;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: var(--bg-light);
-            color: #1f2937;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .site-header {
-            background: #fff;
-            box-shadow: 0 1px 4px rgba(0,0,0,.08);
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-        }
-
-        .topbar {
-            background: var(--primary);
-            color: #fff;
-            font-size: .78rem;
-            padding: .3rem 1rem;
-        }
-        .topbar a { color: #fff; text-decoration: none; }
-        .topbar a:hover { text-decoration: underline; }
-
-        .navbar-brand-name {
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: .02em;
-        }
-        .navbar-brand-sub {
-            font-size: .75rem;
-            color: var(--text-muted);
-            margin-top: -2px;
-        }
-
-        .btn-tracuu {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            border-radius: 20px;
-            padding: .35rem 1rem;
-            font-size: .85rem;
-            font-weight: 600;
-            transition: all .2s;
-        }
-        .btn-tracuu:hover { background: var(--primary); color: #fff; }
-
-        .btn-dangnhap {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: .35rem 1.1rem;
-            font-size: .85rem;
-            font-weight: 600;
-            transition: background .2s;
-        }
-        .btn-dangnhap:hover { background: var(--accent-hover); color: #fff; }
-
-        .page-wrapper {
-            flex: 1;
-            display: flex;
-            gap: 0;
-            padding: 1.5rem 2rem;
-            max-width: 1280px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-
-        .sidebar-progress {
-            width: var(--sidebar-w);
-            min-width: var(--sidebar-w);
-            margin-right: 1.5rem;
-        }
-
-        .content-area {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .site-footer {
-            background: #1e293b;
-            color: #94a3b8;
-            font-size: .82rem;
-            margin-top: auto;
-        }
-
-        @@media (max-width: 768px) {
-            .page-wrapper { flex-direction: column; padding: 1rem; }
-            .sidebar-progress { width: 100%; min-width: unset; margin-right: 0; margin-bottom: 1rem; }
-        }
-    </style>
+    <link href="~/Content/lib/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/common.css" rel="stylesheet" />
+    <link href="~/Content/lib/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/kendo-ui.common.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/kendo.default.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/6f955e325d.js" crossorigin="anonymous"></script>
 
     @RenderSection("Styles", required: false)
 </head>
@@ -141,9 +30,7 @@
 
     @Html.Partial("_Footer")
 
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap 5.3.8 Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     @RenderSection("Scripts", required: false)

@@ -174,8 +174,6 @@
     <Content Include="Content\lib\themes\base\theme.css" />
     <Content Include="Content\lib\themes\base\tooltip.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Controllers\HomeController.cs" />
-    <Content Include="Controllers\ThongTinXetTuyenController.cs" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\js\common.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.js" />
@@ -197,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Controllers\ThongTinXetTuyenController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
