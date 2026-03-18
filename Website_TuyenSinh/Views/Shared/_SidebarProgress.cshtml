@@ -1,166 +1,76 @@
 
+<aside class="sidebar-progress">
+    <div class="sidebar-card">
+        <div class="sidebar-title"><i class="bi bi-list-check me-1"></i>Mục lục đăng ký</div>
 
-@{
-    int currentStep    = ViewData["CurrentStep"]    is int cs ? cs : 3;
-    int completedSteps = ViewData["CompletedSteps"] is int cp ? cp : 2;
-    int totalSteps     = 6;
-    int progressPct    = (int)Math.Round((double)completedSteps / totalSteps * 100);
+        <div class="text-center">
+            <div class="progress-pct" id="df-sidebar-progress-pct">0%</div>
+        </div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="df-sidebar-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-label text-center" id="df-sidebar-progress-label">0/0 bước hoàn thành</div>
 
-    var steps = new[]
-    {
-        new { Id = 1, Title = "Thông tin thí sinh",    Sub = "Đã hoàn thành", Status = "done"    },
-        new { Id = 2, Title = "Chứng chỉ ngoại ngữ",  Sub = "Đã hoàn thành", Status = "done"    },
-        new { Id = 3, Title = "Thông tin xét tuyển",   Sub = "Đang thực hiện", Status = "active" },
-        new { Id = 4, Title = "Thông tin khảo sát",    Sub = "Chưa nhập",     Status = "pending" },
-        new { Id = 5, Title = "Người giới thiệu",      Sub = "Chưa nhập",     Status = "pending" },
-        new { Id = 6, Title = "Hoàn tất đăng ký",      Sub = "Chưa nhập",     Status = "pending" },
-    };
-}
-
-<style>
-/*    Test*/
-    .sidebar-card {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 1px 6px rgba(0,0,0,.07);
-        padding: 1.2rem 1rem;
-        position: sticky;
-        top: 80px;
-    }
-
-    .sidebar-title {
-        font-size: .8rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: .06em;
-        margin-bottom: .9rem;
-    }
-
-    .progress-pct {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--primary);
-        line-height: 1;
-    }
-
-    .progress-bar-wrap {
-        background: #e2e8f0;
-        border-radius: 99px;
-        height: 8px;
-        margin: .5rem 0 .25rem;
-        overflow: hidden;
-    }
-    .progress-bar-fill {
-        background: var(--primary);
-        height: 100%;
-        border-radius: 99px;
-        transition: width .5s ease;
-    }
-
-    .progress-label {
-        font-size: .75rem;
-        color: var(--text-muted);
-        margin-bottom: 1rem;
-    }
-
-    /* Steps */
-    .step-list { list-style: none; padding: 0; margin: 0; }
-
-    .step-item {
-        display: flex;
-        align-items: flex-start;
-        gap: .65rem;
-        padding: .55rem .6rem;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background .15s;
-        margin-bottom: .15rem;
-    }
-    .step-item:hover { background: var(--bg-light); }
-
-    /* Active step */
-    .step-item.is-active {
-        background: #fff7ed;
-        border: 1.5px solid var(--accent);
-    }
-    .step-item.is-done {
-        background: #eff6ff;
-    }
-
-    .step-badge {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: .75rem;
-        font-weight: 700;
-        flex-shrink: 0;
-        margin-top: 1px;
-    }
-    .step-badge.done   { background: var(--primary); color: #fff; }
-    .step-badge.active { background: var(--accent);  color: #fff; }
-    .step-badge.pending{ background: #e2e8f0; color: var(--text-muted); }
-
-    .step-info { min-width: 0; }
-    .step-info-title {
-        font-size: .82rem;
-        font-weight: 600;
-        color: #1f2937;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .step-item.is-active .step-info-title { color: var(--accent-hover); }
-
-    .step-info-sub {
-        font-size: .72rem;
-        margin-top: 1px;
-    }
-    .step-info-sub.done   { color: var(--primary); }
-    .step-info-sub.active { color: var(--accent); }
-    .step-info-sub.pending{ color: var(--text-muted); }
-</style>
-
-<div class="sidebar-card">
-    <div class="sidebar-title"><i class="bi bi-list-check me-1"></i>Mục lục đăng ký</div>
-
-    <!-- Progress -->
-    <div class="text-center">
-        <div class="progress-pct">@progressPct%</div>
+        <ul class="step-list" id="df-sidebar-steps"></ul>
     </div>
-    <div class="progress-bar-wrap">
-        <div class="progress-bar-fill" style="width:@progressPct%"></div>
-    </div>
-    <div class="progress-label text-center">@completedSteps/@totalSteps bước hoàn thành</div>
+</aside>
 
-    <!-- Step list -->
-    <ul class="step-list">
-        @foreach (var step in steps)
-        {
-            string itemClass  = step.Status == "active" ? "is-active" :
-                                step.Status == "done"   ? "is-done"   : "";
-            string badgeClass = step.Status;
-            string badgeIcon  = step.Status == "done" ? "✓" : step.Id.ToString();
-
-            <li class="step-item @itemClass"
-                onclick="navigateStep(@step.Id)">
-                <span class="step-badge @badgeClass">@badgeIcon</span>
-                <div class="step-info">
-                    <div class="step-info-title">@step.Title</div>
-                    <div class="step-info-sub @step.Status">@step.Sub</div>
-                </div>
-            </li>
+<script>
+    (function () {
+        function esc(s) {
+            return s == null ? "" : String(s)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
         }
-    </ul>
-</div>
 
-@section Scripts {
-    <script>
-        function navigateStep(stepId) {
-            console.log('Navigate to step:', stepId);
+        function statusOf(idx, activeIdx, tab) {
+            if (idx === activeIdx) return "active";
+            if (tab && tab.isCompleted) return "done";
+            if (idx < activeIdx) return "done";
+            return "pending";
         }
-    </script>
-}
+
+        function subText(status) {
+            if (status === "done") return "Đã hoàn thành";
+            if (status === "active") return "Đang thực hiện";
+            return "Chưa nhập";
+        }
+
+        window.dfUpdateSidebar = function (activeIdx, tabs) {
+            tabs = Array.isArray(tabs) ? tabs : [];
+            var total = tabs.length;
+            var completed = tabs.filter(function (t) { return !!t.isCompleted; }).length;
+            var pct = total ? Math.round((completed / total) * 100) : 0;
+
+            var pctEl = document.getElementById("df-sidebar-progress-pct");
+            var fillEl = document.getElementById("df-sidebar-progress-fill");
+            var labelEl = document.getElementById("df-sidebar-progress-label");
+            var listEl = document.getElementById("df-sidebar-steps");
+
+            if (pctEl) pctEl.textContent = pct + "%";
+            if (fillEl) fillEl.style.width = pct + "%";
+            if (labelEl) labelEl.textContent = completed + "/" + total + " bước hoàn thành";
+            if (!listEl) return;
+
+            var html = "";
+            tabs.forEach(function (tab, idx) {
+                var status = statusOf(idx, activeIdx, tab);
+                var itemClass = status === "active" ? "is-active" : (status === "done" ? "is-done" : "");
+                var label = tab && tab.tabLabel ? tab.tabLabel : ("Bước " + (idx + 1));
+
+                html += ""
+                    + "<li class='step-item " + itemClass + "' onclick='window.dfGoToTab && window.dfGoToTab(" + idx + ")'>"
+                    + "<span class='step-badge " + status + "'>" + (idx + 1) + "</span>"
+                    + "<div class='step-info'>"
+                    + "<div class='step-info-title'>" + esc(label) + "</div>"
+                    + "<div class='step-info-sub " + status + "'>" + subText(status) + "</div>"
+                    + "</div>"
+                    + "</li>";
+            });
+
+            listEl.innerHTML = html;
+        };
+    })();
+</script>
