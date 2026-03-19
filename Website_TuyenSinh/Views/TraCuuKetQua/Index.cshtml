@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Tra cứu kết quả";
+    Layout = "~/Views/Shared/_Layout-NoSidebar.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/dang-nhap.css" />
+}
+
+<div class="main-container w-100 d-flex justify-content-center align-items-center">
+    <div class="glass-card text-center">
+
+        <div class="login-title d-flex flex-column justify-content-center align-items-center gap-1">
+            <div class="main-title fs-5" style="color: var(--primary-blue)">TRA CỨU KẾT QUẢ</div>
+            <div class="sub-title fw-semibold" style="color: var(--color-current)">Xét tuyển Đại học chính quy 2026</div>
+        </div>
+
+        <form method="post" action="#" class="w-100 d-flex flex-column gap-1">
+
+            <!-- Thông tin thí sinh -->
+            <div class="text-start position-relative">
+                <label class="form-label fw-medium mb-1">Thông tin thí sinh</label>
+                <input type="password" class="form-control glass-input" 
+                       placeholder="Nhập CMND / CCCD / Mã hồ sơ / SĐT" id="password" />
+            </div>
+
+            <!-- Notes -->
+            <div class="d-flex align-items-center gap-3 py-2" style="font-size: 12px;">
+                <div class="fw-medium">* Vui lòng nhập chính xác thông tin cá nhân của bạn để kiểm tra kết quả xét tuyển từ nhà trường.</div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-main w-100 text-white d-flex justify-content-center align-items-center gap-2">
+                <i class="fa fa-search" aria-hidden="true" style="font-size: 12px;"></i> Tra cứu ngay
+            </button>
+
+        </form>
+    </div>
+</div>
+

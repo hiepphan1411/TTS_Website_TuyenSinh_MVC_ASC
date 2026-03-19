@@ -120,6 +120,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DangNhapController.cs" />
+    <Compile Include="Controllers\DatLaiMatKhauController.cs" />
+    <Compile Include="Controllers\TraCuuKetQuaController.cs" />
+    <Compile Include="Controllers\TraCuuThongTinController.cs" />
     <Compile Include="Controllers\XetTuyenDaiHocController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -131,6 +135,9 @@
   <ItemGroup>
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\dang-ky-tuyen-sinh.css" />
+    <Content Include="Content\css\dang-nhap.css" />
+    <Content Include="Content\css\dashboard-filter.css" />
+    <Content Include="Content\images\login-background.png" />
     <Content Include="Content\lib\bootstrap-grid.css" />
     <Content Include="Content\lib\bootstrap-grid.min.css" />
     <Content Include="Content\lib\bootstrap-grid.rtl.css" />
@@ -239,6 +246,12 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_SidebarProgress.cshtml" />
     <Content Include="Views\XetTuyenDaiHoc\Index.cshtml" />
+    <Content Include="Views\DangNhap\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout-NoSidebar.cshtml" />
+    <Content Include="Views\DatLaiMatKhau\Index.cshtml" />
+    <Content Include="Views\TraCuuKetQua\Index.cshtml" />
+    <Content Include="Views\TraCuuThongTin\Index.cshtml" />
+    <Content Include="Views\Shared\_DashboardFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

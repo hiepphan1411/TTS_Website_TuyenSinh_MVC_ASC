@@ -1,0 +1,68 @@
+﻿.filter-section {
+    background: #f3f4f6;
+    padding: 20px;
+    border-radius: 16px;
+    color: var(--color-text-primary);
+}
+
+/* Group */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+}
+
+/* Input with icon */
+.input-icon {
+    position: relative;
+}
+
+    .input-icon input {
+        border-radius: 10px;
+        padding-right: 35px;
+    }
+
+    .input-icon i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+    }
+
+/* Multi select fake */
+.multi-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: white;
+    border-radius: 10px;
+    padding: 6px;
+    border: 1px solid #ddd;
+}
+
+.tag {
+    background: #e5e7eb;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+    .tag i {
+        cursor: pointer;
+    }
+
+.add-more {
+    color: #666;
+    cursor: pointer;
+}
+
+/* Button filter */
+.btn-filter {
+    background: #e5e7eb;
+    border: none;
+    border-radius: 10px;
+}
