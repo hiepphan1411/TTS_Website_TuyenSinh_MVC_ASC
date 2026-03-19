@@ -77,10 +77,6 @@ D:\WebApplicationTest3\WebApplicationTest3\obj\Debug\Website_TuyenSinh.csproj.Co
 D:\WebApplicationTest3\WebApplicationTest3\obj\Debug\Website_.9E6BD646.Up2Date
 D:\WebApplicationTest3\WebApplicationTest3\obj\Debug\WebApplicationTest3.dll
 D:\WebApplicationTest3\WebApplicationTest3\obj\Debug\WebApplicationTest3.pdb
-D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_TuyenSinh.csproj.AssemblyReference.cache
-D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_TuyenSinh.csproj.CoreCompileInputs.cache
-D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.dll
-D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.pdb
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\WebApplicationTest3.dll.config
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\WebApplicationTest3.dll
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\WebApplicationTest3.pdb
@@ -155,4 +151,8 @@ D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.WebPag
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Newtonsoft.Json.xml
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Antlr3.Runtime.pdb
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_TuyenSinh.csproj.AssemblyReference.cache
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_TuyenSinh.csproj.CoreCompileInputs.cache
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_.9E6BD646.Up2Date
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.pdb

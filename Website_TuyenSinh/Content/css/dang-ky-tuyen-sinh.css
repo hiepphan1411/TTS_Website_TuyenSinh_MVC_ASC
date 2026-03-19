@@ -8,14 +8,14 @@
 }
 
 .df-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--df-gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--df-gray-200);
 }
 
 .df-card-title {
@@ -25,9 +25,8 @@
 }
 
 .df-card-sub {
-  font-size: 12.48px;
+  font-size: 13px;
   color: var(--df-gray-500);
-  margin-top: 2.4px;
 }
 
 .df-badge-done {
@@ -138,7 +137,7 @@
   outline: none;
   flex: 1;
   min-width: 80px;
-  font-size: 13.28px;
+  font-size: 13px;
   background: transparent;
 }
 
@@ -235,8 +234,8 @@
   background: var(--df-gray-50);
   border: 1px solid var(--df-gray-200);
   border-radius: var(--df-radius);
-  padding: 8.8px 13.6px;
-  font-size: 12.48px;
+  padding: 8px 13px;
+  font-size: 12px;
   font-family: monospace;
   color: var(--df-gray-500);
 }
@@ -263,9 +262,28 @@
   color: var(--df-gray-500);
   border-bottom: 1.5px solid var(--df-gray-200);
   padding-bottom: 6.4px;
-  margin: 20.8px 0 13.6px;
+  margin: 20px 0 13px;
   grid-column: 1 / -1;
 }
+
+.group-box {
+    border: 1px solid #d9d9df;
+    border-radius: 8px;
+    padding: 18px 16px 16px;
+    margin-top: 10px;
+    background: #fff;
+}
+
+    .group-box > legend {
+        float: none; 
+        width: auto;
+        margin: 0 0 6px;
+        padding: 0 8px;
+        font-size: 14px;
+        color: #666;
+        background: #fff; 
+        line-height: 1;
+    }
 
 .df-nav-bar {
   display: flex;
