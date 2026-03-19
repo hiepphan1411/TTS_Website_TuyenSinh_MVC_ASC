@@ -1,154 +1,141 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section styles{
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 }
 
-  <div class="banner">
-      <div class="card-banner">
+<div class="banner">
+    <div class="card-banner">
         <p>CỔNG THÔNG TIN TUYỂN SINH</p>
         <p>TUYỂN SINH ĐẠI HỌC</p>
         <p>CHÍNH QUY NĂM 2026</p>
         <p>Khám phá cơ hội học tập tại môi trường giáo dục hàng đầu, nơi kiến tạo tương lai và phát triển tiềm năng của bạn.</p>
 
         <div class="d-flex banner-btn justify-content-center gap-3 mt-4">
-          <a href="#" class="btn-now-register">Đăng ký xét tuyển ngay</a>
-          <a href="#" class="btn-detail">Xem chi tiết ngành học</a>
+            <a href="#" class="btn-now-register">Đăng ký xét tuyển ngay</a>
+            <a href="#" class="btn-detail">Xem chi tiết ngành học</a>
         </div>
 
         <div class="card-banner-footer">
-          <span><i class="fa fa-graduation-cap"></i> Học bổng lên đến 20 tỷ</span>
-          <span><i class="fa fa-briefcase"></i> Thực tập lương cao</span>
+            <span><i class="fa fa-graduation-cap"></i> Học bổng lên đến 20 tỷ</span>
+            <span><i class="fa fa-briefcase"></i> Thực tập lương cao</span>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
-  <!-- Bậc đào tạo & Đăng ký -->
-  <div class="card-section">
+<!-- Bậc đào tạo & Đăng ký -->
+<div class="card-section">
     <div class="container-lg">
-      <p class="title-center">BẬC ĐÀO TẠO VÀ ĐĂNG KÝ</p>
-      <div class="d-flex justify-content-center mb-4">
-          <div class="line"></div>
-      </div>
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="card-register">
-          <div>
-            <i class="fa fa-graduation-cap"></i>
-            </div>
-            <p>ĐẠI HỌC - CHÍNH QUY</p>
-            <p>Đào tạo bằng đại học chính quy với chương trình chuẩn quốc gia, thời gian 4 năm.</p>
-            <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
-          </div>
+        <p class="title-center">BẬC ĐÀO TẠO VÀ ĐĂNG KÝ</p>
+        <div class="d-flex justify-content-center mb-4">
+            <div class="line"></div>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="card-register">
-          <div>
-            <i class="fa fa-file-text"></i>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card-register">
+                    <div>
+                        <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <p>ĐẠI HỌC - CHÍNH QUY</p>
+                    <p>Đào tạo bằng đại học chính quy với chương trình chuẩn quốc gia, thời gian 4 năm.</p>
+                    <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
+                </div>
             </div>
-            <P>XÉT TUYỂN SAU ĐẠI HỌC</p>
-            <p>Chương trình đào tạo cao học, thạc sĩ, tiến sĩ cho sinh viên tốt nghiệp đại học.</p>
-            <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
-          </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card-register">
+                    <div>
+                        <i class="fa fa-file-text"></i>
+                    </div>
+                    <P>XÉT TUYỂN SAU ĐẠI HỌC</P>
+                    <p>Chương trình đào tạo cao học, thạc sĩ, tiến sĩ cho sinh viên tốt nghiệp đại học.</p>
+                    <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card-register">
+                    <div>
+                        <i class="fa fa-link"></i>
+                    </div>
+                    <p>ĐẠI HỌC - LIÊN THÔNG</p>
+                    <p>Chương trình liên thông từ cao đẳng lên đại học, rút ngắn thời gian học.</p>
+                    <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card-register">
+                    <div>
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <p>TRA CỨU KẾT QUẢ XÉT TUYỂN</p>
+                    <p>Kiểm tra kết quả xét tuyển và tình trạng hồ sơ của bạn.</p>
+                    <a href="#" class="btn-outline-primary">Tra cứu ngay →</a>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="card-register">
-            <div>
-                <i class="fa fa-link"></i>
-            </div>
-            <p>ĐẠI HỌC - LIÊN THÔNG</p>
-            <p>Chương trình liên thông từ cao đẳng lên đại học, rút ngắn thời gian học.</p>
-            <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="card-register">
-            <div>
-              <i class="fa fa-search"></i>
-            </div>
-              <p>TRA CỨU KẾT QUẢ XÉT TUYỂN</p>
-              <p>Kiểm tra kết quả xét tuyển và tình trạng hồ sơ của bạn.</p>
-              <a href="#" class="btn-outline-primary">Tra cứu ngay →</a>
-            </div>
-        </div>
-      </div>
     </div>
     <div class="container">
-      <p class="title-center">THÔNG TIN TUYỂN SINH</p>
-      <div class="d-flex justify-content-center">
-          <div class="line"></div>
-      </div>
-      <div class="row g-4 py-4">
-        <div class="col-md-4">
-          <div class="card-info">
-            <div>
-              <i class="fa fa-map-marker"></i>
-              <p>Địa chỉ</p>
-            </div>
-            <div class="info">
-              <p class="info-title">Trụ sở chính: </p>
-              <p class="info-detail">Số 8, đường Phú Nghĩa, xã Phú Nghĩa, TP. Hà Nội</p>
-            </div>
-            <div class="info">
-              <p class="info-title">Cơ sở đào tạo: </p>
-              <p class="info-detail">608 Nguyễn Huy Tưởng, P. Thanh Xuân, TP. Hà Nội</p>
-            </div>
-          </div>
+        <p class="title-center">THÔNG TIN TUYỂN SINH</p>
+        <div class="d-flex justify-content-center">
+            <div class="line"></div>
         </div>
-        <div class="col-md-4">
-          <div class="card-info">
-            <div>
-              <i class="fa fa-phone"></i>
-              <p>Liên hệ</p>
+        <div class="row g-4 py-4">
+            <div class="col-md-4">
+                <div class="card-info">
+                    <div>
+                        <i class="fa fa-map-marker"></i>
+                        <p>Địa chỉ</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Trụ sở chính: </p>
+                        <p class="info-detail">Số 8, đường Phú Nghĩa, xã Phú Nghĩa, TP. Hà Nội</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Cơ sở đào tạo: </p>
+                        <p class="info-detail">608 Nguyễn Huy Tưởng, P. Thanh Xuân, TP. Hà Nội</p>
+                    </div>
+                </div>
             </div>
-            <div class="info">
-              <p class="info-title">Hotline: </p>
-              <p class="info-detail">012345678 - 0982 245 123</p>
+            <div class="col-md-4">
+                <div class="card-info">
+                    <div>
+                        <i class="fa fa-phone"></i>
+                        <p>Liên hệ</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Hotline: </p>
+                        <p class="info-detail">012345678 - 0982 245 123</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Website: </p>
+                        <p class="info-detail">a.edu.vn</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Email: </p>
+                        <p class="info-detail">tuyensinh@a.edu.vn</p>
+                    </div>
+                </div>
             </div>
-            <div class="info">
-              <p class="info-title">Website: </p>
-              <p class="info-detail">a.edu.vn</p>
+            <div class="col-md-4">
+                <div class="card-info">
+                    <div>
+                        <i class="fa fa-gift"></i>
+                        <p>Ưu đãi đặc biệt</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-detail">Học bổng toàn phần cho sinh viên xuất sắc</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-detail">Cơ hội thực tập tại doanh nghiệp lớn</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-detail">Môi trường học tập hiện đại, quốc tế</p>
+                    </div>
+                </div>
             </div>
-            <div class="info">
-              <p class="info-title">Email: </p>
-              <p class="info-detail">tuyensinh@a.edu.vn</p>
-            </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card-info">
-            <div>
-              <i class="fa fa-gift"></i>
-              <p>Ưu đãi đặc biệt</p>
-            </div>
-            <div class="info">
-              <p class="info-detail">Học bổng toàn phần cho sinh viên xuất sắc</p>
-            </div>
-            <div class="info">
-              <p class="info-detail">Cơ hội thực tập tại doanh nghiệp lớn</p>
-            </div>
-            <div class="info">
-              <p class="info-detail">Môi trường học tập hiện đại, quốc tế</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-
-  </div>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-  <script>
- 
-    $(function() {
-    
-    });
-  </script>
+</div>

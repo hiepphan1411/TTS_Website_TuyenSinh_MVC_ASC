@@ -25,6 +25,7 @@
     --warning-color: #ff9800;
     --warning-orange: #ffa500;
     --danger-color: #d32f2f;
+    --color-danger-light: #ffcdcd;
     --color-danger: #f65050;
     --info-color: #2196f3;
     /* Progress / Legend */
@@ -142,6 +143,9 @@ body {
     color: #fff;
     text-decoration: none;
 }
+.navbar{
+  background-color: white;
+}
 
 .topbar a:hover {
     text-decoration: underline;
@@ -163,10 +167,10 @@ body {
 
 .btn-tracuu {
     text-decoration: none;
-    border: 1px solid var(--primary-blue);
+    border: 1px solid var(--primary-blue) !important;
     color: var(--primary-blue);
     border-radius: 20px;
-    padding: 10px 30px;
+    padding: 10px 30px !important;
     font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.2s;
@@ -179,26 +183,24 @@ body {
 
 .btn-dangnhap {
     text-decoration: none;
-    background: var(--primary-yellow);
+    background: var(--primary-yellow) !important;
     border: 1px solid var(--primary-yellow) !important;
     color: #fff;
     border: none;
     border-radius: 20px;
-    padding: 10px 30px;
+    padding: 10px 30px !important;
     font-size: 0.85rem;
     font-weight: 600;
 }
 
 .btn-dangnhap:hover {
-    background: white;
-    color: var(--primary-yellow);
+    background: white !important;
+    color: var(--primary-yellow) !important;
     border: 1px solid var(--primary-yellow);
     font-family: "Segoe UI", system-ui, sans-serif;
     background: var(--bg-light);
     color: #1f2937;
-    min-height: 100vh;
     display: flex;
-    flex-direction: column;
 }
 
 .site-header {
@@ -210,14 +212,14 @@ body {
 }
 
 .topbar {
-    background: var(--primary);
-    color: #fff;
+    background: var(--primary-blue);
+    color: white;
     font-size: 0.78rem;
     padding: 0.3rem 1rem;
 }
 
 .topbar a {
-    color: #fff;
+    color: white;
     text-decoration: none;
 }
 
@@ -240,8 +242,8 @@ body {
 }
 
 .btn-tracuu {
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
     border-radius: 20px;
     padding: 0.35rem 1rem;
     font-size: 0.85rem;
@@ -250,7 +252,7 @@ body {
 }
 
 .btn-tracuu:hover {
-    background: var(--primary);
+    background: var(--primary-blue);
     color: #fff;
 }
 
@@ -262,12 +264,12 @@ body {
     padding: 0.35rem 1.1rem;
     font-size: 0.85rem;
     font-weight: 600;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .btn-dangnhap:hover {
-    background: var(--accent-hover);
-    color: #fff;
+    background: white;
+    color: var(--primary-blue);
 }
 
 .page-wrapper {
@@ -316,7 +318,7 @@ body {
 }
 
 .footer-heading {
-    color: var(--primary-yellow);
+    color: var(--primary-yellow) !important;
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 15px;
@@ -522,7 +524,7 @@ body {
     color: white;
     font-weight: 500;
     border-radius: 16px;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .card-section {
