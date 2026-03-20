@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout-NoSidebar.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/dang-nhap.css" /> 
+}
+
+<div class="main-container w-100 d-flex justify-content-center align-items-center">
+    <div class="glass-card text-center">
+
+        <div class="login-title d-flex flex-column justify-content-center align-items-center gap-1">
+            <div class="badge-top">THÔNG TIN TUYỂN SINH</div>
+            <div class="main-title fs-6">ĐĂNG NHẬP TÀI KHOẢN</div>
+            <div class="sub-title">CHÍNH QUY NĂM 2025</div>
+        </div>
+
+        <form method="post" action="#" class="w-100 d-flex flex-column gap-1">
+
+            <!-- Mã hồ sơ -->
+            <div class="text-start">
+                <label class="form-label fw-medium mb-1">Mã hồ sơ</label>
+                <input type="text" class="form-control glass-input" placeholder="Nhập mã hồ sơ" />
+            </div>
+
+            <!-- Mật khẩu -->
+            <div class="text-start position-relative">
+                <label class="form-label fw-medium mb-1">Mật khẩu</label>
+                <input type="password" class="form-control glass-input" placeholder="Nhập mật khẩu" id="password" />
+                <i class="fa fa-eye-slash position-absolute" 
+                   aria-hidden="true"
+                   role="button"
+                   style="top: 62%; right: 20px; color: var(--color-gray-heavy); font-size: 13px; "
+                   onclick="togglePassword()"></i>
+            </div>
+
+            <!-- Captcha -->
+            <div class="d-flex align-items-center gap-3 pt-3">
+                <input type="text" class="form-control glass-input" style="max-width: 150px;" placeholder="Nhập mã" />
+
+                <div class="captcha-box">
+                    <div>aBd7</div>
+                    <i class="fa fa-repeat" aria-hidden="true" role="button"></i>
+                </div>
+            </div>
+
+            <div class="text-start fw-semibold py-1" style="font-size: 12px;">
+                <a href="@Url.Action("Index", "DatLaiMatKhau")" class="text-white text-decoration-none"><i>Quên mật khẩu?</i></a>
+            </div>
+
+            <button type="submit" 
+                    class="btn btn-main w-100 text-white d-flex justify-content-center align-items-center gap-2">
+                <i class="fa fa-search" aria-hidden="true" style="font-size: 12px;"></i> Tra cứu ngay
+            </button>
+
+        </form>
+    </div>
+</div>
+
