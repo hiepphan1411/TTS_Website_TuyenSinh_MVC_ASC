@@ -18,6 +18,12 @@ namespace WebApplicationTest3
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "TuyenSinh",
+                url: "tuyen-sinh/{typeCauHinh}",
+                defaults: new { controller = "DangKyXetTuyen", action = "Index" }
+            );
         }
     }
 }

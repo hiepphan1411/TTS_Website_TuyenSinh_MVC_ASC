@@ -241,11 +241,9 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_SidebarProgress.cshtml" />
-    <Content Include="Views\DangKyXetTuyen\DangKyChinhQuy.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
-    <Content Include="Views\TuyenSinhSauDaiHoc.cshtml" />
-    <Content Include="Views\DangKyXetTuyen\TuyenSinhSauDaiHoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
