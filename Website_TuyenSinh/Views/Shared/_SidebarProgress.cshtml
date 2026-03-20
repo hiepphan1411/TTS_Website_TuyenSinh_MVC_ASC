@@ -1,4 +1,3 @@
-
 <aside class="sidebar-progress">
     <div class="sidebar-card">
         <div class="sidebar-title"><i class="bi bi-list-check me-1"></i>Mục lục đăng ký</div>
@@ -25,10 +24,10 @@
                 .replace(/"/g, "&quot;");
         }
 
-        function statusOf(idx, activeIdx, tab) {
+        function statusOf(idx, activeIdx, tab, isInit) {
             if (idx === activeIdx) return "active";
+            if (isInit) return "pending"; 
             if (tab && tab.isCompleted) return "done";
-            if (idx < activeIdx) return "done";
             return "pending";
         }
 
@@ -38,25 +37,28 @@
             return "Chưa nhập";
         }
 
-        window.dfUpdateSidebar = function (activeIdx, tabs) {
+        window.dfUpdateSidebar = function (activeIdx, tabs, isInit) {
             tabs = Array.isArray(tabs) ? tabs : [];
             var total = tabs.length;
             var completed = tabs.filter(function (t) { return !!t.isCompleted; }).length;
             var pct = total ? Math.round((completed / total) * 100) : 0;
+
 
             var pctEl = document.getElementById("df-sidebar-progress-pct");
             var fillEl = document.getElementById("df-sidebar-progress-fill");
             var labelEl = document.getElementById("df-sidebar-progress-label");
             var listEl = document.getElementById("df-sidebar-steps");
 
-            if (pctEl) pctEl.textContent = pct + "%";
-            if (fillEl) fillEl.style.width = pct + "%";
-            if (labelEl) labelEl.textContent = completed + "/" + total + " bước hoàn thành";
-            if (!listEl) return;
+            if (!isInit) {
+                if (pctEl) pctEl.textContent = pct + "%";
+                if (fillEl) fillEl.style.width = pct + "%";
+                if (labelEl) labelEl.textContent = completed + "/" + total + " bước hoàn thành";
+                if (!listEl) return;
+            }
 
             var html = "";
             tabs.forEach(function (tab, idx) {
-                var status = statusOf(idx, activeIdx, tab);
+                var status = statusOf(idx, activeIdx, tab, isInit);
                 var itemClass = status === "active" ? "is-active" : (status === "done" ? "is-done" : "");
                 var label = tab && tab.tabLabel ? tab.tabLabel : ("Bước " + (idx + 1));
 

@@ -125,6 +125,8 @@
     <Compile Include="Controllers\TraCuuKetQuaController.cs" />
     <Compile Include="Controllers\TraCuuThongTinController.cs" />
     <Compile Include="Controllers\XetTuyenDaiHocController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\DangKyXetTuyenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,6 +223,7 @@
     <Content Include="Content\lib\bootstrap.min.css.map" />
     <Content Include="Content\lib\bootstrap.rtl.min.css.map" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\dbs\scripts.sql" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />
@@ -230,6 +233,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -252,6 +256,11 @@
     <Content Include="Views\TraCuuKetQua\Index.cshtml" />
     <Content Include="Views\TraCuuThongTin\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardFilter.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\DangKyChinhQuy.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
+    <Content Include="Views\TuyenSinhSauDaiHoc.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\TuyenSinhSauDaiHoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

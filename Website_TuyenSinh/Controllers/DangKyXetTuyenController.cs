@@ -6,9 +6,8 @@ using Website_TuyenSinh.Models.repositories;
 
 namespace Website_TuyenSinh.Controllers
 {
-    public class XetTuyenDaiHocController : Controller
+    public class DangKyXetTuyenController : Controller
     {
-        private const int ID_LOAI = 112;
 
         private static readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
         {
@@ -17,15 +16,16 @@ namespace Website_TuyenSinh.Controllers
         };
 
         // GET: DangKyTuyenSinh
-        public ActionResult Index()
+        public ActionResult DangKyChinhQuy()
         {
+            var typeCauHinh = 112;
+
             var repo = new TuyenSinhRepository();
-            var data = repo.getByLoai(ID_LOAI);
+            ViewBag.ShowSidebar = true;
+            var data = repo.getByLoai(typeCauHinh);
             ViewBag.FormConfigJson = JsonConvert.SerializeObject(data, _jsonSettings);
             return View();
         }
-
-       
 
         public ActionResult getCauHinhTuyenSinh()
         {
@@ -34,5 +34,17 @@ namespace Website_TuyenSinh.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        //Get cấu hình cho tuyển sinh sau đại học 
+        public ActionResult TuyenSinhSauDaiHoc()
+        {
+            var typeCauHinh = 153;
+
+            var repo = new TuyenSinhRepository();
+            ViewBag.ShowSidebar = true;
+            var data = repo.getByLoai(typeCauHinh);
+            ViewBag.FormConfigJson = JsonConvert.SerializeObject(data, _jsonSettings);
+
+            return View(); 
+        }
     }
 }
