@@ -14,15 +14,27 @@ namespace WebApplicationTest3
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "DangKyChinhQuy",
+                url: "dang-ky-chinh-quy",
+                defaults: new { controller = "DangKyXetTuyen", action = "Index", typeCauHinh = 43 }
             );
 
             routes.MapRoute(
-                name: "TuyenSinh",
-                url: "tuyen-sinh/{typeCauHinh}",
-                defaults: new { controller = "DangKyXetTuyen", action = "Index" }
+                name: "SauDaiHoc",
+                url: "tuyen-sinh-sau-dai-hoc",
+                defaults: new { controller = "DangKyXetTuyen", action = "Index", typeCauHinh = 112 }
+            );
+
+            routes.MapRoute(
+                name: "LienThong",
+                url: "lien-thong-dai-hoc",
+                defaults: new { controller = "DangKyXetTuyen", action = "Index", typeCauHinh = 166 }
+            );
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
