@@ -120,8 +120,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DangNhapController.cs" />
+    <Compile Include="Controllers\DashboardTuyenSinhController.cs" />
+    <Compile Include="Controllers\DatLaiMatKhauController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DangKyXetTuyenController.cs" />
+    <Compile Include="Controllers\TraCuuKetQuaController.cs" />
+    <Compile Include="Controllers\TraCuuThongTinController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -132,6 +137,11 @@
   <ItemGroup>
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\dang-ky-tuyen-sinh.css" />
+    <Content Include="Content\css\dang-nhap.css" />
+    <Content Include="Content\css\dashboard-filter.css" />
+    <Content Include="Content\css\dashboard-tuyensinh.css" />
+    <Content Include="Content\images\login-background.png" />
+    <Content Include="Content\images\logo-ASC.png" />
     <Content Include="Content\lib\bootstrap-grid.css" />
     <Content Include="Content\lib\bootstrap-grid.min.css" />
     <Content Include="Content\lib\bootstrap-grid.rtl.css" />
@@ -214,6 +224,7 @@
     <Content Include="Content\lib\bootstrap.css.map" />
     <Content Include="Content\lib\bootstrap.min.css.map" />
     <Content Include="Content\lib\bootstrap.rtl.min.css.map" />
+    <Content Include="App_Data\dashboard-data-test.json" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\dbs\scripts.sql" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -225,6 +236,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\dashboard-tuyensinh.js" />
     <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
@@ -244,10 +256,17 @@
     <Content Include="Views\DangKyXetTuyen\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
+    <Content Include="Views\DangNhap\Index.cshtml" />
+    <Content Include="Views\DatLaiMatKhau\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout-NoSidebar.cshtml" />
+    <Content Include="Views\TraCuuKetQua\Index.cshtml" />
+    <Content Include="Views\TraCuuThongTin\Index.cshtml" />
+    <Content Include="Views\DashboardTuyenSinh\Index.cshtml" />
+    <Content Include="Views\Shared\DashboardTuyenSinh\_LayoutDashboard.cshtml" />
+    <Content Include="Views\Shared\DashboardTuyenSinh\_Header.cshtml" />
+    <Content Include="Views\Shared\DashboardTuyenSinh\_Sidebar.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />

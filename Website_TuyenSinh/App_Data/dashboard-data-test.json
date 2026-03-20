@@ -1,0 +1,93 @@
+{
+  "kpi": {
+    "soLuongHoSo": "245 / 500",
+    "hoSoTrungTuyen": 156,
+    "hoSoNhapHoc": 120,
+    "tyLeNhapHoc": "76.9%",
+    "tangHoSoHomNay": "+12 hôm nay",
+    "tangTrungTuyenHomNay": "+5 hôm nay · 79% đủ ĐK",
+    "tangNhapHocHomNay": "+3 hôm nay · Đạt 65% chỉ tiêu",
+    "tangTyLe": "+2.3% so với đợt trước"
+  },
+  "hoSoTheoNgay": [
+    { "ngay": "1/3",  "soLuong": 10 },
+    { "ngay": "2/3",  "soLuong": 22 },
+    { "ngay": "3/3",  "soLuong": 14 },
+    { "ngay": "4/3",  "soLuong": 18 },
+    { "ngay": "5/3",  "soLuong": 22 },
+    { "ngay": "6/3",  "soLuong": 10 },
+    { "ngay": "7/3",  "soLuong": 8  },
+    { "ngay": "8/3",  "soLuong": 15 },
+    { "ngay": "9/3",  "soLuong": 17 },
+    { "ngay": "10/3", "soLuong": 8  },
+    { "ngay": "11/3", "soLuong": 22 },
+    { "ngay": "12/3", "soLuong": 16 },
+    { "ngay": "13/3", "soLuong": 17 },
+    { "ngay": "14/3", "soLuong": 9  },
+    { "ngay": "15/3", "soLuong": 20 },
+    { "ngay": "16/3", "soLuong": 21 },
+    { "ngay": "17/3", "soLuong": 17 },
+    { "ngay": "18/3", "soLuong": 13 },
+    { "ngay": "19/3", "soLuong": 20 },
+    { "ngay": "20/3", "soLuong": 14 },
+    { "ngay": "21/3", "soLuong": 10 },
+    { "ngay": "22/3", "soLuong": 12 },
+    { "ngay": "23/3", "soLuong": 9  },
+    { "ngay": "24/3", "soLuong": 15 },
+    { "ngay": "25/3", "soLuong": 18 },
+    { "ngay": "26/3", "soLuong": 24 },
+    { "ngay": "27/3", "soLuong": 16 },
+    { "ngay": "28/3", "soLuong": 8  },
+    { "ngay": "29/3", "soLuong": 7  },
+    { "ngay": "30/3", "soLuong": 6  }
+  ],
+  "soSanhNganh": [
+    { "nganh": "CNTT",      "chiTieu": 180, "nhapHoc": 60  },
+    { "nganh": "Luật",      "chiTieu": 120, "nhapHoc": 45  },
+    { "nganh": "Kinh tế",   "chiTieu": 150, "nhapHoc": 88  },
+    { "nganh": "Kế toán",   "chiTieu": 100, "nhapHoc": 82  },
+    { "nganh": "Marketing", "chiTieu": 100, "nhapHoc": 25  },
+    { "nganh": "NN Anh",    "chiTieu": 60,  "nhapHoc": 52  }
+  ],
+  "phanBoTinh": [
+    { "tinh": "TP.HCM",      "soLuong": 85 },
+    { "tinh": "Hà Nội",      "soLuong": 38 },
+    { "tinh": "Đà Nẵng",     "soLuong": 28 },
+    { "tinh": "Cần Thơ",     "soLuong": 20 },
+    { "tinh": "Hải Phòng",   "soLuong": 14 },
+    { "tinh": "Bình Dương",  "soLuong": 12 },
+    { "tinh": "Đồng Nai",    "soLuong": 11 },
+    { "tinh": "Tây Ninh",    "soLuong": 18 }
+  ],
+  "funnelTuyenSinh": [
+    { "buoc": "Đăng ký",    "soLuong": 500 },
+    { "buoc": "Đủ ĐK",      "soLuong": 380 },
+    { "buoc": "Trúng tuyển","soLuong": 156 },
+    { "buoc": "Nhập học",   "soLuong": 120 }
+  ],
+  "trangThaiHoSo": [
+    { "trangThai": "Chờ duyệt", "soLuong": 35, "mauSac": "#ffc107" },
+    { "trangThai": "Thiếu HS",  "soLuong": 18, "mauSac": "#dc3545" },
+    { "trangThai": "Đã duyệt",  "soLuong": 88, "mauSac": "#28a745" },
+    { "trangThai": "Từ chối",   "soLuong": 14, "mauSac": "#6c757d" }
+  ],
+  "soLuongHoSoTheoLoai": [
+    { "loai": "Hồ sơ",      "soLuong": 20   },
+    { "loai": "Trúng tuyển","soLuong": 4506 },
+    { "loai": "Nhập học",   "soLuong": 1179 },
+    { "loai": "Nguyện vọng","soLuong": 29   }
+  ],
+  "trangThaiDangKyOnline": [
+    { "trangThai": "Chờ duyệt",         "soLuong": 7 },
+    { "trangThai": "Duyệt",             "soLuong": 4 },
+    { "trangThai": "Chờ bổ sung hồ sơ", "soLuong": 1 },
+    { "trangThai": "Dự kiến trúng tuyển","soLuong": 1 }
+  ],
+  "nganhDangTuyenSinh": [
+    { "nganh": "Công nghệ thông tin", "chiTieu": 180, "dangKy": 85,  "trungTuyen": 72, "nhapHoc": 60, "pctDat": 33 },
+    { "nganh": "Luật",                "chiTieu": 120, "dangKy": 95,  "trungTuyen": 52, "nhapHoc": 45, "pctDat": 38 },
+    { "nganh": "Kế toán",             "chiTieu": 150, "dangKy": 128, "trungTuyen": 96, "nhapHoc": 88, "pctDat": 59 },
+    { "nganh": "Marketing",           "chiTieu": 100, "dangKy": 112, "trungTuyen": 85, "nhapHoc": 82, "pctDat": 82 },
+    { "nganh": "Ngôn ngữ Anh",        "chiTieu": 100, "dangKy": 68,  "trungTuyen": 55, "nhapHoc": 52, "pctDat": 87 }
+  ]
+}

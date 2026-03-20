@@ -10,7 +10,8 @@ $(function () {
     }
 
     var tabs = buildTabs(rawDanhMuc || []);
-    var savedValues = loadLocalSnapshot();
+    //var savedValues = loadLocalSnapshot();
+    var savedValues = {};
     var curTabIdx = 0;
     var popupCtx = null;
     var tabDomCache = {};
@@ -586,7 +587,7 @@ $(function () {
                 var joined = Object.keys(sel).join(',');
                 $hid.val(joined);
                 savedValues[fieldKey] = joined;
-                persistLocalSnapshot();
+                //persistLocalSnapshot();
                 $inp.val('').focus();
             });
 
@@ -599,7 +600,7 @@ $(function () {
                 var joined = Object.keys(sel).join(',');
                 $hid.val(joined);
                 savedValues[fieldKey] = joined;
-                persistLocalSnapshot();
+                //persistLocalSnapshot();
             });
 
             $(document).off('click.ms-' + fid).on('click.ms-' + fid, function (e) {
@@ -667,7 +668,7 @@ $(function () {
                 $('#pval-text-' + popupCtx.targetField).text(text);
                 $('#pval-' + popupCtx.targetField).show();
                 savedValues[popupCtx.targetFieldKey || popupCtx.targetField] = { value: val, text: text };
-                persistLocalSnapshot();
+                //persistLocalSnapshot();
                 bootstrap.Modal.getInstance(document.getElementById('df-popup-modal')).hide();
             });
             $tb.append($tr);
@@ -706,7 +707,7 @@ $(function () {
             if (nameHolder) $(nameHolder).text(f.name);
 
             savedValues[fieldId] = { fileName: f.name };
-            persistLocalSnapshot();
+            //persistLocalSnapshot();
         });
 
         $(document).off('change.ip', 'input[data-type="image"]').on('change.ip', 'input[data-type="image"]', function () {
@@ -725,7 +726,7 @@ $(function () {
                     fileName: f.name,
                     preview: e.target.result
                 };
-                persistLocalSnapshot();
+                //persistLocalSnapshot();
             };
             reader.readAsDataURL(f);
         });
@@ -750,7 +751,7 @@ $(function () {
             $(jqId(fid)).val('').trigger('change');
             $('#pval-' + fid).hide();
             delete savedValues[fieldKey];
-            persistLocalSnapshot();
+            //persistLocalSnapshot();
         });
     }
 
@@ -760,7 +761,7 @@ $(function () {
             var key = $(this).data('field-key') || id;
             if (!id || id.indexOf('file-') === 0) return;
             savedValues[key] = $(this).val();
-            persistLocalSnapshot();
+            //persistLocalSnapshot();
         });
 
         $(document).off('change.autosave-check', '#df-fields-container input[type="checkbox"], #df-fields-container input[type="radio"]').on('change.autosave-check', '#df-fields-container input[type="checkbox"], #df-fields-container input[type="radio"]', function () {
@@ -771,7 +772,7 @@ $(function () {
             } else {
                 savedValues[name] = $('input[name="' + name + '"]:checked').val() || '';
             }
-            persistLocalSnapshot();
+            //persistLocalSnapshot();
         });
     }
 
@@ -889,7 +890,7 @@ $(function () {
 
             //console.log("CHuyển tab: " + tabs[curTabIdx].isSeen);
             tabs[curTabIdx].isCompleted = evalTabCompleted(tabs[curTabIdx], true);
-            persistLocalSnapshot();
+            //persistLocalSnapshot();
 
             if (curTabIdx < tabs.length - 1) {
                 renderTab(curTabIdx + 1);
@@ -921,32 +922,32 @@ $(function () {
         });
     }
 
-    function loadLocalSnapshot() {
-        try {
-            var raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return {};
-            var snap = JSON.parse(raw);
-            if (snap && snap.savedValues) {
-                if (Array.isArray(snap.tabsCompleted)) {
-                    $.each(snap.tabsCompleted, function (_, key) {
-                        var found = tabs.find(function (t) { return t.tabKey === key; });
-                        if (found) found.isCompleted = true;
-                    });
-                }
-                return snap.savedValues;
-            }
-        } catch (e) { }
-        return {};
-    }
+    //function loadLocalSnapshot() {
+    //    try {
+    //        var raw = localStorage.getItem(STORAGE_KEY);
+    //        if (!raw) return {};
+    //        var snap = JSON.parse(raw);
+    //        if (snap && snap.savedValues) {
+    //            if (Array.isArray(snap.tabsCompleted)) {
+    //                $.each(snap.tabsCompleted, function (_, key) {
+    //                    var found = tabs.find(function (t) { return t.tabKey === key; });
+    //                    if (found) found.isCompleted = true;
+    //                });
+    //            }
+    //            return snap.savedValues;
+    //        }
+    //    } catch (e) { }
+    //    return {};
+    //}
 
-    function persistLocalSnapshot() {
-        var completed = tabs.filter(function (t) { return t.isCompleted; }).map(function (t) { return t.tabKey; });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-            savedValues: savedValues,
-            tabsCompleted: completed
-        }));
-        syncSidebarStep(curTabIdx);
-    }
+    //function persistLocalSnapshot() {
+    //    var completed = tabs.filter(function (t) { return t.isCompleted; }).map(function (t) { return t.tabKey; });
+    //    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    //        savedValues: savedValues,
+    //        tabsCompleted: completed
+    //    }));
+    //    syncSidebarStep(curTabIdx);
+    //}
 
     // Hàm test
     //function syncSidebarStep(idx) {

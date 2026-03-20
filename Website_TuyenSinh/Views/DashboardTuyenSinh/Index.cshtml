@@ -1,0 +1,377 @@
+﻿@{
+    ViewBag.Title = "Dashboard Tuyển Sinh";
+    Layout = "~/Views/Shared/DashboardTuyenSinh/_LayoutDashboard.cshtml";
+}
+
+@*Sidebar test*@
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <img src="~/Content/images/logo-ASC.png"/>
+        <div class="sidebar-brand-text">Hệ thống tuyển sinh</div>
+    </div>
+
+    <div class="sidebar-section-label">TỔNG QUAN</div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-item active">
+            <a href="#" class="sidebar-nav-link">
+                <i class="bi bi-grid-1x2-fill"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a href="#" class="sidebar-nav-link">
+                <i class="bi bi-bar-chart-line"></i>
+                <span>Báo cáo</span>
+            </a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a href="#" class="sidebar-nav-link">
+                <i class="bi bi-bell"></i>
+                <span>Thông báo</span>
+                <span class="sidebar-badge">4</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-section-label">QUẢN LÝ</div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+            <a href="#" class="sidebar-nav-link">
+                <i class="bi bi-folder2-open"></i>
+                <span>Hồ sơ</span>
+            </a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a href="#" class="sidebar-nav-link">
+                <i class="bi bi-graph-up"></i>
+                <span>Báo cáo</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-section-label">HỆ THỐNG</div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+            <a href="#" class="sidebar-nav-link">
+                <i class="bi bi-gear"></i>
+                <span>Cài đặt</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="main-header d-flex align-items-center justify-content-between">
+    <div>
+        <h1 class="page-title">Dashboard Tuyển Sinh</h1>
+        <p class="page-subtitle mb-0">Hệ thống quản lý tuyển sinh</p>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary btn-sm btn-header-action" id="btnLamMoi" onclick="lamMoiDashboard()">
+            <i class="bi bi-arrow-clockwise"></i> Làm mới
+        </button>
+        <button class="btn btn-primary btn-sm btn-header-action" id="btnXuatBaoCao" onclick="xuatBaoCao()">
+            <i class="bi bi-download"></i> Xuất báo cáo
+        </button>
+    </div>
+</div>
+
+<div class="filter-card" id="filterCard">
+    <div class="d-flex flex-wrap align-items-end gap-3">
+        <div>
+            <label class="filter-label">Năm tuyển sinh <span class="text-danger">*</span></label>
+            <div class="input-group input-group-sm" style="width:130px">
+                <input type="text" class="form-control filter-input" id="namTuyenSinh" value="2026" />
+                <span class="input-group-text bg-white"><i class="bi bi-calendar3 text-muted"></i></span>
+            </div>
+        </div>
+        <div class="flex-grow-1">
+            <label class="filter-label">Đợt tuyển sinh <span class="text-danger">*</span></label>
+            <div class="filter-tags-wrap d-flex flex-wrap align-items-center gap-1" id="dotTuyenSinhTags">
+                <span class="filter-tag">2025 ĐHCQ <i class="bi bi-x" onclick="xoaTagLoc(this)"></i></span>
+                <span class="filter-tag">2025 - SDH - Thạc sĩ <i class="bi bi-x" onclick="xoaTagLoc(this)"></i></span>
+                <span class="filter-tag-add"><i class="bi bi-plus-circle"></i> Chọn đợt tuyển sinh</span>
+            </div>
+        </div>
+        <div style="min-width:170px">
+            <label class="filter-label">Cơ sở</label>
+            <select class="form-select form-select-sm filter-input" id="coSoChon">
+                <option value="">Chọn cơ sở</option>
+                <option>Cơ sở 1</option>
+                <option>Cơ sở 2</option>
+            </select>
+        </div>
+        <div class="d-flex gap-2 ms-auto">
+            <button class="btn btn-sm btn-thu-gon" id="btnThuGonLoc" onclick="thuGonMoRongLoc()">
+                <i class="bi bi-funnel-fill" id="iconThuGon"></i> <span id="labelThuGon">Mở rộng lọc</span>
+            </button>
+            <button class="btn btn-sm btn-tim-kiem" onclick="timKiemDuLieu()">
+                <i class="bi bi-search"></i> Tìm kiếm
+            </button>
+            <button class="btn btn-sm btn-dong-bo" onclick="dongBoDuLieu()">
+                <i class="bi bi-arrow-repeat"></i> Đồng bộ
+            </button>
+        </div>
+    </div>
+
+    <div class="filter-extended-wrap collapsed" id="filterExtendedWrap">
+        <div class="filter-extended-inner d-flex flex-wrap gap-3 pt-2">
+            <div style="min-width:140px">
+                <label class="filter-label">Cơ sở</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn cơ sở</option>
+                </select>
+            </div>
+            <div style="min-width:140px">
+                <label class="filter-label">Khoa</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn khoa</option>
+                </select>
+            </div>
+            <div style="min-width:160px">
+                <label class="filter-label">Hệ đào tạo</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn hệ đào tạo</option>
+                </select>
+            </div>
+            <div style="min-width:160px">
+                <label class="filter-label">Loại đào tạo</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn loại đào tạo</option>
+                </select>
+            </div>
+            <div style="min-width:140px">
+                <label class="filter-label">Ngành</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn ngành</option>
+                </select>
+            </div>
+            <div style="min-width:160px">
+                <label class="filter-label">Hình thức xét tuyển</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn hình thức</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-nav-bar">
+    <ul class="nav dashboard-tabs" id="dashboardTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="tab-tong-quan"
+                    data-bs-toggle="tab" data-bs-target="#tabTongQuan"
+                    type="button" role="tab">
+                Tổng quan
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="tab-ho-so"
+                    data-bs-toggle="tab" data-bs-target="#tabHoSo"
+                    type="button" role="tab">
+                Hồ sơ
+            </button>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content" id="dashboardTabContent">
+
+    <div class="tab-pane fade show active" id="tabTongQuan" role="tabpanel">
+        <div class="row g-3 mb-3" id="kpiRow">
+            <div class="col-xl-3 col-sm-6">
+                <div class="kpi-card">
+                    <div class="kpi-label">Số lượng hồ sơ / nguyện vọng</div>
+                    <div class="kpi-value" id="kpiHoSo">245 / 500</div>
+                    @*<div class="kpi-trend trend-up" id="kpiHoSoTrend">
+                            <i class="bi bi-arrow-up-short"></i> +12 hôm nay
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="kpi-card">
+                    <div class="kpi-label">Hồ sơ trúng tuyển</div>
+                    <div class="kpi-value" id="kpiTrungTuyen">156</div>
+                    @*<div class="kpi-trend trend-up" id="kpiTrungTuyenTrend">
+                            <i class="bi bi-arrow-up-short"></i> +5 hôm nay
+                            <span class="kpi-sub">79% đủ ĐK</span>
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="kpi-card">
+                    <div class="kpi-label">Hồ sơ nhập học</div>
+                    <div class="kpi-value" id="kpiNhapHoc">120</div>
+                    @*<div class="kpi-trend trend-up" id="kpiNhapHocTrend">
+                            <i class="bi bi-arrow-up-short"></i> +3 hôm nay
+                            <span class="kpi-sub">Đạt 65% chỉ tiêu</span>
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="kpi-card">
+                    <div class="kpi-label">Tỷ lệ nhập học</div>
+                    <div class="kpi-value" id="kpiTyLeNhapHoc">76.9%</div>
+                    @*<div class="kpi-trend trend-up" id="kpiTyLeTrend">
+                            <i class="bi bi-arrow-up-short"></i> +2.3% so với đợt trước
+                        </div>*@
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart: Hồ sơ theo ngày -->
+        <div class="chart-card mb-3">
+            <div class="chart-card-header d-flex align-items-center justify-content-between">
+                <div class="chart-title">Hồ sơ theo ngày</div>
+                <div class="chart-trend-badge" hidden>
+                    <i class="bi bi-arrow-up-short"></i> +23% so với đợt trước
+                </div>
+            </div>
+            <div id="chartHoSoTheoNgay" style="height:220px;"></div>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-lg-6">
+                <div class="chart-card h-100">
+                    <div class="chart-card-header">
+                        <div class="chart-title">So sánh ngành với chỉ tiêu</div>
+                    </div>
+                    <div id="chartSoSanhNganh" style="height:260px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="chart-card h-100">
+                    <div class="chart-card-header">
+                        <div class="chart-title">Phân bổ theo tỉnh/thành</div>
+                    </div>
+                    <div id="chartPhanBoTinh" style="height:260px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-lg-6">
+                <div class="chart-card h-100">
+                    <div class="chart-card-header">
+                        <div class="chart-title">Funnel tuyển sinh</div>
+                    </div>
+                    <div id="chartFunnelTuyenSinh" style="height:240px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="chart-card h-100">
+                    <div class="chart-card-header">
+                        <div class="chart-title">Trạng thái hồ sơ</div>
+                    </div>
+                    <div class="chart-legend-row d-flex justify-content-center flex-wrap gap-3 mb-1">
+                        <div class="legend-item"><span class="legend-dot" style="background:#ffc107"></span><small>Chờ duyệt</small></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:#dc3545"></span><small>Thiếu HS</small></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:#28a745"></span><small>Đã duyệt</small></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:#6c757d"></span><small>Từ chối</small></div>
+                    </div>
+                    <div id="chartTrangThaiHoSo" style="height:210px;"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="tabHoSo" role="tabpanel">
+
+        <div class="row g-3 mb-3">
+            <div class="col-lg-6">
+                <div class="data-card h-100">
+                    <div class="data-card-title">Số lượng hồ sơ</div>
+                    <div class="table-responsive">
+                        <table class="table ds-table mb-0" id="tableSoLuongHoSo">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px">STT</th>
+                                    <th>LOẠI THÍ SINH</th>
+                                    <th class="text-end">SỐ LƯỢNG HỒ SƠ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodySoLuongHoSo"></tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer d-flex align-items-center justify-content-between mt-2">
+                        <small class="text-muted" id="paginationHoSoLabel">Hiển thị 1-4 của 1</small>
+                        <div class="d-flex align-items-center gap-2">
+                            <select class="form-select form-select-sm" style="width:65px">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                            <small class="text-muted">mẫu tin/trang</small>
+                            <div class="d-flex gap-1">
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-double-left"></i></button>
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-left"></i></button>
+                                <button class="btn btn-sm btn-page btn-page-active">1</button>
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-right"></i></button>
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-double-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="data-card h-100">
+                    <div class="data-card-title">Số lượng hồ sơ theo trạng thái đăng ký online</div>
+                    <div class="table-responsive">
+                        <table class="table ds-table mb-0" id="tableTrangThaiOnline">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px">STT</th>
+                                    <th>TRẠNG THÁI THÍ SINH</th>
+                                    <th class="text-end">SỐ LƯỢNG HỒ SƠ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyTrangThaiOnline"></tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer d-flex align-items-center justify-content-between mt-2">
+                        <small class="text-muted" id="paginationTrangThaiLabel">Hiển thị 1-4 của 1</small>
+                        <div class="d-flex align-items-center gap-2">
+                            <select class="form-select form-select-sm" style="width:65px">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                            <small class="text-muted">mẫu tin/trang</small>
+                            <div class="d-flex gap-1">
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-double-left"></i></button>
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-left"></i></button>
+                                <button class="btn btn-sm btn-page btn-page-active">1</button>
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-right"></i></button>
+                                <button class="btn btn-sm btn-page" disabled><i class="bi bi-chevron-double-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table: Ngành đang tuyển sinh -->
+        <div class="data-card mb-3">
+            <div class="data-card-title">Ngành đang tuyển sinh</div>
+            <div class="table-responsive">
+                <table class="table ds-table mb-0" id="tableNganhTuyenSinh">
+                    <thead>
+                        <tr>
+                            <th>Ngành</th>
+                            <th class="text-center">Chỉ tiêu</th>
+                            <th class="text-center">Đăng ký</th>
+                            <th class="text-center">Trúng tuyển</th>
+                            <th class="text-center">Nhập học</th>
+                            <th class="text-center">% Đạt</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyNganhTuyenSinh"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/js/dashboard-tuyensinh.js"></script>
+}

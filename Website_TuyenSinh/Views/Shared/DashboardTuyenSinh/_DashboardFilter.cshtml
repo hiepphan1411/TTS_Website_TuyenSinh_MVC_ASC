@@ -1,0 +1,80 @@
+﻿<div class="filter-card" id="filterCard">
+    <div class="d-flex flex-wrap align-items-end gap-3">
+        @*Năm tuyển sinh*@
+        <div>
+            <label class="filter-label">Năm tuyển sinh <span class="text-danger">*</span></label>
+            <div class="input-group input-group-sm" style="width:130px">
+                <input type="text" class="form-control filter-input" id="namTuyenSinh" value="2026" />
+                <span class="input-group-text bg-white"><i class="bi bi-calendar3 text-muted"></i></span>
+            </div>
+        </div>
+        <div class="flex-grow-1">
+            <label class="filter-label">Đợt tuyển sinh <span class="text-danger">*</span></label>
+            <div class="filter-tags-wrap d-flex flex-wrap align-items-center gap-1" id="dotTuyenSinhTags">
+                <span class="filter-tag">2025 ĐHCQ <i class="bi bi-x" onclick="xoaTagLoc(this)"></i></span>
+                <span class="filter-tag">2025 - SDH - Thạc sĩ <i class="bi bi-x" onclick="xoaTagLoc(this)"></i></span>
+                <span class="filter-tag-add"><i class="bi bi-plus-circle"></i> Chọn đợt tuyển sinh</span>
+            </div>
+        </div>
+        <div style="min-width:170px">
+            <label class="filter-label">Cơ sở</label>
+            <select class="form-select form-select-sm filter-input" id="coSoChon">
+                <option value="">Chọn cơ sở</option>
+                <option>Cơ sở 1</option>
+                <option>Cơ sở 2</option>
+            </select>
+        </div>
+        <div class="d-flex gap-2 ms-auto">
+            <button class="btn btn-sm btn-thu-gon" id="btnThuGonLoc" onclick="thuGonMoRongLoc()">
+                <i class="bi bi-funnel" id="iconThuGon"></i> <span id="labelThuGon">Thu gọn lọc</span>
+            </button>
+            <button class="btn btn-sm btn-tim-kiem" onclick="timKiemDuLieu()">
+                <i class="bi bi-search"></i> Tìm kiếm
+            </button>
+            <button class="btn btn-sm btn-dong-bo" onclick="dongBoDuLieu()">
+                <i class="bi bi-arrow-repeat"></i> Đồng bộ
+            </button>
+        </div>
+    </div>
+
+    <div class="filter-extended-wrap" id="filterExtendedWrap">
+        <div class="filter-extended-inner d-flex flex-wrap gap-3 pt-2">
+            <div style="min-width:140px">
+                <label class="filter-label">Cơ sở</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn cơ sở</option>
+                </select>
+            </div>
+            <div style="min-width:140px">
+                <label class="filter-label">Khoa</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn khoa</option>
+                </select>
+            </div>
+            <div style="min-width:160px">
+                <label class="filter-label">Hệ đào tạo</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn hệ đào tạo</option>
+                </select>
+            </div>
+            <div style="min-width:160px">
+                <label class="filter-label">Loại đào tạo</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn loại đào tạo</option>
+                </select>
+            </div>
+            <div style="min-width:140px">
+                <label class="filter-label">Ngành</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn ngành</option>
+                </select>
+            </div>
+            <div style="min-width:160px">
+                <label class="filter-label">Hình thức xét tuyển</label>
+                <select class="form-select form-select-sm filter-input">
+                    <option value="">Chọn hình thức</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
