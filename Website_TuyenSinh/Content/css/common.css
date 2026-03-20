@@ -414,21 +414,19 @@ body {
 /* Content */
 /* Home */
 .banner {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
-    url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTg2OvQXdZxc30YWy93iRDcPE3JXTw7q9wgYscR7E-iCKvz4eDoSPkCpIULTZktr4rQQGrIVHx-Yk9Vj5SgYVs4aOCdFOHZ5DihkTpc-o9gFswyMLbGcc6SIan7sWFxEJZRC_t4UHrD9AvXj1QKY_lIK-hTUJoLWwnzlz6hixPche6dLQ-oSpj9mvLIQ8ZxWP2vJqmH9bl4srnFdd17-GIbu-igXu2cucQTEcXmhCgo0W8mF2nIGnbRRz59y8-bVBSyzkc5hV_IvU");
-  background-size: cover;
-  background-position: center;
-  color: white;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('/Content/images/login-background.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-banner {
@@ -477,7 +475,7 @@ body {
   color: white;
   font-weight: 500;
   border-radius: 16px;
-  text-decoration: none;
+  border: none;
 }
 
 .card-section {
@@ -488,7 +486,6 @@ body {
   background-color: var(--primary-blue-hover);
   color: white;
   transition: all 0.3s;
-  text-decoration: underline;
 }
 
 .btn-detail {

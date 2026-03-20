@@ -91,6 +91,7 @@ $(function () {
             case 'ThongTinXetTuyen': return 'Thông tin xét tuyển';
             case 'ThongTinKhaoSat': return 'Thông tin khảo sát';
             case 'HoanTatDangKy': return 'Hoàn tất đăng ký';
+            case 'ThongTinChungChiNN': return 'Thông tin chứng chỉ ngoại ngữ';
             default: return tabKey;
         }
     }

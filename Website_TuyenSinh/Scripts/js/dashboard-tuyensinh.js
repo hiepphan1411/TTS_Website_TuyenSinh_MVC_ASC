@@ -241,6 +241,7 @@ function buildChartPhanBoTinh(duLieu) {
     });
 }
 
+
 function buildChartFunnelTuyenSinh(duLieu) {
     var danhSachBuoc    = $.map(duLieu, function (d) { return d.buoc; });
     var danhSachSoLuong = $.map(duLieu, function (d) { return d.soLuong; });
@@ -273,6 +274,46 @@ function buildChartFunnelTuyenSinh(duLieu) {
         }
     });
 }
+
+//hàm vẽ funnel mặc định
+//function buildChartFunnelTuyenSinh(duLieu) {
+//    var dataFunnel = $.map(duLieu, function (d) {
+//        return {
+//            category: d.buoc,
+//            value: d.soLuong
+//        };
+//    });
+
+//    $('#chartFunnelTuyenSinh').kendoChart({
+//        theme: 'default',
+//        legend: { visible: false },
+//        chartArea: { background: 'transparent', margin: { top: 0, bottom: 0 } },
+
+//        series: [{
+//            type: 'funnel',
+//            data: dataFunnel,
+//            color: '#3a74f0',
+//            opacity: 0.85,
+
+//            labels: {
+//                visible: true,
+//                background: 'transparent',
+//                color: '#fff',
+//                template: '#= category #: #= value #'
+//            },
+
+//            dynamicSlope: false,
+//            dynamicHeight: false,
+//            segmentSpacing: 1
+//        }],
+
+//        tooltip: {
+//            visible: true,
+//            template: '#= category #: <b>#= value #</b>',
+//            font: '12px Segoe UI'
+//        }
+//    });
+//}
 
 function buildChartTrangThaiHoSo(duLieu) {
     var danhSachSeries = $.map(duLieu, function (d) {

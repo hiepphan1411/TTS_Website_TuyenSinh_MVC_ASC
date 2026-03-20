@@ -203,12 +203,12 @@
     <Content Include="Content\lib\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\lib\bootstrap.bundle.js" />
+    <Content Include="Scripts\lib\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\lib\bootstrap.esm.js" />
+    <Content Include="Scripts\lib\bootstrap.esm.min.js" />
+    <Content Include="Scripts\lib\bootstrap.js" />
+    <Content Include="Scripts\lib\bootstrap.min.js" />
     <Content Include="Content\lib\bootstrap-grid.css.map" />
     <Content Include="Content\lib\bootstrap-grid.min.css.map" />
     <Content Include="Content\lib\bootstrap-grid.rtl.css.map" />
@@ -225,20 +225,21 @@
     <Content Include="Content\lib\bootstrap.min.css.map" />
     <Content Include="Content\lib\bootstrap.rtl.min.css.map" />
     <Content Include="App_Data\dashboard-data-test.json" />
-    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <None Include="Scripts\lib\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\dbs\scripts.sql" />
-    <Content Include="Scripts\jquery-3.7.0.js" />
-    <Content Include="Scripts\jquery-3.7.0.min.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\lib\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\lib\jquery.validate.js" />
+    <Content Include="Scripts\lib\jquery.validate.min.js" />
+    <Content Include="Scripts\lib\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\lib\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\dashboard-tuyensinh.js" />
     <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\lib\kendo.all.min%402016.3.1118.js" />
+    <Content Include="Scripts\lib\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -269,14 +270,14 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.esm.min.js.map" />
-    <Content Include="Scripts\bootstrap.esm.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.7.0.min.map" />
+    <Content Include="Scripts\lib\bootstrap.min.js.map" />
+    <Content Include="Scripts\lib\bootstrap.js.map" />
+    <Content Include="Scripts\lib\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\lib\bootstrap.esm.js.map" />
+    <Content Include="Scripts\lib\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\lib\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\lib\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\lib\jquery-3.7.0.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
