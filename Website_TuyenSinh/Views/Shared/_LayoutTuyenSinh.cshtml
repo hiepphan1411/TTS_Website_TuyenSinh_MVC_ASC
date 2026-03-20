@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8" />
@@ -22,10 +22,7 @@
 
     <div class="page-wrapper">
 
-        @*@if ((bool?)ViewBag.ShowSidebar == true)
-        {
-            @Html.Partial("_SidebarProgress")
-        }*@
+        @Html.Partial("_SidebarProgress")
 
         <main class="content-area">
             @RenderBody()
