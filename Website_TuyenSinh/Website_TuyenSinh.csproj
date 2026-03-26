@@ -140,8 +140,8 @@
     <Content Include="Content\css\dang-nhap.css" />
     <Content Include="Content\css\dashboard-filter.css" />
     <Content Include="Content\css\dashboard-tuyensinh.css" />
-    <Content Include="Content\images\login-background.png" />
     <Content Include="Content\images\logo-ASC.png" />
+    <Content Include="Content\images\login-background.png" />
     <Content Include="Content\lib\bootstrap-grid.css" />
     <Content Include="Content\lib\bootstrap-grid.min.css" />
     <Content Include="Content\lib\bootstrap-grid.rtl.css" />
@@ -203,6 +203,7 @@
     <Content Include="Content\lib\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv2.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.min.js" />
     <Content Include="Scripts\lib\bootstrap.esm.js" />

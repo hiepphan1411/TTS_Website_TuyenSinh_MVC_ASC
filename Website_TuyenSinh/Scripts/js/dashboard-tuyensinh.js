@@ -16,6 +16,7 @@ function taiDuLieuMau() {
     });
 }
 
+//Data default test giao diện
 function getDuLieuNhung() {
     return {
         kpi: {
@@ -61,7 +62,7 @@ function getDuLieuNhung() {
             { tinh: "Hải Phòng",  soLuong: 14 },
             { tinh: "Bình Dương", soLuong: 12 },
             { tinh: "Đồng Nai",   soLuong: 11 },
-            { tinh: "Tây Ninh",   soLuong: 18 }
+            { tinh: "Tây Ninh",   soLuong: 8 }
         ],
         funnelTuyenSinh: [
             { buoc: "Đăng ký",    soLuong: 500 },
@@ -114,10 +115,6 @@ function capNhatKPI(kpi) {
     $('#kpiTrungTuyen').text(kpi.hoSoTrungTuyen);
     $('#kpiNhapHoc').text(kpi.hoSoNhapHoc);
     $('#kpiTyLeNhapHoc').text(kpi.tyLeNhapHoc);
-    $('#kpiHoSoTrend').html('<i class="bi bi-arrow-up-short"></i> ' + kpi.tangHoSoHomNay);
-    $('#kpiTrungTuyenTrend').html('<i class="bi bi-arrow-up-short"></i> ' + kpi.tangTrungTuyenHomNay);
-    $('#kpiNhapHocTrend').html('<i class="bi bi-arrow-up-short"></i> ' + kpi.tangNhapHocHomNay);
-    $('#kpiTyLeTrend').html('<i class="bi bi-arrow-up-short"></i> ' + kpi.tangTyLe);
 }
 
 function buildChartHoSoTheoNgay(duLieu) {

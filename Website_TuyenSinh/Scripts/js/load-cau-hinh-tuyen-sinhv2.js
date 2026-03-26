@@ -1,7 +1,14 @@
-//TODO: CHạy bản v2 để load cấu hình, ai chạy cái này người đó bị K....
-
 $(function () {
-    var STORAGE_KEY = 'xettuyen_local_form_data';
+    //Site test: Không lưu(option 1), Lưu dưới dạng mã hóa (option 2)
+    var cheDoLuu = 2;
+
+    var CAU_HINH_LUU = {
+        tenKhoa: 'xettuyen_local_form_data',
+        soNgayHetHan: 3,
+        saltMaHoa: 'ASC_2026'
+    };
+
+    //State
     var flag_InitLanDau = true;
     var rawDanhMuc;
     try {
@@ -12,16 +19,17 @@ $(function () {
     }
 
     var tabs = buildTabs(rawDanhMuc || []);
-    //var savedValues = loadLocalSnapshot();
-    var savedValues = {};
+    var savedValues = loadSnapshot(tabs);
     var curTabIdx = 0;
     var popupCtx = null;
     var tabDomCache = {};
     var $activePanel = null;
 
-    renderShell();
+    //Init
+    renderTieuDeNoiDungTab();
     bindGlobalEvents();
     renderTab(0);
+
 
     function buildTabs(records) {
         var byTab = {};
@@ -30,10 +38,11 @@ $(function () {
             if (!byTab[tabKey]) {
                 byTab[tabKey] = {
                     tabKey: tabKey,
-                    tabLabel: getTabLabel(tabKey),
+                    tabLabel: getTenTab(tabKey),
                     tabIndex: Object.keys(byTab).length,
                     isCompleted: false,
                     isSeen: false,
+                    isDisable: true,
                     fields: []
                 };
             }
@@ -80,9 +89,7 @@ $(function () {
         };
     }
 
-
-
-    function getTabLabel(tabKey) {
+    function getTenTab(tabKey) {
         switch (tabKey) {
             case 'ThongTinThiSinh': return 'Thông tin thí sinh';
             case 'ThongTinDangKy': return 'Thông tin đăng ký';
@@ -98,7 +105,7 @@ $(function () {
         }
     }
 
-    function renderShell() {
+    function renderTieuDeNoiDungTab() {
         $('#df-loading').remove();
         $('#df-wrapper').empty();
 
@@ -113,13 +120,15 @@ $(function () {
             '<div>' +
             '<div class="df-card-title" id="df-tab-title"></div>' +
             '<div class="df-card-sub">Vui lòng điền chính xác thông tin theo giấy tờ tùy thân.</div>' +
-            '</div > ' +
+            '</div>' +
             '<span class="df-badge-done" id="df-done-badge" style="display:none">' +
-            '<i class="bi bi-check-circle-fill"></i> Đã hoàn thành' + '</span > ' + '</div > ' + '<div id="df-fields-container"></div>' +
+            '<i class="bi bi-check-circle-fill"></i> Đã hoàn thành</span>' +
+            '</div>' +
+            '<div id="df-fields-container"></div>' +
             '<div class="df-nav-bar">' +
             '<button class="df-btn-back" id="df-btn-back"><i class="bi bi-arrow-left me-1"></i> Quay về</button>' +
             '<button class="df-btn-next" id="df-btn-next">Hoàn thành &amp; tiếp tục <i class="bi bi-arrow-right ms-1"></i></button>' +
-            '</div > '
+            '</div>'
         );
         $('#df-wrapper').append($card);
     }
@@ -128,6 +137,8 @@ $(function () {
         var prevIdx = curTabIdx;
         curTabIdx = idx;
         var tab = tabs[idx];
+
+        tabs[idx].isSeen = true;
 
         if (!tab) return;
 
@@ -161,10 +172,13 @@ $(function () {
     window.dfGoToTab = function (idx) {
         if (typeof idx !== 'number') return;
         if (idx < 0 || idx >= tabs.length) return;
-        tabs[idx].isSeen = true;
+
+        if (!tabs[idx].isSeen) return;
+        
         renderTab(idx);
     };
 
+    //Build nội dung của tab tương ứng
     function buildTabPanel(tab) {
         var $panel = $('<div class="df-tab-panel"></div>');
         var childRendered = {};
@@ -212,8 +226,9 @@ $(function () {
         return $panel;
     }
 
+    //Render các field theo dòng
     function renderFieldRows(fields, useLegacyGroup) {
-        var $container = $(useLegacyGroup ? '<div class="form-group row "></div>' : '<div></div>');
+        var $container = $(useLegacyGroup ? '<div class="form-group row"></div>' : '<div></div>');
         var $row = null;
         var usedCols = 0;
 
@@ -235,6 +250,9 @@ $(function () {
         return $container;
     }
 
+    //Custom lại field theo lại,
+
+    //Type1
     function buildField(f) {
         var $w = $('<div class="df-field-wrap" data-field="' + f.maDanhMuc + '"></div>');
 
@@ -261,52 +279,32 @@ $(function () {
         return $w;
     }
 
-    //T1
+    //Type2
     function bTextBox(f) {
         return lbl(f) +
             '<input type="text" id="' + inputId(f) + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" class="df-input" ' +
             ph(f) + ml(f) + ro(f) + ' />';
     }
 
-    //T2
-    function bCheckBox(f, o) {
-        const cId = inputId(f);
-
-        let h = `<div class="df-check-group" id="cg-${cId}">`;
-
-        h += `
-                    <label class="df-check-item" for="${cId}">
-                        <input 
-                            type="checkbox" 
-                            id="${cId}" 
-                            name="${inputName(f)}" 
-                            data-field-key="${esc(f.maDanhMuc)}" 
-                            value="false"
-                        />
-                        ${esc(f.tenDanhMuc)}
-                    </label>
-
-                    <input 
-                        type="hidden" 
-                        id="${cId}_hidden" 
-                        name="${inputName(f)}_hidden" 
-                        data-field-key="${esc(f.maDanhMuc)}"
-                    />
-                `;
-
-        h += `</div>`;
-
-        return h;
+    //Type3
+    function bCheckBox(f) {
+        var cId = inputId(f);
+        return `
+            <div class="df-check-group" id="cg-${cId}">
+                <label class="df-check-item" for="${cId}">
+                    <input type="checkbox" id="${cId}" name="${inputName(f)}" data-field-key="${esc(f.maDanhMuc)}" value="false" />
+                    ${esc(f.tenDanhMuc)}
+                </label>
+                <input type="hidden" id="${cId}_hidden" name="${inputName(f)}_hidden" data-field-key="${esc(f.maDanhMuc)}" />
+            </div>
+        `;
     }
 
-    //T3
+    //Type4
     function bRadioBox(f) {
-        //Chưa có API get nên để tạm
+        //TODO: CHưa có API nên để tạm hardcode để test
         if (f.maDanhMuc === 'GioiTinh' && (!f.options || !f.options.length)) {
-            f.options = [
-                { value: 'Nam', text: 'Nam' },
-                { value: 'Nữ', text: 'Nữ' }
-            ];
+            f.options = [{ value: 'Nam', text: 'Nam' }, { value: 'Nữ', text: 'Nữ' }];
         }
 
         var h = lbl(f) + '<div class="df-radio-group" id="rg-' + inputId(f) + '">';
@@ -314,13 +312,13 @@ $(function () {
             var rId = inputId(f) + '_' + i;
             h += '<label class="df-radio-item">' +
                 '<input type="radio" id="' + rId + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" value="' + esc(o.value) + '" />' +
-                esc(o.text) + '</label > ';
+                esc(o.text) + '</label>';
         });
-        h += '</div > ';
+        h += '</div>';
         return h;
     }
 
-    //T4
+    //Type5
     function bComboBox(f) {
         var h = lbl(f) +
             '<select id="' + inputId(f) + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" class="df-select" ' + (f.readOnly ? ' disabled' : '') + '>' +
@@ -332,7 +330,7 @@ $(function () {
         return h;
     }
 
-    //T5
+    //Type6
     function bNumeric(f) {
         return lbl(f) +
             '<div class="df-numeric-wrap">' +
@@ -345,7 +343,7 @@ $(function () {
             '</div>';
     }
 
-    //T6
+    //Type7
     function bDatePicker(f) {
         return lbl(f) +
             '<div class="df-date-wrap">' +
@@ -354,22 +352,20 @@ $(function () {
             '</div>';
     }
 
-    //T7
+    //Type8
     function bLabel(f) {
         return `
-                    <div class="df-label-field">
-                        <span class="df-label mb-0">
-                            ${esc(f.tenDanhMuc)} :
-                            ${f.isRequired ? '<span style="color: red;">*</span>' : ''}
-                        </span>
-                        <span id="${inputId(f)}">
-                            ${savedValues[f.maDanhMuc] || '—'}
-                        </span>
-                    </div>
-                `;
+            <div class="df-label-field">
+                <span class="df-label mb-0">
+                    ${esc(f.tenDanhMuc)} :
+                    ${f.isRequired ? '<span style="color:red;">*</span>' : ''}
+                </span>
+                <span id="${inputId(f)}">${savedValues[f.maDanhMuc] || '—'}</span>
+            </div>
+        `;
     }
 
-    //T8
+    //Type9
     function bImage(f) {
         var id = inputId(f);
         return lbl(f) +
@@ -381,7 +377,7 @@ $(function () {
             '<input type="file" id="file-' + id + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" accept="image/*" data-type="image" data-preview="#img-prev-' + id + '" data-ph="#img-ph-' + id + '" />';
     }
 
-    //T9
+    //Type10
     function bFileAttach(f) {
         var id = inputId(f);
         return lbl(f) +
@@ -393,7 +389,7 @@ $(function () {
             '<input type="file" id="file-' + id + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" data-type="file" data-fname="#fname-' + id + '" />';
     }
 
-    //T10
+    //Type11
     function bLink(f) {
         return lbl(f) +
             '<a class="df-link-field" id="' + inputId(f) + '" data-controller="' + esc(f.controller || '') + '" data-action="' + esc(f.actionName || '') + '" href="#">' +
@@ -401,15 +397,15 @@ $(function () {
             '</a>';
     }
 
-    //T11
-    //TODO: Custom lại
+    //Type12
+    //TODO: Chưa custom lại nên để tạm
     function bConfig(f) {
         return '<div class="df-config-box" id="' + inputId(f) + '">' +
             '<strong>' + esc(f.tenDanhMuc) + '</strong> <code>' + esc(f.maDanhMuc) + '</code> - type <code>' + f.fieldType + '</code>' +
             '</div>';
     }
 
-    //T12
+    //Type13
     function bPopup(f) {
         return lbl(f) +
             '<div>' +
@@ -424,7 +420,6 @@ $(function () {
             '</div>';
     }
 
-    //T13
     function bActionDelete(f) {
         return lbl(f) +
             '<button type="button" class="df-btn-delete" data-field="' + inputId(f) + '" data-field-key="' + esc(f.maDanhMuc) + '">' +
@@ -432,7 +427,6 @@ $(function () {
             '</button>';
     }
 
-    //T14
     function bMultiSelect(f) {
         var h = lbl(f) +
             '<div class="df-ms-container" id="msc-' + inputId(f) + '">' +
@@ -449,6 +443,7 @@ $(function () {
     }
 
 
+    //Khôi phục lại giá trị đã lưu
     function restoreValues(fields) {
         $.each(fields, function (_, f) {
             var val = savedValues[f.maDanhMuc];
@@ -457,11 +452,11 @@ $(function () {
                 case 2:
                     var arr = Array.isArray(val) ? val : String(val).split(',');
                     $.each(arr, function (_, v) {
-                        $('input[name="' + inputName(f) + '" ][value="' + v.trim() + '" ]').prop('checked', true);
+                        $('input[name="' + inputName(f) + '"][value="' + v.trim() + '"]').prop('checked', true);
                     });
                     break;
                 case 3:
-                    $('input[name="' + inputName(f) + '" ][value="' + val + '" ]').prop('checked', true);
+                    $('input[name="' + inputName(f) + '"][value="' + val + '"]').prop('checked', true);
                     break;
                 case 12:
                     var pv = typeof val === 'object' ? val : { value: val, text: val };
@@ -478,15 +473,15 @@ $(function () {
                     }
                     break;
                 case 9:
-                    if (val.fileName) {
-                        $('#fname-' + inputId(f)).text(val.fileName);
-                    }
+                    if (val.fileName) $('#fname-' + inputId(f)).text(val.fileName);
                     break;
                 default:
                     $(jqId(inputId(f))).val(val);
             }
         });
     }
+
+    //Lấy giá trị
     function bindCascade(fields) {
         $.each(fields, function (_, f) {
             if (!f.cascadeField) return;
@@ -497,47 +492,49 @@ $(function () {
                 });
         });
     }
+
     function loadInitialActionOptions(fields) {
         $.each(fields, function (_, f) {
             if (!hasActionSource(f) || f.cascadeField) return;
             loadOptionsAjax(f, '');
         });
     }
+
     function loadOptionsAjax(f, parentVal) {
-        //Test
-        //$.getJSON('/XetTuyenDaiHoc/GetOptions', {
-        //    controller: f.controller,
-        //    actionName: f.actionName,
-        //    parentValue: parentVal
-        //}, function (opts) {
-        //    var data = Array.isArray(opts) ? opts : [];
-        //    var normalized = $.map(data, normalizeOpt);
-        //    var $el = $(jqId(inputId(f)));
-        //    if (f.fieldType === 4) {
-        //        $el.empty().append('<option value="">' + (f.placeHolder || '-- Chọn --') + '</option>');
-        //        $.each(normalized, function (_, o) {
-        //            $el.append('<option value="' + esc(o.value) + '">' + esc(o.text) + '</option>');
-        //        });
-        //    } else if (f.fieldType === 2) {
-        //        var $cg = $('#cg-' + inputId(f)).empty();
-        //        $.each(normalized, function (i, o) {
-        //            var cId = inputId(f) + '_' + i;
-        //            $cg.append('<label class="df-check-item"><input type="checkbox" id="' + cId + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" value="' + esc(o.value) + '" />' + esc(o.text) + '</label>');
-        //        });
-        //    } else if (f.fieldType === 3) {
-        //        var $rg = $('#rg-' + inputId(f)).empty();
-        //        $.each(normalized, function (i, o) {
-        //            var rId = inputId(f) + '_' + i;
-        //            $rg.append('<label class="df-radio-item"><input type="radio" id="' + rId + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" value="' + esc(o.value) + '" />' + esc(o.text) + '</label>');
-        //        });
-        //    } else if (f.fieldType === 14) {
-        //        var $drop = $('#msd-' + inputId(f)).empty();
-        //        $.each(normalized, function (_, o) {
-        //            $drop.append('<div class="df-ms-opt" data-val="' + esc(o.value) + '" data-text="' + esc(o.text) + '"><i class="bi bi-square chk-icon"></i>' + esc(o.text) + '</div>');
-        //        });
-        //    }
-        //    restoreValues([f]);
-        //    });
+        // Bật lại khi có API thật
+        // $.getJSON('/XetTuyenDaiHoc/GetOptions', {
+        //     controller: f.controller,
+        //     actionName: f.actionName,
+        //     parentValue: parentVal
+        // }, function (opts) {
+        //     var data = Array.isArray(opts) ? opts : [];
+        //     var normalized = $.map(data, normalizeOpt);
+        //     var $el = $(jqId(inputId(f)));
+        //     if (f.fieldType === 4) {
+        //         $el.empty().append('<option value="">' + (f.placeHolder || '-- Chọn --') + '</option>');
+        //         $.each(normalized, function (_, o) {
+        //             $el.append('<option value="' + esc(o.value) + '">' + esc(o.text) + '</option>');
+        //         });
+        //     } else if (f.fieldType === 2) {
+        //         var $cg = $('#cg-' + inputId(f)).empty();
+        //         $.each(normalized, function (i, o) {
+        //             var cId = inputId(f) + '_' + i;
+        //             $cg.append('<label class="df-check-item"><input type="checkbox" id="' + cId + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" value="' + esc(o.value) + '" />' + esc(o.text) + '</label>');
+        //         });
+        //     } else if (f.fieldType === 3) {
+        //         var $rg = $('#rg-' + inputId(f)).empty();
+        //         $.each(normalized, function (i, o) {
+        //             var rId = inputId(f) + '_' + i;
+        //             $rg.append('<label class="df-radio-item"><input type="radio" id="' + rId + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" value="' + esc(o.value) + '" />' + esc(o.text) + '</label>');
+        //         });
+        //     } else if (f.fieldType === 14) {
+        //         var $drop = $('#msd-' + inputId(f)).empty();
+        //         $.each(normalized, function (_, o) {
+        //             $drop.append('<div class="df-ms-opt" data-val="' + esc(o.value) + '" data-text="' + esc(o.text) + '"><i class="bi bi-square chk-icon"></i>' + esc(o.text) + '</div>');
+        //         });
+        //     }
+        //     restoreValues([f]);
+        // });
     }
 
     function bindMultiselect(fields) {
@@ -590,7 +587,7 @@ $(function () {
                 var joined = Object.keys(sel).join(',');
                 $hid.val(joined);
                 savedValues[fieldKey] = joined;
-                //persistLocalSnapshot();
+                persistSnapshotIfEnabled();
                 $inp.val('').focus();
             });
 
@@ -603,13 +600,11 @@ $(function () {
                 var joined = Object.keys(sel).join(',');
                 $hid.val(joined);
                 savedValues[fieldKey] = joined;
-                //persistLocalSnapshot();
+                persistSnapshotIfEnabled();
             });
 
             $(document).off('click.ms-' + fid).on('click.ms-' + fid, function (e) {
-                if (!$('#msc-' + fid).is(e.target) && !$('#msc-' + fid).has(e.target).length) {
-                    $drop.hide();
-                }
+                if (!$('#msc-' + fid).is(e.target) && !$('#msc-' + fid).has(e.target).length) $drop.hide();
             });
         });
     }
@@ -671,7 +666,7 @@ $(function () {
                 $('#pval-text-' + popupCtx.targetField).text(text);
                 $('#pval-' + popupCtx.targetField).show();
                 savedValues[popupCtx.targetFieldKey || popupCtx.targetField] = { value: val, text: text };
-                //persistLocalSnapshot();
+                persistSnapshotIfEnabled();
                 bootstrap.Modal.getInstance(document.getElementById('df-popup-modal')).hide();
             });
             $tb.append($tr);
@@ -710,7 +705,7 @@ $(function () {
             if (nameHolder) $(nameHolder).text(f.name);
 
             savedValues[fieldId] = { fileName: f.name };
-            //persistLocalSnapshot();
+            persistSnapshotIfEnabled();
         });
 
         $(document).off('change.ip', 'input[data-type="image"]').on('change.ip', 'input[data-type="image"]', function () {
@@ -725,11 +720,8 @@ $(function () {
             reader.onload = function (e) {
                 $prev.attr('src', e.target.result).show();
                 $ph.hide();
-                savedValues[fieldId] = {
-                    fileName: f.name,
-                    preview: e.target.result
-                };
-                //persistLocalSnapshot();
+                savedValues[fieldId] = { fileName: f.name, preview: e.target.result };
+                persistSnapshotIfEnabled();
             };
             reader.readAsDataURL(f);
         });
@@ -754,7 +746,7 @@ $(function () {
             $(jqId(fid)).val('').trigger('change');
             $('#pval-' + fid).hide();
             delete savedValues[fieldKey];
-            //persistLocalSnapshot();
+            persistSnapshotIfEnabled();
         });
     }
 
@@ -764,7 +756,7 @@ $(function () {
             var key = $(this).data('field-key') || id;
             if (!id || id.indexOf('file-') === 0) return;
             savedValues[key] = $(this).val();
-            //persistLocalSnapshot();
+            persistSnapshotIfEnabled();
         });
 
         $(document).off('change.autosave-check', '#df-fields-container input[type="checkbox"], #df-fields-container input[type="radio"]').on('change.autosave-check', '#df-fields-container input[type="checkbox"], #df-fields-container input[type="radio"]', function () {
@@ -775,35 +767,30 @@ $(function () {
             } else {
                 savedValues[name] = $('input[name="' + name + '"]:checked').val() || '';
             }
-            //persistLocalSnapshot();
+            persistSnapshotIfEnabled();
         });
     }
 
     function hasMeaningfulValue(f, rawVal) {
         if (rawVal == null) return false;
-
         if (f.fieldType === 12) {
             if (typeof rawVal === 'object') return !!String(rawVal.value || '').trim();
             return !!String(rawVal).trim();
         }
-
         if (f.fieldType === 8 || f.fieldType === 9) {
             if (typeof rawVal === 'object') return !!String(rawVal.fileName || '').trim();
             return !!String(rawVal).trim();
         }
-
         return !!String(rawVal).trim();
     }
 
     function evalTabCompleted(tab, useDomValue) {
+        //f.isRequired &&
         var requiredFields = $.grep(tab.fields, function (f) {
             return f.isRequired && f.isVisible && !f.isParent;
         });
 
-        if (!tab.isSeen) {
-            return false;
-        }
-
+        if (!tab.isSeen) return false;
         if (!requiredFields.length) return true;
 
         for (var i = 0; i < requiredFields.length; i++) {
@@ -818,23 +805,22 @@ $(function () {
         var tab = tabs[idx];
         var valid = true;
 
-        //TODO: Test temp
-        //$.each(tab.fields, function (_, f) {
-        //    if (!f.isRequired || !f.isVisible || f.isParent) return;
-
-        //    var val = getVal(f);
-        //    var $err = $('#df-err-' + inputId(f));
-        //    if (!val) {
-        //        $err.addClass('show');
-        //        $(jqId(inputId(f))).addClass('is-invalid');
-        //        if (f.fieldType === 14) $('#msb-' + inputId(f)).addClass('is-invalid');
-        //        valid = false;
-        //    } else {
-        //        $err.removeClass('show');
-        //        $(jqId(inputId(f))).removeClass('is-invalid');
-        //        if (f.fieldType === 14) $('#msb-' + inputId(f)).removeClass('is-invalid');
-        //    }
-        //});
+        // Test validate
+         $.each(tab.fields, function (_, f) {
+             if (!f.isRequired || !f.isVisible || f.isParent) return;
+             var val = getVal(f);
+             var $err = $('#df-err-' + inputId(f));
+             if (!val) {
+                 $err.addClass('show');
+                 $(jqId(inputId(f))).addClass('is-invalid');
+                 if (f.fieldType === 14) $('#msb-' + inputId(f)).addClass('is-invalid');
+                 valid = false;
+             } else {
+                 $err.removeClass('show');
+                 $(jqId(inputId(f))).removeClass('is-invalid');
+                 if (f.fieldType === 14) $('#msb-' + inputId(f)).removeClass('is-invalid');
+             }
+         });
 
         return valid;
     }
@@ -848,9 +834,7 @@ $(function () {
             case 8:
             case 9:
                 var fileInput = document.getElementById('file-' + inputId(f));
-                if (fileInput && fileInput.files && fileInput.files.length) {
-                    return fileInput.files[0].name;
-                }
+                if (fileInput && fileInput.files && fileInput.files.length) return fileInput.files[0].name;
                 var mem = savedValues[f.maDanhMuc];
                 return mem && mem.fileName ? mem.fileName : '';
             default:
@@ -870,19 +854,14 @@ $(function () {
 
     function bindNav() {
         $('#df-btn-back').off('click').on('click', function () {
-            if (curTabIdx > 0) {
-                renderTab(curTabIdx - 1);
-            } else {
-                window.history.back();
-            }
+            if (curTabIdx > 0) renderTab(curTabIdx - 1);
+            else window.history.back();
         });
 
         $('#df-btn-next').off('click').on('click', function () {
             if (!validateTab(curTabIdx)) {
                 var $first = $('.is-invalid').first();
-                if ($first.length) {
-                    $('html,body').animate({ scrollTop: $first.offset().top - 90 }, 280);
-                }
+                if ($first.length) $('html,body').animate({ scrollTop: $first.offset().top - 90 }, 280);
                 return;
             }
 
@@ -890,20 +869,17 @@ $(function () {
             $.extend(savedValues, data);
 
             tabs[curTabIdx].isSeen = true;
-
-            //console.log("CHuyển tab: " + tabs[curTabIdx].isSeen);
             tabs[curTabIdx].isCompleted = evalTabCompleted(tabs[curTabIdx], true);
-            //persistLocalSnapshot();
+            persistSnapshotIfEnabled();
 
             if (curTabIdx < tabs.length - 1) {
                 renderTab(curTabIdx + 1);
             } else {
-                if (tabs.every(t => t.isCompleted)) {
+                if (tabs.every(function (t) { return t.isCompleted; })) {
                     syncSidebarStep(curTabIdx);
-                    //TODO
-                    alert("Đăng ký thành công!");
+                    alert('Đăng ký thành công!');
                 } else {
-                    alert("Vui lòng nhập đầy dủ thông tin!!")
+                    alert('Vui lòng nhập đầy đủ thông tin!!');
                 }
             }
         });
@@ -917,6 +893,11 @@ $(function () {
         bindActionDelete();
         bindFormValueAutoSave();
 
+        $(document).off('click.dfStep', '#df-sidebar-steps .step-item').on('click.dfStep', '#df-sidebar-steps .step-item', function () {
+            var idx = Number($(this).data('idx'));
+            if (!Number.isNaN(idx) && window.dfGoToTab) window.dfGoToTab(idx);
+        });
+
         $('#df-popup-search-btn').off('click').on('click', function () {
             if (!popupCtx) return;
             popupCtx.page = 1;
@@ -924,53 +905,79 @@ $(function () {
         });
 
         $('#df-popup-keyword').off('keypress').on('keypress', function (e) {
-            if (e.which === 13) {
-                $('#df-popup-search-btn').trigger('click');
-            }
+            if (e.which === 13) $('#df-popup-search-btn').trigger('click');
         });
     }
-
-    //function loadLocalSnapshot() {
-    //    try {
-    //        var raw = localStorage.getItem(STORAGE_KEY);
-    //        if (!raw) return {};
-    //        var snap = JSON.parse(raw);
-    //        if (snap && snap.savedValues) {
-    //            if (Array.isArray(snap.tabsCompleted)) {
-    //                $.each(snap.tabsCompleted, function (_, key) {
-    //                    var found = tabs.find(function (t) { return t.tabKey === key; });
-    //                    if (found) found.isCompleted = true;
-    //                });
-    //            }
-    //            return snap.savedValues;
-    //        }
-    //    } catch (e) { }
-    //    return {};
-    //}
-
-    //function persistLocalSnapshot() {
-    //    var completed = tabs.filter(function (t) { return t.isCompleted; }).map(function (t) { return t.tabKey; });
-    //    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    //        savedValues: savedValues,
-    //        tabsCompleted: completed
-    //    }));
-    //    syncSidebarStep(curTabIdx);
-    //}
-
-    // Hàm test
-    //function syncSidebarStep(idx) {
-    //    if (typeof window.dfUpdateSidebar === 'function') {
-    //        window.dfUpdateSidebar(idx, tabs);
-    //    }
-    //}
 
     function syncSidebarStep(idx) {
         $.each(tabs, function (i, t) {
             t.isCompleted = evalTabCompleted(t, i === idx);
         });
 
-        dfUpdateSidebar(idx, tabs, flag_InitLanDau);
+        if (typeof window.dfUpdateSidebar === 'function') {
+            window.dfUpdateSidebar(idx, tabs, flag_InitLanDau);
+        }
+
         flag_InitLanDau = false;
+    }
+
+    function persistSnapshotIfEnabled() {
+        if (cheDoLuu !== 2) return;
+        try {
+            var completed = tabs.filter(function (t) { return t.isCompleted; }).map(function (t) { return t.tabKey; });
+            var payload = {
+                version: 1,
+                createdAt: Date.now(),
+                expireAt: Date.now() + (CAU_HINH_LUU.soNgayHetHan * 24 * 60 * 60 * 1000),
+                data: { savedValues: savedValues, tabsCompleted: completed }
+            };
+            var raw = JSON.stringify(payload);
+            var encrypted = maHoaNoiDung(raw, CAU_HINH_LUU.saltMaHoa);
+            localStorage.setItem(CAU_HINH_LUU.tenKhoa, encrypted);
+            syncSidebarStep(curTabIdx);
+        } catch (e) { }
+    }
+
+    function loadSnapshot(tabsRef) {
+        if (cheDoLuu !== 2) return {};
+        try {
+            var encrypted = localStorage.getItem(CAU_HINH_LUU.tenKhoa);
+            if (!encrypted) return {};
+            var raw = giaiMaNoiDung(encrypted, CAU_HINH_LUU.saltMaHoa);
+            var snap = JSON.parse(raw);
+
+            if (!snap || !snap.expireAt || Date.now() > snap.expireAt) {
+                localStorage.removeItem(CAU_HINH_LUU.tenKhoa);
+                return {};
+            }
+
+            if (snap && snap.data && Array.isArray(snap.data.tabsCompleted)) {
+                $.each(snap.data.tabsCompleted, function (_, key) {
+                    var found = tabsRef.find(function (t) { return t.tabKey === key; });
+                    if (found) found.isCompleted = true;
+                });
+            }
+            $.each(tabsRef, function (index, tab) {
+                syncSidebarStep(index);
+            });
+
+            return (snap && snap.data && snap.data.savedValues) ? snap.data.savedValues : {};
+
+        } catch (e) {
+            localStorage.removeItem(CAU_HINH_LUU.tenKhoa);
+            return {};
+        }
+    }
+
+    function maHoaNoiDung(raw, muoi) {
+        return btoa(unescape(encodeURIComponent(String(muoi || '') + '|' + raw)));
+    }
+
+    function giaiMaNoiDung(encoded, muoi) {
+        var decoded = decodeURIComponent(escape(atob(encoded)));
+        var prefix = String(muoi || '') + '|';
+        if (decoded.indexOf(prefix) === 0) return decoded.substring(prefix.length);
+        return decoded;
     }
 
     function esc(s) {
@@ -982,7 +989,7 @@ $(function () {
     }
 
     function lbl(f) {
-        return '<label class="df-label" id="' + labelId(f) + '" for="' + inputId(f) + '">' + esc(f.tenDanhMuc) + (f.isRequired ? '<span style="color: red;"> *</span>' : '') + '</label>';
+        return '<label class="df-label" id="' + labelId(f) + '" for="' + inputId(f) + '">' + esc(f.tenDanhMuc) + (f.isRequired ? '<span style="color:red;"> *</span>' : '') + '</label>';
     }
 
     function inputName(f) { return String(f && f.maDanhMuc ? f.maDanhMuc : ''); }
@@ -1007,14 +1014,10 @@ $(function () {
         if (!text) text = o.Ten;
         if (!text) text = o.name;
 
-        return {
-            value: value == null ? '' : String(value),
-            text: text == null ? '' : String(text)
-        };
+        return { value: value == null ? '' : String(value), text: text == null ? '' : String(text) };
     }
 
     function ph(f) { return f.placeHolder ? ' placeholder="' + esc(f.placeHolder) + '"' : ''; }
     function ml(f) { return f.maxLength ? ' maxlength="' + f.maxLength + '"' : ''; }
     function ro(f) { return f.readOnly ? ' readonly' : ''; }
-
 });

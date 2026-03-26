@@ -57,7 +57,7 @@
     { "tinh": "Hải Phòng",   "soLuong": 14 },
     { "tinh": "Bình Dương",  "soLuong": 12 },
     { "tinh": "Đồng Nai",    "soLuong": 11 },
-    { "tinh": "Tây Ninh",    "soLuong": 18 }
+    { "tinh": "Tây Ninh",    "soLuong": 11 }
   ],
   "funnelTuyenSinh": [
     { "buoc": "Đăng ký",    "soLuong": 500 },
