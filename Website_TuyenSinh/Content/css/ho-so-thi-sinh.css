@@ -65,7 +65,6 @@
     padding: 2px 8px;
 }
 
-    /* Status colors - sử dụng biến từ common.css */
     .check-status.bg-success {
         background-color: var(--color-green-light) !important;
     }
@@ -258,6 +257,7 @@
     gap: 5px;
     align-items: center;
     justify-content: center;
+    text-align: center;
     border-radius: 8px;
     padding: 15px 20px;
     font-size: 15px;
@@ -298,7 +298,6 @@
     font-weight: 600;
 }
 
-/* Timeline Styles */
 .timeline {
     position: relative;
     padding-left: 30px;
@@ -364,7 +363,6 @@
     color: #6c757d;
 }
 
-/* Tab Panes */
 .tab-pane {
     display: none;
 }
@@ -373,7 +371,6 @@
         display: block;
     }
 
-/* Khung Hồ Sơ Styles */
 .khung-ho-so-container {
     padding: 40px 20px;
     background-color: white;
@@ -412,7 +409,6 @@
     margin-bottom: 30px;
 }
 
-/* Documents Grid */
 .khung-documents-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -443,7 +439,7 @@
 }
 
     .khung-card-header.required {
-        background-color: var(--color-danger-light);
+        background-color: var(--color-red-lighter);
         color: var(--danger-color);
     }
 
@@ -586,9 +582,10 @@
         background-color: #f9f9f9;
     }
 
-/* Password Change Tab Styles */
 .change-password-container {
     display: flex;
+    background: url('https://localhost:44302/Content/images/login-background.png') no-repeat center center / cover;
+    min-height: 60vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -609,7 +606,9 @@
 .change-password-form {
     width: 100%;
     max-width: 400px;
-    background-color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -627,7 +626,7 @@
         display: block;
         font-size: 13px;
         font-weight: 600;
-        color: var(--color-text-primary);
+        color: white;
         margin-bottom: 8px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -644,7 +643,7 @@
     padding: 12px 40px 12px 12px !important;
     font-size: 14px;
     border: 1px solid #ddd !important;
-    border-radius: 4px;
+    border-radius: 12px;
     background-color: white;
     color: var(--color-text-primary);
     transition: border-color 0.3s ease;
@@ -680,7 +679,7 @@
     background-color: var(--primary-blue);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
@@ -704,7 +703,6 @@
         transform: none;
     }
 
-/* Error message styling */
 .form-group .error-message {
     color: #d32f2f;
     font-size: 12px;
@@ -718,4 +716,363 @@
 
 .form-group.error .password-input {
     border-color: #d32f2f !important;
+}
+
+.main-container {
+    min-height: 60vh !important;
+    border-radius: 8px;
+}
+
+.chi-tiet-ho-so-container {
+    background-color: white;
+    border-radius: 12px;
+    padding: 0;
+}
+
+.chi-tiet-content {
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.chi-tiet-header-info {
+    background-color: var(--blue-bg-light);
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.chi-tiet-header-row {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.chi-tiet-info-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.chi-tiet-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    margin: 0 0 8px 0;
+}
+
+.chi-tiet-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.chi-tiet-section {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.chi-tiet-section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 0 8px;
+}
+
+.chi-tiet-section-number {
+    display: inline;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary-blue);
+    padding-left: 4px;
+    border-left: 4px solid var(--primary-blue);
+}
+
+.chi-tiet-section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.chi-tiet-section-content {
+    background-color: var(--color-bg-light);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.chi-tiet-review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+    .chi-tiet-review-grid.chi-tiet-grid-6col {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .chi-tiet-review-grid.chi-tiet-grid-1col {
+        grid-template-columns: 1fr;
+    }
+
+.chi-tiet-review-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.chi-tiet-review-item-inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.chi-tiet-certificate-box-sub {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    gap: 20px;
+}
+
+.chi-tiet-certificate-box-center {
+    padding-left: 20px;
+    border-left: 2px solid var(--border-color);
+}
+
+    .chi-tiet-certificate-box-center p:first-child {
+        margin: 0;
+        color: var(--primary-blue);
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .chi-tiet-certificate-box-center p:last-child {
+        margin: 0;
+        color: var(--color-text-primary);
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+.chi-tiet-review-item-inline .chi-tiet-review-label {
+    margin-bottom: 0;
+}
+
+.chi-tiet-review-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.chi-tiet-review-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    word-break: break-word;
+}
+
+@media (max-width: 768px) {
+    .chi-tiet-content {
+        padding: 20px;
+    }
+
+    .chi-tiet-header-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .chi-tiet-review-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.chi-tiet-info-box {
+    display: flex;
+    padding: 20px;
+    align-items: flex-start center;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    gap: 15px;
+}
+
+.chi-tiet-info-content {
+    flex: 1;
+}
+
+.chi-tiet-info-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 5px 0;
+}
+
+.icon-record {
+    background-color: var(--blue-bg-light);
+    font-size: 20px;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 8px;
+    color: var(--primary-blue);
+}
+
+.chi-tiet-info-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin: 0;
+    word-break: break-word;
+}
+
+.chi-tiet-certificate-box {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+    .chi-tiet-certificate-box > p {
+        padding: 20px;
+        font-style: italic;
+    }
+
+.chi-tiet-cert-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.chi-tiet-cert-detail {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 5px 0 0 0;
+}
+
+.chi-tiet-cert-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.chi-tiet-cert-value {
+    font-size: 14px;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin: 0;
+}
+
+.chi-tiet-academic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.chi-tiet-academic-card {
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.chi-tiet-academic-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--blue-bg-light);
+}
+
+.chi-tiet-academic-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin: 12px 0 8px 0;
+}
+
+.chi-tiet-academic-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.chi-tiet-footer {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 0 0;
+    margin-top: 30px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.btn-back-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background-color: transparent;
+    border: none;
+    color: var(--color-text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-back-detail:hover {
+        background-color: var(--border-color-d0);
+        color: white;
+    }
+
+.chi-tiet-sub-box {
+    margin-top: 30px;
+    position: relative;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 20px;
+    background-color: white;
+}
+
+.chi-tiet-sub-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background-color: white;
+    padding: 0 8px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+}
+
+.chi-tiet-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.btn-back-detail i {
+    font-size: 14px;
 }

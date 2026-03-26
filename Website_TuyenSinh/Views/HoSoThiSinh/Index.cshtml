@@ -6,6 +6,7 @@
 @section styles{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="~/Content/css/ho-so-thi-sinh.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/dang-nhap.css" />
 
 
 }
@@ -94,18 +95,18 @@
                         </button>
 
                         <div class="button-group">
-                            <button class="btn-detail-record">
+                            <button type="button" class="btn-detail-record">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                 <p>Xem chi tiết hồ sơ</p>
-                            </button>
-                            <button class="btn-print">
-                                <i class="fa fa-print" aria-hidden="true"></i>
-                                <p>In giấy báo trúng tuyển</p>
-                            </button>
-                            <button class="btn-export">
-                                <i class="fa fa-file-export" aria-hidden="true"></i>
-                                <p>Xuất giấy đăng ký xét tuyển</p>
-                            </button>
+                                </>
+                                <button class="btn-print">
+                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                    <p>In giấy báo trúng tuyển</p>
+                                </button>
+                                <button class="btn-export">
+                                    <i class="fa fa-file-export" aria-hidden="true"></i>
+                                    <p>Xuất giấy đăng ký xét tuyển</p>
+                                </button>
                         </div>
                     </div>
 
@@ -346,16 +347,31 @@
         </div>
         <!-- End Tab 3 -->
 
+        <div class="tab-pane" id="traCuuKetQua">
+            @Html.Partial("_InfomationSearch")
+        </div>
+
+        <!-- Tab 5: Chi tiết hồ sơ (được hiển thị khi click nút Xem chi tiết) -->
+        <div class="tab-pane" id="chiTietHoSoTab">
+            <div class="chi-tiet-ho-so-container" id="chiTietHoSoContent">
+                <!-- Nội dung được load động từ JavaScript -->
+            </div>
+        </div>
+
     </div>
 
-    <!-- Hidden file input for document upload -->
+
     <input type="file" id="hiddenFileInput" style="display: none;" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
 
 </div>
 
 @section scripts{
     <script src="~/Scripts/js/ho-so-thi-sinh.js"></script>
+
+    <script>
+        $(document).keydown(function (e) {
+            if (e.key === 'Escape') {
+            }
+        });
+    </script>
 }
-
-
-

@@ -1,24 +1,60 @@
 const candidateData = {
     personal: {
         fullName: 'Nguyễn Văn A',
-        dateOfBirth: '15/03/2007',
+        dateOfBirth: '07/01/2008',
         gender: 'Nam',
-        cccd: '0123147258369',
-        placeOfBirth: 'An Giang',
+        cccd: '0123456789',
+        placeOfBirth: 'TP Hồ Chí Minh',
         nationality: 'Việt Nam',
         ethnicity: 'Kinh',
-        phone: '0123456789',
-        email: '123.student@123.edu.vn',
+        phone: '0134567258',
+        email: 'nguyenvana23@gmail.com',
+        area: 'Khu vực 1',
+        priority: 'Đối tượng ưu tiên 01',
     },
     application: {
         applicationId: '123456789',
-        submissionDate: '15/06/2025',
+        submissionDate: '12/02/2025',
         status: 'Đã được duyệt',
         admissionMethod:
             'Xét ưu tiên / Tuyển thẳng theo quy định của Điều 8 Bộ GD&ĐT',
         progress: 50,
     },
-
+    recruitment: {
+        recruitmentProgram: 'Khối xác tuyển sinh Khối xác 1',
+        major: 'Công nghệ thông tin',
+    },
+    homeAddress: {
+        province: 'TP Hồ Chí Minh',
+        district: 'Phường/Xã Huyền Nhà Bè',
+        address: 'Số nhà/ Tên đường 123 Quảng Trung, Phường 1T',
+    },
+    guardianAddress: {
+        province: 'TP Hồ Chí Minh',
+        district: 'Phường/Xã Huyền Nhà Bè',
+        address: 'Số nhà/ Tên đường 123 Quảng Trung, Phường 1T',
+    },
+    languageCertificate: {
+        name: 'IELTS Academic',
+        score: 6.5,
+        examDate: '12/02/2025',
+        conversionPoints: 10,
+        certificate: 'IDP Education',
+        file: 'minhChung.pdf',
+    },
+    admissionInfo: {
+        method: 'Phương thức xét tuyển',
+        detail: 'Xét ưu tiên/Tuyển thẳng theo quy định của Điều 8 Bộ GD&ĐT',
+    },
+    guardian: {
+        name: 'Trần Thị B',
+        phone: '0123456789',
+    },
+    academics: {
+        class10: { conduct: 'Hạnh kiểm', score: '—' },
+        class11: { conduct: 'Hạnh kiểm', score: 'Giỏi' },
+        class12: { conduct: 'Hạnh kiểm', score: 'Tốt' },
+    },
     timeline: [
         {
             step: 'Đăng ký',
@@ -53,6 +89,7 @@ $(document).ready(function () {
     initializeTabSwitching();
     initializePasswordForm();
     initializeFileUpload();
+    initializeDetailButton();
 });
 
 function initializeInterface() {
@@ -122,7 +159,6 @@ function updateCandidateData(newData) {
 function getCandidateData() {
     return candidateData;
 }
-
 
 // vẽ biểu đồ tròn
 
@@ -206,6 +242,7 @@ function initializeTabSwitching() {
         'KHUNG HỒ SỐ TRỰC TUYẾN',
         'ĐỔI MẬT KHẨU',
         'TRA CỨU KẾT QUẢ',
+        'CHI TIẾT HỒ SƠ ĐĂNG KÝ',
     ];
 
     tabItems.on('click', function () {
@@ -225,7 +262,232 @@ function initializeTabSwitching() {
     });
 }
 
-// Initialize password change form
+// Initialize detail button
+function initializeDetailButton() {
+    $('.btn-detail-record').on('click', function () {
+        // Ẩn tất cả tab panes
+        $('.tab-pane').removeClass('active');
+
+        // Hiển thị tab chi tiết
+        $('#chiTietHoSoTab').addClass('active');
+
+        // Load dữ liệu vào tab chi tiết
+        loadDetailTabData();
+
+        // Cập nhật header title
+        $('#tabHeaderTitle').text('CHI TIẾT HỒ SƠ ĐĂNG KÝ');
+
+        // Ẩn tất cả tab items active
+        $('.tab-item').removeClass('active');
+
+        // Scroll lên đầu trang
+        $('html, body').animate({ scrollTop: 0 }, 300);
+    });
+}
+
+// Load dữ liệu vào tab chi tiết
+function loadDetailTabData() {
+    const data = candidateData;
+    const $container = $('#chiTietHoSoContent');
+
+    // Clear container
+    $container.empty();
+
+    // Build chi tiết panel
+    const $panel = buildDetailPanel(data);
+    $container.append($panel);
+}
+
+// Build chi tiết panel
+function buildDetailPanel(data) {
+    let sectionNum = 1;
+
+    const html = `
+    <div class="chi-tiet-content">
+
+        ${buildSection(
+            sectionNum++,
+            '. Thông tin thí sinh',
+            [
+                { label: 'Họ và tên', value: data.personal.fullName },
+                { label: 'Ngày sinh', value: data.personal.dateOfBirth },
+                { label: 'Giới tính', value: data.personal.gender },
+                { label: 'Số CMND/CCCD', value: data.personal.cccd },
+                { label: 'Ngày cấp', value: data.personal.idIssueDate },
+                { label: 'Nơi cấp', value: data.personal.idIssuePlace },
+                { label: 'Số điện thoại', value: data.personal.phone },
+                { label: 'Email', value: data.personal.email },
+                { label: 'Dân tộc', value: data.personal.ethnicity },
+                {
+                    label: 'Năm tốt nghiệp',
+                    value: data.personal.graduationYear,
+                },
+                {
+                    label: 'Tên trường THPT lớp 12',
+                    value: data.personal.highSchoolName,
+                },
+                {
+                    label: 'Đối tượng ưu tiên tuyển sinh',
+                    value: data.personal.area,
+                },
+                { label: 'Khu vực tuyển sinh', value: data.personal.priority },
+            ],
+            'chi-tiet-grid-6col',
+            `
+            <div class="chi-tiet-sub-box">
+                <div class="chi-tiet-sub-title">Hộ khẩu thường trú</div>
+                <div class="chi-tiet-grid-3col">
+                    ${buildItem('Thành phố/ Tỉnh', data.homeAddress.province)}
+                    ${buildItem('Phường/ Xã', data.homeAddress.district)}
+                    ${buildItem('Số nhà/ Tên đường', data.homeAddress.address)}
+                </div>
+            </div>
+
+            <div class="chi-tiet-sub-box">
+                <div class="chi-tiet-sub-title">Địa chỉ liên hệ hiện tại</div>
+                <div class="chi-tiet-grid-3col">
+                    ${buildItem('Thành phố/ Tỉnh', data.guardianAddress.province)}
+                    ${buildItem('Phường/ Xã', data.guardianAddress.district)}
+                    ${buildItem('Số nhà/ Tên đường', data.guardianAddress.address)}
+                </div>
+            </div>
+            `,
+        )}
+
+        <!-- Chứng chỉ -->
+        <div class="chi-tiet-section">
+            <div class="chi-tiet-section-header">
+                <span class="chi-tiet-section-number">${sectionNum++}</span>
+                <span class="chi-tiet-section-title">. Chứng chỉ ngoại ngữ</span>
+            </div>
+            <div class="chi-tiet-section-content">
+                <div class="chi-tiet-certificate-box">
+                    <div class="chi-tiet-certificate-box-sub">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                           <div class="icon-record"><i class="fa fa-certificate"></i></div>
+                            <div>
+                                <p style="margin: 0; font-weight: 600;">${data.languageCertificate.name}</p>
+                                <p style="margin: 0; font-weight: 500; font-size: 13px; color: #666;">Điểm thi: ${data.languageCertificate.score} | Ngày thi: ${data.languageCertificate.examDate}</p>
+                            </div>
+                        </div>
+                        <div class="chi-tiet-certificate-box-center">
+                            <p >Điểm quy đổi: ${data.languageCertificate.conversionPoints}</p>
+                            <p >Đơn vị cấp: ${data.languageCertificate.certificate}</p>
+                        </div>
+                    </div>
+                    <p style="margin: 0; font-size: 13px; color: #666;">Đã đính kèm tệp: ${data.languageCertificate.file}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin xét tuyển -->
+        <div class="chi-tiet-section">
+            <div class="chi-tiet-section-header">
+                <span class="chi-tiet-section-number">${sectionNum++}</span>
+                <span class="chi-tiet-section-title">. Thông tin xét tuyển</span>
+            </div>
+            <div class="chi-tiet-section-content">
+                <div class="chi-tiet-info-box">
+                    <div class="icon-record"><i class="fa fa-book"></i></div>
+                    <div class="chi-tiet-info-content">
+                        <p class="chi-tiet-info-label">PHƯƠNG THỨC XÉT TUYỂN</p>
+                        <p class="chi-tiet-info-value">${data.admissionInfo.detail}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin người tư vấn -->
+        <div class="chi-tiet-section">
+            <div class="chi-tiet-section-header">
+                <span class="chi-tiet-section-number">${sectionNum++}</span>
+                <span class="chi-tiet-section-title">. Thông tin người giới thiệu/ tư vấn</span>
+            </div>
+            <div class="chi-tiet-section-content">
+                <div class="chi-tiet-info-box">
+                    <div class="icon-record"><i class="fa fa-user"></i></div>
+                    <div class="chi-tiet-info-content">
+                        <p class="chi-tiet-info-value" style="font-weight: 600;">${data.guardian.name}</p>
+                        <p class="chi-tiet-info-value">Số điện thoại: ${data.guardian.phone}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chi-tiet-footer">
+            <button type="button" class="btn-back-detail">
+            <i class="fa fa-arrow-left"></i>
+                Quay lại
+            </button>
+        </div>
+
+    </div>
+    `;
+
+    const $panel = $(html);
+
+    $panel.find('.btn-back-detail').on('click', function () {
+        $('.tab-pane').removeClass('active');
+        $('#hoSoThiSinh').addClass('active');
+        $('.tab-item').removeClass('active');
+        $('.tab-item').first().addClass('active');
+        $('#tabHeaderTitle').text('THÔNG TIN THÍ SINH ĐĂNG KÝ');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+    });
+
+    return $panel;
+}
+
+// Helper function to build section
+function buildSection(number, title, fields, gridClass = '', extraHtml = '') {
+    let html = `
+        <div class="chi-tiet-section">
+            <div class="chi-tiet-section-header">
+                <span class="chi-tiet-section-number">${number}</span>
+                <span class="chi-tiet-section-title">${title}</span>
+            </div>
+            <div class="chi-tiet-section-content">
+                <div class="chi-tiet-review-grid ${gridClass}">
+    `;
+
+    fields.forEach((field) => {
+        if (field.inline) {
+            // Hiển thị inline (label và value trên 1 dòng)
+            html += `
+                    <div class="chi-tiet-review-item chi-tiet-review-item-inline">
+                        <span class="chi-tiet-review-label">${field.label}:</span>
+                        <span class="chi-tiet-review-value">${field.value || '—'}</span>
+                    </div>
+            `;
+        } else {
+            // Hiển thị bình thường (label trên, value dưới)
+            html += `
+                    <div class="chi-tiet-review-item">
+                        <div class="chi-tiet-review-label">${field.label}</div>
+                        <div class="chi-tiet-review-value">${field.value || '—'}</div>
+                    </div>
+            `;
+        }
+    });
+
+    html += `
+                </div>
+                ${extraHtml}
+            </div>
+        </div>
+    `;
+
+    return html;
+}
+
+// Helper function to build item for grid
+function buildItem(label, value) {
+    return `
+        <div class="chi-tiet-review-item">
+            <div class="chi-tiet-review-label">${label}</div>
+            <div class="chi-tiet-review-value">${value || '—'}</div>
+        </div>
+    `;
+}
 function initializePasswordForm() {
     const form = $('#changePasswordForm');
     const passwordToggles = $('.password-toggle');

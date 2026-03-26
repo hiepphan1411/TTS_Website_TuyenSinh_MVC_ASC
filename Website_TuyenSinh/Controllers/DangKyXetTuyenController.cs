@@ -37,14 +37,14 @@ namespace Website_TuyenSinh.Controllers
         //Get cấu hình cho tuyển sinh sau đại học 
         public ActionResult TuyenSinhSauDaiHoc()
         {
-            var typeCauHinh = 153;
+            var typeCauHinh = 112;
 
             var repo = new TuyenSinhRepository();
             ViewBag.ShowSidebar = true;
             var data = repo.getByLoai(typeCauHinh);
             ViewBag.FormConfigJson = JsonConvert.SerializeObject(data, _jsonSettings);
 
-            return View(); 
+            return View();
         }
     }
 }
