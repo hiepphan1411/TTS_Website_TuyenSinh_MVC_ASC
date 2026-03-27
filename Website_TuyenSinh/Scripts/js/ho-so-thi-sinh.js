@@ -4,10 +4,14 @@ const candidateData = {
         dateOfBirth: '07/01/2008',
         gender: 'Nam',
         cccd: '0123456789',
+        idIssueDate: '01/02/2020',
+        idIssuePlace: 'TP Hồ Chí Minh',
         placeOfBirth: 'TP Hồ Chí Minh',
         nationality: 'Việt Nam',
         ethnicity: 'Kinh',
         phone: '0134567258',
+        graduationYear: '2025',
+        highSchoolName: 'THPT Bùi Hữu Nghĩa',
         email: 'nguyenvana23@gmail.com',
         area: 'Khu vực 1',
         priority: 'Đối tượng ưu tiên 01',
@@ -265,19 +269,15 @@ function initializeTabSwitching() {
 // Initialize detail button
 function initializeDetailButton() {
     $('.btn-detail-record').on('click', function () {
-        // Ẩn tất cả tab panes
+
         $('.tab-pane').removeClass('active');
 
-        // Hiển thị tab chi tiết
         $('#chiTietHoSoTab').addClass('active');
 
-        // Load dữ liệu vào tab chi tiết
         loadDetailTabData();
 
-        // Cập nhật header title
         $('#tabHeaderTitle').text('CHI TIẾT HỒ SƠ ĐĂNG KÝ');
 
-        // Ẩn tất cả tab items active
         $('.tab-item').removeClass('active');
 
         // Scroll lên đầu trang
@@ -290,15 +290,12 @@ function loadDetailTabData() {
     const data = candidateData;
     const $container = $('#chiTietHoSoContent');
 
-    // Clear container
     $container.empty();
 
-    // Build chi tiết panel
     const $panel = buildDetailPanel(data);
     $container.append($panel);
 }
 
-// Build chi tiết panel
 function buildDetailPanel(data) {
     let sectionNum = 1;
 
@@ -306,34 +303,34 @@ function buildDetailPanel(data) {
     <div class="chi-tiet-content">
 
         ${buildSection(
-            sectionNum++,
-            '. Thông tin thí sinh',
-            [
-                { label: 'Họ và tên', value: data.personal.fullName },
-                { label: 'Ngày sinh', value: data.personal.dateOfBirth },
-                { label: 'Giới tính', value: data.personal.gender },
-                { label: 'Số CMND/CCCD', value: data.personal.cccd },
-                { label: 'Ngày cấp', value: data.personal.idIssueDate },
-                { label: 'Nơi cấp', value: data.personal.idIssuePlace },
-                { label: 'Số điện thoại', value: data.personal.phone },
-                { label: 'Email', value: data.personal.email },
-                { label: 'Dân tộc', value: data.personal.ethnicity },
-                {
-                    label: 'Năm tốt nghiệp',
-                    value: data.personal.graduationYear,
-                },
-                {
-                    label: 'Tên trường THPT lớp 12',
-                    value: data.personal.highSchoolName,
-                },
-                {
-                    label: 'Đối tượng ưu tiên tuyển sinh',
-                    value: data.personal.area,
-                },
-                { label: 'Khu vực tuyển sinh', value: data.personal.priority },
-            ],
-            'chi-tiet-grid-6col',
-            `
+        sectionNum++,
+        '. Thông tin thí sinh',
+        [
+            { label: 'Họ và tên', value: data.personal.fullName },
+            { label: 'Ngày sinh', value: data.personal.dateOfBirth },
+            { label: 'Giới tính', value: data.personal.gender },
+            { label: 'Số CMND/CCCD', value: data.personal.cccd },
+            { label: 'Ngày cấp', value: data.personal.idIssueDate },
+            { label: 'Nơi cấp', value: data.personal.idIssuePlace },
+            { label: 'Số điện thoại', value: data.personal.phone },
+            { label: 'Email', value: data.personal.email },
+            { label: 'Dân tộc', value: data.personal.ethnicity },
+            {
+                label: 'Năm tốt nghiệp',
+                value: data.personal.graduationYear,
+            },
+            {
+                label: 'Tên trường THPT lớp 12',
+                value: data.personal.highSchoolName,
+            },
+            {
+                label: 'Đối tượng ưu tiên tuyển sinh',
+                value: data.personal.area,
+            },
+            { label: 'Khu vực tuyển sinh', value: data.personal.priority },
+        ],
+        'chi-tiet-grid-6col',
+        `
             <div class="chi-tiet-sub-box">
                 <div class="chi-tiet-sub-title">Hộ khẩu thường trú</div>
                 <div class="chi-tiet-grid-3col">
@@ -352,7 +349,7 @@ function buildDetailPanel(data) {
                 </div>
             </div>
             `,
-        )}
+    )}
 
         <!-- Chứng chỉ -->
         <div class="chi-tiet-section">

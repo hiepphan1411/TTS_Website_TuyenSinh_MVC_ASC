@@ -120,7 +120,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ChiTietHoSoDangKyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HoSoThiSinhController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
@@ -267,7 +266,6 @@
     <Content Include="Views\TuyenSinhSauDaiHoc.cshtml" />
     <Content Include="Views\DangKyXetTuyen\TuyenSinhSauDaiHoc.cshtml" />
     <Content Include="Views\Shared\_InfomationSearch.cshtml" />
-    <Content Include="Views\ChiTietHoSoDangKy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
