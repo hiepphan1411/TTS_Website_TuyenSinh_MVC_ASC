@@ -1,17 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Trang chủ";
 }
 
-@section styles{
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
- 
-}
-
-  <div class="banner">
-      <div class="card-banner">
+<div class="banner">
+    <div class="card-banner">
         <p>CỔNG THÔNG TIN TUYỂN SINH</p>
         <p>TUYỂN SINH ĐẠI HỌC</p>
         <p>CHÍNH QUY NĂM 2026</p>
@@ -32,7 +24,7 @@
 <!-- Bậc đào tạo & Đăng ký -->
 <div class="card-section">
     <div class="container-lg">
-        <p class="title-center">BẬC ĐÀO TẠO VÀ ĐĂNG KÝ</p>
+        <p class="title-center" id="section-dk">BẬC ĐÀO TẠO VÀ ĐĂNG KÝ</p>
         <div class="d-flex justify-content-center mb-4">
             <div class="line"></div>
         </div>
@@ -44,7 +36,7 @@
                     </div>
                     <p>ĐẠI HỌC - CHÍNH QUY</p>
                     <p>Đào tạo bằng đại học chính quy với chương trình chuẩn quốc gia, thời gian 4 năm.</p>
-                    <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
+                    <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 43 })" class="btn-outline-primary">Đăng ký ngay →</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -54,7 +46,7 @@
                     </div>
                     <P>XÉT TUYỂN SAU ĐẠI HỌC</P>
                     <p>Chương trình đào tạo cao học, thạc sĩ, tiến sĩ cho sinh viên tốt nghiệp đại học.</p>
-                    <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
+                    <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 112 })" class="btn-outline-primary">Đăng ký ngay →</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -64,7 +56,7 @@
                     </div>
                     <p>ĐẠI HỌC - LIÊN THÔNG</p>
                     <p>Chương trình liên thông từ cao đẳng lên đại học, rút ngắn thời gian học.</p>
-                    <a href="#" class="btn-outline-primary">Đăng ký ngay →</a>
+                    <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 166 })" class="btn-outline-primary">Đăng ký ngay →</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -141,3 +133,19 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/lib/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/lib/jquery-3.7.0.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            $(".btn-now-register").click(function () {
+                var targetPosition = $("#section-dk").offset().top;
+
+                $("html, body").animate({
+                    scrollTop: targetPosition
+                }, 300);
+            });
+        }
+    )
+</script>

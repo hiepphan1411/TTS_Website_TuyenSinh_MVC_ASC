@@ -1,4 +1,5 @@
 ﻿/*Test*/
+
 .df-card {
     background: #fff;
     border-radius: 14px;
@@ -71,8 +72,17 @@
     display: none;
 }
 
+.show {
+    display: block;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
 .df-numeric-wrap .df-input {
-    padding-right: 38.4px;
+    padding-right: 38px;
 }
 
 .df-numeric-spin button {
@@ -292,16 +302,16 @@
     background: #fff;
 }
 
-    .group-box > legend {
-        float: none;
-        width: auto;
-        margin: 0 0 6px;
-        padding: 0 8px;
-        font-size: 14px;
-        color: #666;
-        background: #fff;
-        line-height: 1;
-    }
+.group-box>legend {
+    float: none;
+    width: auto;
+    margin: 0 0 6px;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    line-height: 1;
+}
 
 .df-nav-bar {
     display: flex;
@@ -335,26 +345,27 @@
     transition: ease 0.15s;
 }
 
-    .df-btn-next:hover {
-        background: #1d4ed8;
-    }
+.df-btn-next:hover {
+    background: #1d4ed8;
+}
 
-    .df-btn-next:disabled {
-        background: var(--df-gray-400);
-        cursor: not-allowed;
-    }
+.df-btn-next:disabled {
+    background: var(--df-gray-400);
+    cursor: not-allowed;
+}
 
 @media (max-width: 576px) {
     .df-card {
         padding: 16px 16px;
     }
-
     .df-radio-group {
         flex-direction: column;
     }
 }
 
+
 /* ===== Review Panel Styles ===== */
+
 .df-review-panel {
     width: 100%;
 }
@@ -365,18 +376,18 @@
     border-bottom: 2px solid var(--df-gray-200);
 }
 
-    .df-review-header h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--df-gray-900);
-        margin: 0 0 8px 0;
-    }
+.df-review-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--df-gray-900);
+    margin: 0 0 8px 0;
+}
 
-    .df-review-header p {
-        font-size: 13px;
-        color: var(--df-gray-500);
-        margin: 0;
-    }
+.df-review-header p {
+    font-size: 13px;
+    color: var(--df-gray-500);
+    margin: 0;
+}
 
 .df-review-content {
     margin-bottom: 28px;
@@ -387,9 +398,9 @@
     border-bottom: 1px solid var(--df-gray-100);
 }
 
-    .df-review-section:last-of-type {
-        border-bottom: none;
-    }
+.df-review-section:last-of-type {
+    border-bottom: none;
+}
 
 .df-review-section-header {
     display: flex;
@@ -459,27 +470,27 @@
     gap: 10px;
 }
 
-    .df-confirm-checkbox label {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        cursor: pointer;
-        margin: 0;
-    }
+.df-confirm-checkbox label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    margin: 0;
+}
 
-    .df-confirm-checkbox input[type='checkbox'] {
-        width: 18px;
-        height: 18px;
-        margin-top: 2px;
-        cursor: pointer;
-        flex-shrink: 0;
-    }
+.df-confirm-checkbox input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
 
-    .df-confirm-checkbox span {
-        font-size: 13px;
-        color: var(--df-gray-700);
-        line-height: 1.6;
-    }
+.df-confirm-checkbox span {
+    font-size: 13px;
+    color: var(--df-gray-700);
+    line-height: 1.6;
+}
 
 @media (max-width: 1200px) {
     .df-review-items-grid {
@@ -493,11 +504,9 @@
         grid-template-columns: 1fr;
         gap: 16px 0;
     }
-
     .df-review-section-header {
         gap: 10px;
     }
-
     .df-review-header h3 {
         font-size: 16px;
     }
@@ -544,9 +553,9 @@
     margin: 0;
 }
 
-    .df-review-group-items .df-review-item {
-        padding: 0;
-    }
+.df-review-group-items .df-review-item {
+    padding: 0;
+}
 
 .df-captcha-section {
     padding: 20px;
@@ -592,11 +601,11 @@
     gap: 8px;
 }
 
-    .df-captcha-input-wrapper label {
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--df-gray-800);
-    }
+.df-captcha-input-wrapper label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--df-gray-800);
+}
 
 .df-captcha-input-box {
     display: flex;
@@ -662,13 +671,9 @@
     border-radius: 8px;
 }
 
-    .btn-captcha-submit:hover {
-        background-color: var(--primary-blue-hover);
-    }
-
-/* ═══════════════════════════════════════════════════════════════
-   TABLE LAYOUT STYLING FOR CHI TIẾT HỒ SƠ
-   ═══════════════════════════════════════════════════════════════ */
+.btn-captcha-submit:hover {
+    background-color: var(--primary-blue-hover);
+}
 
 .df-table-section {
     margin-bottom: 20px;
@@ -683,56 +688,58 @@
     overflow: hidden;
 }
 
-    .df-review-table thead {
-        background-color: var(--df-gray-100);
-        border-bottom: 2px solid var(--df-gray-300);
-    }
+.df-review-table thead {
+    background-color: var(--df-gray-100);
+    border-bottom: 2px solid var(--df-gray-300);
+}
 
-    .df-review-table th {
-        padding: 12px 16px;
-        text-align: left;
-        font-weight: 700;
-        font-size: 13px;
-        color: var(--df-gray-700);
-        white-space: nowrap;
-        border-right: 1px solid var(--df-gray-200);
-    }
+.df-review-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--df-gray-700);
+    white-space: nowrap;
+    border-right: 1px solid var(--df-gray-200);
+}
 
-        .df-review-table th:last-child {
-            border-right: none;
-        }
+.df-review-table th:last-child {
+    border-right: none;
+}
 
-    .df-review-table tbody tr {
-        border-bottom: 1px solid var(--df-gray-200);
-        transition: background-color 0.2s ease;
-    }
+.df-review-table tbody tr {
+    border-bottom: 1px solid var(--df-gray-200);
+    transition: background-color 0.2s ease;
+}
 
-        .df-review-table tbody tr:hover {
-            background-color: var(--df-gray-50);
-        }
+.df-review-table tbody tr:hover {
+    background-color: var(--df-gray-50);
+}
 
-        .df-review-table tbody tr:last-child {
-            border-bottom: none;
-        }
+.df-review-table tbody tr:last-child {
+    border-bottom: none;
+}
 
-    .df-review-table td {
-        padding: 12px 16px;
-        font-size: 13px;
-        color: var(--df-gray-800);
-        border-right: 1px solid var(--df-gray-200);
-    }
+.df-review-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--df-gray-800);
+    border-right: 1px solid var(--df-gray-200);
+}
 
-        .df-review-table td:last-child {
-            border-right: none;
-        }
+.df-review-table td:last-child {
+    border-right: none;
+}
 
-        .df-review-table td.td-diem {
-            font-weight: 600;
-            color: var(--primary-blue);
-            text-align: center;
-        }
+.df-review-table td.td-diem {
+    font-weight: 600;
+    color: var(--primary-blue);
+    text-align: center;
+}
+
 
 /* Chi tiết header */
+
 .chi-tiet-header {
     display: flex;
     gap: 30px;
@@ -748,18 +755,18 @@
     color: var(--df-gray-800);
 }
 
-    .header-info strong {
-        color: var(--df-gray-900);
-        font-weight: 600;
-    }
+.header-info strong {
+    color: var(--df-gray-900);
+    font-weight: 600;
+}
 
-    .header-info .badge {
-        display: inline-block;
-        background: #dcfce7;
-        color: var(--success-green);
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 12px;
-        margin-left: 8px;
-    }
+.header-info .badge {
+    display: inline-block;
+    background: #dcfce7;
+    color: var(--success-green);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    margin-left: 8px;
+}
