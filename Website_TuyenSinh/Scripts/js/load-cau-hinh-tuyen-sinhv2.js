@@ -53,6 +53,15 @@ $(function () {
         $.each(result, function (_, tab) {
             tab.fields.sort(function (a, b) { return (a.stt || 0) - (b.stt || 0); });
         });
+        result.push({
+            tabKey: 'HoanTatDangKy',
+            tabLabel: 'Hoàn tất đăng ký',
+            tabIndex: result.length,
+            isCompleted: false,
+            isSeen: false,
+            fields: [],
+            isReviewTab: true,
+        });
         return result;
     }
 
@@ -180,6 +189,10 @@ $(function () {
 
     //Build nội dung của tab tương ứng
     function buildTabPanel(tab) {
+        if (tab.isReviewTab) {
+            return buildReviewPanel(tab);
+        }
+
         var $panel = $('<div class="df-tab-panel"></div>');
         var childRendered = {};
 
@@ -851,6 +864,223 @@ $(function () {
         });
         return d;
     }
+
+    function buildReviewPanel(reviewTab) {
+        var $panel = $('<div class="df-review-panel"></div>');
+
+        var $mainContainer = $('<div class="df-review-content"></div>');
+
+        function getFieldValue(field) {
+            var savedValue = savedValues[field.maDanhMuc];
+
+            if (
+                (field.fieldType === 8 || field.fieldType === 9) &&
+                savedValue
+            ) {
+                if (typeof savedValue === 'object' && savedValue.fileName) {
+                    return savedValue.fileName;
+                }
+                return savedValue;
+            }
+
+            return savedValue || '';
+        }
+
+        var sectionNum = 1;
+        $.each(tabs, function (tabIdx, tab) {
+            if (tab.isReviewTab) return;
+
+            var $section = $('<div class="df-review-section"></div>');
+
+            // Section header
+            var $sectionHeader = $(
+                '<div class="df-review-section-header"></div>',
+            );
+            $sectionHeader.append(
+                `<span class="df-section-number">
+                    ${sectionNum}
+                </span>
+                <span class="df-section-title">
+                    ${esc(tab.tabLabel)}
+                </span>`,
+            );
+            $section.append($sectionHeader);
+
+            var $grid = $('<div class="df-review-items-grid"></div>');
+            var hasContent = false;
+            var groupedFields = {};
+            var childFieldIds = {};
+
+            $.each(tab.fields, function (_, field) {
+                if (field.isParent && field.isVisible) {
+                    var childFields = $.grep(tab.fields, function (f) {
+                        return (
+                            !f.isParent &&
+                            f.parentField === field.maDanhMuc &&
+                            f.isVisible &&
+                            f.fieldType !== 7 &&
+                            f.fieldType !== 11 &&
+                            f.fieldType !== 13
+                        );
+                    });
+
+                    if (childFields.length > 0) {
+                        groupedFields[field.maDanhMuc] = {
+                            title: field.tenDanhMuc,
+                            fields: childFields,
+                        };
+
+                        $.each(childFields, function (_, f) {
+                            childFieldIds[f.maDanhMuc] = true;
+                        });
+                    }
+                }
+            });
+
+            $.each(tab.fields, function (_, field) {
+                if (field.maDanhMuc === 'ApplyHKTT') return;
+                if (
+                    field.fieldType === 7 ||
+                    field.fieldType === 11 ||
+                    field.fieldType === 13 ||
+                    !field.isVisible ||
+                    field.isParent
+                ) {
+                    return;
+                }
+
+                if (childFieldIds[field.maDanhMuc]) {
+                    return;
+                }
+
+                var fieldValue = getFieldValue(field);
+                if (!fieldValue) {
+                    fieldValue = '—';
+                }
+
+                var $item = $('<div class="df-review-item"></div>');
+                $item.append(
+                    '<div class="df-review-label">' +
+                    esc(field.tenDanhMuc) +
+                    '</div>',
+                );
+                $item.append(
+                    `<div class="df-review-value">
+                        ${esc(fieldValue)}
+                    </div>`,
+                );
+                $grid.append($item);
+                hasContent = true;
+            });
+
+            $.each(groupedFields, function (key, group) {
+                var $groupBox = $('<div class="df-review-group-box"></div>');
+
+                $groupBox.append(
+                    `<div class="df-review-group-title">
+                        ${esc(group.title)}
+                    </div>`,
+                );
+
+                var $groupItems = $(
+                    '<div class="df-review-group-items"></div>',
+                );
+                $.each(group.fields, function (_, field) {
+                    if (field.maDanhMuc === 'ApplyHKTT') return;
+                    var fieldValue = getFieldValue(field);
+                    if (!fieldValue) {
+                        fieldValue = '—';
+                    }
+
+                    var $item = $('<div class="df-review-item"></div>');
+                    $item.append(
+                        `<div class="df-review-label">
+                            ${esc(field.tenDanhMuc)}
+                        </div>`,
+                    );
+                    $item.append(
+                        `<div class="df-review-value">
+                            ${esc(fieldValue)}
+                        </div>`,
+                    );
+                    $groupItems.append($item);
+                });
+
+                $groupBox.append($groupItems);
+                $grid.append($groupBox);
+                hasContent = true;
+            });
+
+            if (hasContent) {
+                $section.append($grid);
+                $mainContainer.append($section);
+                sectionNum++;
+            }
+        });
+
+        $panel.append($mainContainer);
+        //captcha
+        var $finalSection = $('<div class="df-review-section"></div>');
+        var $finalHeader = $('<div class="df-review-section-header"></div>');
+        $finalHeader.append(
+            `<span class="df-section-number">
+                ${sectionNum}.
+            </span>
+            <span class="df-section-title">
+                ${esc(reviewTab.tabLabel)}
+            </span>`,
+        );
+        $finalSection.append($finalHeader);
+        $mainContainer.append($finalSection);
+
+        var $footer = $(`<div class="df-review-footer"></div>`);
+
+        var $subFooter = $(`<div class="df-review-sub-footer"></div>`);
+
+        var $captchaSection = $('<div class="df-captcha-section"></div>');
+        $captchaSection.append(
+            `
+                <div class="df-captcha-header">
+                    <div class="df-confirm-checkbox">
+                        <input type="checkbox" id="df-confirm-review" />
+                        <div class="df-captcha-heading">Tôi cam đoan những thông tin trên đúng sự thật</div>
+                    </div>
+                     <div class="df-captcha-description">
+                        Vui lòng lòng kiểm tra kỹ mọi thông tin trước khi xác nhận. Thông tin không chính xác có thể ảnh hưởng đến kết quả xét tuyển.
+                    </div>
+                  </div>`,
+        );
+        $captchaSection.append(
+            `<div class="df-captcha-content">
+                   
+                    <div class="df-captcha-input-wrapper">
+                        <div class="df-captcha-input-box">
+                            <input type="text" id="df-captcha-input" class="df-captcha-field" placeholder="Nhập mã" />
+                            <div class="capcha-code">
+                              <div class="df-captcha-code" id="df-captcha-code">AB07</div>
+                              <div class="df-captcha-refresh" id="df-captcha-refresh">
+                                  <i class="fa fa-refresh" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <span class="df-captcha-note">Lưu ý: Mã bảo vệ chỉ nhập 1 lần. Nếu sai, vui lòng nhấn nút làm mới để tạo mã khác. Hệ thống không cho phép sửa ký tự sai.</span>
+                <div>
+                    <div class="df-captcha-submit">
+                        <button type="button" class="btn-captcha-submit">ĐĂNG KÝ</button>
+                    </div>
+                </div>
+            `,
+        );
+        $subFooter.append($captchaSection);
+        $footer.append($subFooter);
+        $panel.append($footer);
+
+        return $panel;
+    }
+
 
     function bindNav() {
         $('#df-btn-back').off('click').on('click', function () {
