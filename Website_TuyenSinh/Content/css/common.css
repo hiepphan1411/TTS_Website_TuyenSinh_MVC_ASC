@@ -242,7 +242,6 @@ body {
   font-weight: 700;
   font-size: 15px;
   margin-bottom: 8px;
-
   /* color: #f8fafc;
     font-weight: 700;
     font-size: 0.9rem;
@@ -253,7 +252,6 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -414,19 +412,21 @@ body {
 /* Content */
 /* Home */
 .banner {
-    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('/Content/images/login-background.png');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
+    url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTg2OvQXdZxc30YWy93iRDcPE3JXTw7q9wgYscR7E-iCKvz4eDoSPkCpIULTZktr4rQQGrIVHx-Yk9Vj5SgYVs4aOCdFOHZ5DihkTpc-o9gFswyMLbGcc6SIan7sWFxEJZRC_t4UHrD9AvXj1QKY_lIK-hTUJoLWwnzlz6hixPche6dLQ-oSpj9mvLIQ8ZxWP2vJqmH9bl4srnFdd17-GIbu-igXu2cucQTEcXmhCgo0W8mF2nIGnbRRz59y8-bVBSyzkc5hV_IvU");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-banner {
@@ -850,58 +850,57 @@ p {
   }
 }
 
-
 /*Xử lý nút spinner */
 .df-numeric-wrap {
-    position: relative;
-    display: inline-block;
-    width: 100%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .df-input {
-    width: 100%;
-    padding-right: 30px; 
-    box-sizing: border-box;
+  width: 100%;
+  padding-right: 30px;
+  box-sizing: border-box;
 }
 
-    .df-input::-webkit-outer-spin-button,
-    .df-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+.df-input::-webkit-outer-spin-button,
+.df-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .df-input {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 .df-numeric-spin {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    bottom: 2px;
-    width: 24px;
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid #ccc;
-    background: var(--light-gray);
-    border-radius: 6px;
-    overflow: hidden;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #ccc;
+  background: var(--light-gray);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
-    .df-numeric-spin button {
-        flex: 1;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        font-size: 10px;
-        line-height: 1;
-        padding: 0;
-    }
+.df-numeric-spin button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1;
+  padding: 0;
+}
 
-        .df-numeric-spin button:hover {
-            background: #e0e0e0;
-        }
+.df-numeric-spin button:hover {
+  background: #e0e0e0;
+}
 
-        .df-numeric-spin button:first-child {
-            border-bottom: 1px solid #ccc;
-        }
+.df-numeric-spin button:first-child {
+  border-bottom: 1px solid #ccc;
+}
