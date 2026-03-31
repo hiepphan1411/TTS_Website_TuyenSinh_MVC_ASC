@@ -45,11 +45,14 @@ $(function () {
     }
 
     function mapField(rec) {
-        var col = parseInt(rec.text05 || rec.text03 || 12, 10);
+        var col = parseInt(rec.text05 || 12, 10);
         if (!col || col < 1 || col > 12) col = 12;
 
         var fType = parseInt(rec.text07 || 1, 10);
         if (!fType || fType < 1 || fType > 14) fType = 1;
+
+        var minLen = parseInt(rec.text12 || 0, 10);
+        if (isNaN(minLen) || minLen < 0) minLen = 0;
 
         var maxLen = parseInt(rec.text13 || 0, 10);
         if (isNaN(maxLen) || maxLen < 0) maxLen = 0;
@@ -58,14 +61,15 @@ $(function () {
             maDanhMuc: rec.maDanhMuc,
             tenDanhMuc: rec.tenDanhMuc,
             tab: rec.text02,
-            colSpan: col,
+            isRequired: rec.text03 === '1',
             parentField: rec.text04 || '',
+            colSpan: col,
             isParent: rec.text06 === '1',
             fieldType: fType,
             controller: rec.text08 || '',
             actionName: rec.text09 || '',
             cascadeField: rec.text10 || '',
-            isRequired: rec.text03 === '1',
+            minLength: minLen,
             maxLength: maxLen,
             placeHolder: rec.text14 || '',
             readOnly: rec.text15 === '1',
@@ -76,8 +80,6 @@ $(function () {
             })()
         };
     }
-
-
 
     function getTabLabel(tabKey) {
         switch (tabKey) {
@@ -105,18 +107,23 @@ $(function () {
 
         var $card = $('<div class="df-card"></div>');
         $card.append(
-            '<div class="df-card-header">' +
-            '<div>' +
-            '<div class="df-card-title" id="df-tab-title"></div>' +
-            '<div class="df-card-sub">Vui lòng điền chính xác thông tin theo giấy tờ tùy thân.</div>' +
-            '</div > ' +
-            '<span class="df-badge-done" id="df-done-badge" style="display:none">' +
-            '<i class="bi bi-check-circle-fill"></i> Đã hoàn thành' + '</span > ' + '</div > ' + '<div id="df-fields-container"></div>' +
-            '<div class="df-nav-bar">' +
-            '<button class="df-btn-back" id="df-btn-back"><i class="bi bi-arrow-left me-1"></i> Quay về</button>' +
-            '<button class="df-btn-next" id="df-btn-next">Hoàn thành &amp; tiếp tục <i class="bi bi-arrow-right ms-1"></i></button>' +
-            '</div > '
-        );
+            `<div class="df-card-header">
+                <div>
+                    <div class="df-card-title" id="df-tab-title"></div>
+                    <div class="df-card-sub">Vui lòng điền chính xác thông tin theo giấy tờ tùy thân.</div>
+                </div>
+                <span class="df-badge-done" id="df-done-badge" style="display:none">
+                    <i class="bi bi-check-circle-fill"></i> Đã hoàn thành
+                </span>
+            </div>
+
+            <div id="df-fields-container"></div>
+
+            <div class="df-nav-bar">
+                <button class="df-btn-back" id="df-btn-back"><i class="bi bi-arrow-left me-1"></i> Quay về</button>
+                <button class="df-btn-next" id="df-btn-next">Hoàn thành &amp; tiếp tục <i class="bi bi-arrow-right ms-1"></i></button>
+            </div>
+            `);
         $('#df-wrapper').append($card);
     }
 

@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Text.Json, Version=10.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,23 +124,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DatLaiMatKhauController.cs" />
+    <Compile Include="Controllers\ThongKeDiemDanhKTXController.cs" />
     <Compile Include="Controllers\TraCuuKetQuaController.cs" />
     <Compile Include="Controllers\TraCuuThongTinController.cs" />
-    <Compile Include="Controllers\XetTuyenDaiHocController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DangKyXetTuyenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_DanhMuc.cs" />
+    <Compile Include="Models\DM_TieuChiTuyenSinh.cs" />
+    <Compile Include="Models\ParamThongKeDiemDanhNoiTru.cs" />
+    <Compile Include="Models\repositories\TieuChiTSRepository.cs" />
     <Compile Include="Models\repositories\TuyenSinhRepository.cs" />
+    <Compile Include="Models\ThongKeDiemDanhNoiTruViewModel.cs" />
+    <Compile Include="Models\TieuChiTuyenSinhViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\dang-ky-tuyen-sinh.css" />
     <Content Include="Content\css\dang-nhap.css" />
-    <Content Include="Content\css\dashboard-filter.css" />
+    <Content Include="Content\css\razor-logic-style.css" />
     <Content Include="Content\images\login-background.png" />
     <Content Include="Content\lib\bootstrap-grid.css" />
     <Content Include="Content\lib\bootstrap-grid.min.css" />
@@ -234,6 +241,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
+    <Content Include="Scripts\js\razor-form-handler.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -249,21 +257,25 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_SidebarProgress.cshtml" />
-    <Content Include="Views\XetTuyenDaiHoc\Index.cshtml" />
     <Content Include="Views\DangNhap\Index.cshtml" />
     <Content Include="Views\Shared\_Layout-NoSidebar.cshtml" />
     <Content Include="Views\DatLaiMatKhau\Index.cshtml" />
     <Content Include="Views\TraCuuKetQua\Index.cshtml" />
     <Content Include="Views\TraCuuThongTin\Index.cshtml" />
-    <Content Include="Views\Shared\_DashboardFilter.cshtml" />
     <Content Include="Views\DangKyXetTuyen\DangKyChinhQuy.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
-    <Content Include="Views\TuyenSinhSauDaiHoc.cshtml" />
     <Content Include="Views\DangKyXetTuyen\TuyenSinhSauDaiHoc.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\RazorLogicChinhQuy.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_NguyenVongTHPT.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_NguyenVongSimple.cshtml" />
+    <Content Include="Views\ThongKeDiemDanhKTX\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DanhMucRepository\" />
+    <Folder Include="Views\DM_TieuChiTuyenSinh\" />
+    <Folder Include="Views\TieuChiTuyenSinhViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

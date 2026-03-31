@@ -1,0 +1,227 @@
+﻿
+@model List<WebApplicationTest3.Models.ThongKeDiemDanhNoiTruViewModel>
+@{
+    ViewBag.Title = "Thống kê điểm danh KTX";
+
+    bool hasIDNguoiONoiTru = Model.Any(x => x.IDNguoiONoiTru != null);
+    bool hasIDPhong = Model.Any(x => x.IDPhong != null);
+    bool hasVangMat = Model.Any(x => x.VangMat != null);
+    bool hasNgayDiemDanh = Model.Any(x => x.NgayDiemDanh != null);
+    bool hasNguoiDiemDanh = Model.Any(x => x.NguoiDiemDanh != null);
+    bool hasIDLop = Model.Any(x => x.IDLopHoc != null);
+    bool hasTenLop = Model.Any(x => !string.IsNullOrEmpty(x.TenLopHoc));
+    bool hasMaNoiTru = Model.Any(x => !string.IsNullOrEmpty(x.MaNoiTru));
+    bool hasHoDem = Model.Any(x => !string.IsNullOrEmpty(x.HoDem));
+    bool hasTen = Model.Any(x => !string.IsNullOrEmpty(x.Ten));
+    bool hasTenNhomDiaDiem = Model.Any(x => !string.IsNullOrEmpty(x.TenNhomDiaDiemPhong));
+    bool hasTenDayNha = Model.Any(x => !string.IsNullOrEmpty(x.TenDayNha));
+    bool hasMaDayNha = Model.Any(x => !string.IsNullOrEmpty(x.MaDayNha));
+    bool hasIDPhanLoaiDoiTuong = Model.Any(x => x.IDPhanLoaiDoiTuong != null);
+    bool hasHoVaTen = Model.Any(x => !string.IsNullOrEmpty(x.HoVaTen));
+    bool hasPhong = Model.Any(x => !string.IsNullOrEmpty(x.MaPhong));
+    bool hasSLVang = Model.Any(x => x.SLVang != null);
+    bool hasNgayVang = Model.Any(x => !string.IsNullOrEmpty(x.NgayVang));
+}
+
+<div>
+    <div class="header">Thống kê điểm danh ký túc xá</div>
+
+    <div class="container">
+        <div class="filter-box">
+            <div class="filter-row">
+                <label>Tháng</label>
+                <select>
+                    <option>04/2024</option>
+                    <option>03/2024</option>
+                </select>
+
+                <label>Địa điểm phòng</label>
+                <select>
+                    <option>Tất cả</option>
+                    <option>KTX cơ sở 1</option>
+                    <option>KTX cơ sở 2</option>
+                </select>
+
+                <button class="btn-view">Xem thống kê</button>
+                <button class="btn-export">Xuất Excel</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="openTab('lop')">Theo lớp</div>
+            <div class="tab" onclick="openTab('sinhvien')">Theo sinh viên</div>
+            <div class="tab" onclick="openTab('phong')">Theo phòng KTX</div>
+        </div>
+
+        <div class="table-box tab-content" id="lop">
+            @foreach (var tab in new List<string> { "Thông kê theo lớp", "Thống kê theo sinh viên", "Thống kê theo phòng KTX" })
+            {
+                <h3>@tab</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            @if (hasIDNguoiONoiTru)
+                            {
+                                <th>ID Người ở Nội Trú</th>
+                            }
+                            @if (hasIDPhong)
+                            {
+                                <th>ID Phòng</th>
+                            }
+                            @if (hasVangMat)
+                            {
+                                <th>Vắng mặt</th>
+                            }
+                            @if (hasNgayDiemDanh)
+                            {
+                                <th>Ngày điểm danh</th>
+                            }
+                            @if (hasNguoiDiemDanh)
+                            {
+                                <th>Người điểm danh</th>
+                            }
+                            @if (hasIDLop)
+                            {
+                                <th>ID lớp học</th>
+                            }
+                            @if (hasTenLop)
+                            {
+                                <th>Tên lớp học</th>
+                            }
+                            @if (hasMaNoiTru)
+                            {
+                                <th>Mã nội trú</th>
+                            }
+                            @if (hasHoDem)
+                            {
+                                <th>Họ đệm</th>
+                            }
+                            @if (hasTen)
+                            {
+                                <th>Tên</th>
+                            }
+                            @if (hasTenNhomDiaDiem)
+                            {
+                                <th>Tên nhóm địa điểm</th>
+                            }
+                            @if (hasTenDayNha)
+                            {
+                                <th>tên dãy nhà</th>
+                            }
+                            @if (hasMaDayNha)
+                            {
+                                <th>Mã dãy nhà</th>
+                            }
+                            @if (hasPhong)
+                            {
+                                <th>Phòng</th>
+                            }
+                            @if (hasIDPhanLoaiDoiTuong)
+                            {
+                                <th>ID Phân loại đối tượng</th>
+                            }
+                            @if (hasHoVaTen)
+                            {
+                                <th>Họ và tên</th>
+                            }
+                            @if (hasSLVang)
+                            {
+                                <th>Số lần vắng</th>
+                            }
+                            @if (hasNgayVang)
+                            {
+                                <th>Ngày vắng</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        int stt = 1;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            @if (hasIDNguoiONoiTru)
+                            { 
+                                <td>@item.IDNguoiONoiTru</td>
+                            }
+                            @if (hasIDPhong)
+                            {
+                                <td>@item.IDPhong</td>
+                            }
+                            @if (hasVangMat)
+                            {
+                                <td>@item.VangMat</td>
+                            }
+                            @if (hasNgayDiemDanh)
+                            {
+                                <td>@item.NgayDiemDanh</td>
+                            }
+                            @if (hasNguoiDiemDanh)
+                            {
+                                <td>@item.NguoiDiemDanh</td>
+                            }
+                            @if (hasIDLop)
+                            {
+                                <td>@item.IDLopHoc</td>
+                            }
+                            @if (hasTenLop)
+                            {
+                                <td>@item.TenLopHoc</td>
+                            }
+                            @if (hasMaNoiTru)
+                            {
+                                <td>@item.MaNoiTru</td>
+                            }
+                            @if (hasHoDem)
+                            {
+                                <td>@item.HoDem</td>
+                            }
+                            @if (hasTen)
+                            {
+                                <td>@item.Ten</td>
+                            }
+                            @if (hasTenNhomDiaDiem)
+                            {
+                                <td>@item.TenNhomDiaDiemPhong</td>
+                            }
+                            @if (hasTenDayNha)
+                            {
+                                <td>@item.TenDayNha</td>
+                            }
+                            @if (hasMaDayNha)
+                            {
+                                <td>@item.MaDayNha</td>
+                            }
+                            @if (hasPhong)
+                            {
+                                <td>@item.MaPhong</td>
+                            }
+                            @if (hasIDPhanLoaiDoiTuong)
+                            {
+                                <td>@item.IDPhanLoaiDoiTuong</td>
+                            }
+                            @if (hasHoVaTen)
+                            {
+                                <td>@item.HoVaTen</td>
+                            }
+                            @if (hasSLVang)
+                            {
+                                <td>@item.SLVang</td>
+                            }
+                            @if (hasNgayVang)
+                            {
+                                <td>@item.NgayVang</td>
+                            } 
+                        </tr>
+                        stt++;
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
