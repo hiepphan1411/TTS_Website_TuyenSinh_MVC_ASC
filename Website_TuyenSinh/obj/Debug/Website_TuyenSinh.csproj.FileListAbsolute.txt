@@ -54,6 +54,8 @@ D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Antlr3.Runtime.
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.Web.Infrastructure.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Newtonsoft.Json.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Text.Json.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Threading.Tasks.Extensions.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.Helpers.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.Mvc.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.Optimization.dll
@@ -62,6 +64,13 @@ D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.WebP
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.WebPages.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.WebPages.Razor.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\WebGrease.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Memory.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.IO.Pipelines.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Text.Encodings.Web.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Numerics.Vectors.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Buffers.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.Helpers.xml
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.Mvc.xml
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Web.Optimization.xml
@@ -77,12 +86,3 @@ D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_T
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_.9E6BD646.Up2Date
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.dll
 D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.pdb
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Text.Json.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Threading.Tasks.Extensions.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Memory.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.IO.Pipelines.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Text.Encodings.Web.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Numerics.Vectors.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.Bcl.AsyncInterfaces.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Runtime.CompilerServices.Unsafe.dll
-D:\Intership\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Buffers.dll

@@ -264,7 +264,6 @@ $(function () {
     }
 
     //Custom lại field theo lại,
-
     //Type1
     function buildField(f) {
         var $w = $('<div class="df-field-wrap" data-field="' + f.maDanhMuc + '"></div>');
