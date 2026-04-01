@@ -1,0 +1,377 @@
+﻿
+@{
+    ViewBag.Title = "Hồ sơ thí sinh";
+}
+
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Content/css/ho-so-thi-sinh.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/dang-nhap.css" />
+
+
+}
+
+<div class="container-lg mt-4">
+
+    <!-- Header Tabs -->
+    <div class="tab-content">
+        <p class="tab-item active">HỒ SƠ THÍ SINH</p>
+        <p class="tab-item">KHUNG HỒ SƠ</p>
+        <p class="tab-item">THAY ĐỔI MẬT KHẨU</p>
+        <p class="tab-item">TRA CỨU KẾT QUẢ</p>
+    </div>
+
+    <!-- Header Black -->
+    <div class="header-black" id="tabHeaderTitle">
+        THÔNG TIN THÍ SINH ĐĂNG KÝ
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Tab 1: Hồ sơ thí sinh -->
+        <div class="tab-pane active" id="hoSoThiSinh">
+            <div class="record-candidate flex-wrap ">
+                <div class="d-flex gap-2">
+                    <div class="icon-record-candidate">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <div class="d-flex gap-2">
+                            <p class="name"></p>
+                            <div class="check-status">
+                                <p class="check-icon"><i class="fa fa-check-circle" aria-hidden="true"></i></p>
+                                <p class="status"></p>
+                            </div>
+
+                        </div>
+                        <div class="d-flex gap-2 time-submit">
+                            <p>Mã hồ sơ: 123456789</p>
+                            <p>Ngày nộp: 15/06/2025</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-round">
+                    <div class="note-status">
+                        <div>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <p>Đã duyệt</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-spinner" aria-hidden="true"></i>
+                            <p>Đang xử lý</p>
+                        </div>
+                    </div>
+                    <div class="progress-circle mx-auto mt-2" id="progressCircle"></div>
+                </div>
+            </div>
+
+            <!-- Hai cột chính -->
+            <div class="row">
+
+                <!-- Cột trái: Thông tin xét tuyển + Nút hành động -->
+                <div class="col-lg-8">
+
+                    <div class="info-admission">
+                        <div class="info-admission-header">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            <p>Thông tin xét tuyển</p>
+                        </div>
+                        <div class="card-info-admission">
+                            <div class="admission-method">
+                                <span><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+                                <div>
+                                    <p>Phương thức xét tuyển:</p>
+                                    <p>Xét ưu tiên / Tuyển thẳng theo quy định của Điều 8 Bộ GD&ĐT</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button class="btn-enrollment">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <p> NHẬP HỌC NGAY</p>
+
+                        </button>
+
+                        <div class="button-group">
+                            <button type="button" class="btn-detail-record">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                <p>Xem chi tiết hồ sơ</p>
+                                </>
+                                <button class="btn-print">
+                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                    <p>In giấy báo trúng tuyển</p>
+                                </button>
+                                <button class="btn-export">
+                                    <i class="fa fa-file-export" aria-hidden="true"></i>
+                                    <p>Xuất giấy đăng ký xét tuyển</p>
+                                </button>
+                        </div>
+                    </div>
+
+                    <div class="info-admission">
+                        <div class="info-admission-header">
+                            <i class="fa fa-id-card" aria-hidden="true"></i>
+                            <p>Thông tin học sinh</p>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="info-student">
+                                    <p class="info-student-title">HỌ VÀ TÊN</p>
+                                    <p class="info-student-content">Nguyễn Văn A</p>
+                                </div>
+                                <div class="info-student">
+                                    <p class="info-student-title">SỐ CCCD</p>
+                                    <p class="info-student-content">0123147258369</p>
+                                </div>
+                                <div class="info-student">
+                                    <p class="info-student-title">ĐIỆN THOẠI</p>
+                                    <p class="info-student-content">0123456789</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-student">
+                                    <p class="info-student-title">NGÀY SINH</p>
+                                    <p class="info-student-content">15/03/2007</p>
+                                </div>
+                                <div class="info-student">
+                                    <p class="info-student-title">NƠI SINH</p>
+                                    <p class="info-student-content">An Giang</p>
+                                </div>
+                                <div class="info-student">
+                                    <p class="info-student-title">EMAIL</p>
+                                    <p class="info-student-content">123.student@123.edu.vn</p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-student">
+                                    <p class="info-student-title">GIỚI TÍNH</p>
+                                    <p class="info-student-content">Nam</p>
+                                </div>
+                                <div class="info-student">
+                                    <p class="info-student-title">QUỐC TỊCH</p>
+                                    <p class="info-student-content">Việt Nam</p>
+                                </div>
+                                <div class="info-student">
+                                    <p class="info-student-title">DÂN TỘC</p>
+                                    <p class="info-student-content">Kinh</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Cột phải: Tiến độ hồ sơ -->
+                <div class="col-lg-4">
+
+                    <div class="info-admission">
+
+                        <div class="info-admission-header">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i>
+                            <p>Tiến độ hồ sơ</p>
+                        </div>
+                        <ul class="list-unstyled timeline">
+                            <li class="mb-3 active">
+                                <span class="timeline-dot"></span>
+                                <strong>Đăng ký</strong>
+                                <small>20/05/2025<br>Thông tin được lưu trên hệ thống</small>
+                            </li>
+                            <li class="mb-3 active">
+                                <span class="timeline-dot"></span>
+                                <strong>Duyệt hồ sơ</strong>
+                                <small>22/05/2025<br>Ban tuyển sinh đã xác nhận hồ sơ bạn</small>
+                            </li>
+                            <li class="mb-3">
+                                <span class="timeline-dot"></span>
+                                <strong>Xét tuyển</strong>
+                                <small>Chờ cập nhật<br>Hồ sơ đang trong quá trình đánh giá chuyên môn</small>
+                            </li>
+                            <li>
+                                <span class="timeline-dot"></span>
+                                <strong>Kết quả</strong>
+                                <small>Chờ cập nhật<br>Thông báo thời gian trúng tuyển chính thức sẽ được gửi tại đây</small>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Tab khung hồ sơ -->
+        <div class="tab-pane" id="khungHoSo">
+            <div class="khung-ho-so-container">
+                <div class="khung-content">
+                    <h3 class="khung-subtitle">CẤP NHẬT HỒ SỐ ĐỂ HOÀN TẤT ĐĂNG KÝ</h3>
+                    <p class="khung-description">Vui lòng cung cấp các vân bản pháp lý cần thiết để hoàn thiện quy trình xét duyệt.</p>
+                    <p class="khung-note">Những mục đánh dấu (*) là bắt buộc cập nhật file</p>
+
+                    <div class="khung-documents-grid">
+                        <div class="khung-document-card">
+                            <div class="khung-card-header required">BẮT BUỘC *</div>
+                            <div class="khung-card-title">Bản sao Bằng tốt nghiệp hoặc Giấy chứng nhận tốt nghiệp THPT tam thời</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload">Tải lên ngay</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header required">BẮT BUỘC *</div>
+                            <div class="khung-card-title">Bản Scan/Hình chụp Giấy chứng nhận kết quả thi THPT</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload">Tải lên ngay</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header optional">TÙY CHỌN</div>
+                            <div class="khung-card-title">Bản Scan/Hình chụp Học bạ THPT Điểm TB Lớp 10</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload-outline">Tải lên</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header approved">ĐÃ NỘP</div>
+                            <div class="khung-card-title">Học bạ THPT (Kết quả lớp 12)</div>
+                            <div class="khung-card-file">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                <div class="file-info">
+                                    <p>hoc_ba_thpt.pdf</p>
+                                    <span>7MB</span>
+                                </div>
+                            </div>
+                            <button class="btn-change">Thay đổi hồ sơ</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header approved">ĐÃ NỘP</div>
+                            <div class="khung-card-title">Học bạ THPT (Kết quả lớp 12)</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload">Tải lên ngay</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header required">BẮT BUỘC *</div>
+                            <div class="khung-card-title">Bản Scan/Hình chụp Xếp loại Học lực - Hạnh kiểm Lớp 12</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload">Tải lên ngay</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header required">BẮT BUỘC *</div>
+                            <div class="khung-card-title">Bản Scan/Hình chụp Học bạ THPT Điểm kiểm Lớp 11</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload">Tải lên ngay</button>
+                        </div>
+
+                        <div class="khung-document-card">
+                            <div class="khung-card-header optional">TÙY CHỌN</div>
+                            <div class="khung-card-title">Bản Scan/Hình chụp Kế hoạch Lớp loài học Hạnh kiểm Lớp 11</div>
+                            <div class="khung-card-upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <p>Chọn tài liệu</p>
+                            </div>
+                            <button class="btn-upload-outline">Tải lên</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Tab 2 -->
+        <!-- Tab 3: Thay đổi mật khẩu -->
+        <div class="tab-pane" id="thayDoiMatKhau">
+            <div class="change-password-container">
+                <form class="change-password-form" id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Mật khẩu cũ</label>
+                        <div class="password-input-wrapper">
+                            <input type="password"
+                                   id="currentPassword"
+                                   class="form-control password-input"
+                                   placeholder="Nhập Mật khẩu cũ"
+                                   required>
+                            <i class="fa fa-eye password-toggle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">Mật khẩu mới</label>
+                        <div class="password-input-wrapper">
+                            <input type="password"
+                                   id="newPassword"
+                                   class="form-control password-input"
+                                   placeholder="Nhập Mật khẩu mới"
+                                   required>
+                            <i class="fa fa-eye password-toggle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+                        <div class="password-input-wrapper">
+                            <input type="password"
+                                   id="confirmPassword"
+                                   class="form-control password-input"
+                                   placeholder="Xác nhận Mật khẩu mới"
+                                   required>
+                            <i class="fa fa-eye password-toggle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-change-password">Cập nhật</button>
+                </form>
+            </div>
+        </div>
+        <!-- End Tab 3 -->
+
+        <div class="tab-pane" id="traCuuKetQua">
+            @Html.Partial("_InfomationSearch")
+        </div>
+
+        <!-- Tab 5: Chi tiết hồ sơ (được hiển thị khi click nút Xem chi tiết) -->
+        <div class="tab-pane" id="chiTietHoSoTab">
+            <div class="chi-tiet-ho-so-container" id="chiTietHoSoContent">
+                <!-- Nội dung được load động từ JavaScript -->
+            </div>
+        </div>
+
+    </div>
+
+
+    <input type="file" id="hiddenFileInput" style="display: none;" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
+
+</div>
+
+@section scripts{
+    <script src="~/Scripts/js/ho-so-thi-sinh.js"></script>
+
+    <script>
+        $(document).keydown(function (e) {
+            if (e.key === 'Escape') {
+            }
+        });
+    </script>
+}

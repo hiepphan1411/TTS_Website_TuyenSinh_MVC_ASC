@@ -22,15 +22,16 @@ namespace Website_TuyenSinh.Controllers
         };
         string apiToHop = "https://ts-dntu.ascvn.vn/TuyenSinh/GetToHopMonForSelect";
 
-        // GET: DangKyTuyenSinh
-        public ActionResult DangKyChinhQuy()
+        // GET: DangKyChinhQuy, TuyenSinhSauDaiHoc
+        public ActionResult Index(int typeCauHinh)
         {
-            var typeCauHinh = 112;
-
             var repo = new TuyenSinhRepository();
+
             ViewBag.ShowSidebar = true;
+
             var data = repo.getByLoai(typeCauHinh);
             ViewBag.FormConfigJson = JsonConvert.SerializeObject(data, _jsonSettings);
+
             return View();
         }
 
@@ -87,17 +88,5 @@ namespace Website_TuyenSinh.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        //Get cấu hình cho tuyển sinh sau đại học 
-        public ActionResult TuyenSinhSauDaiHoc()
-        {
-            var typeCauHinh = 153;
-
-            var repo = new TuyenSinhRepository();
-            ViewBag.ShowSidebar = true;
-            var data = repo.getByLoai(typeCauHinh);
-            ViewBag.FormConfigJson = JsonConvert.SerializeObject(data, _jsonSettings);
-
-            return View(); 
-        }
     }
 }

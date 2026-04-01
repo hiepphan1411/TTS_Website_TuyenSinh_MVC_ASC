@@ -14,8 +14,12 @@
     </div>
 </aside>
 
+<script src="~/Scripts/lib/jquery-3.7.0.min.js"></script>
+
 <script>
-    (function () {
+    (function ($) {
+
+        // Utils
         function esc(s) {
             return s == null ? "" : String(s)
                 .replace(/&/g, "&amp;")
@@ -24,55 +28,57 @@
                 .replace(/"/g, "&quot;");
         }
 
-        function statusOf(idx, activeIdx, tab, isInit) {
-            if (idx === activeIdx) return "active";
-            if (isInit) return "pending"; 
+        function trangThaiCuaBuoc(idx, idxDangActive, tab, laLanDau) {
+            if (idx === idxDangActive) return "active";
+            if (laLanDau) return "pending";
             if (tab && tab.isCompleted) return "done";
             return "pending";
         }
 
-        function subText(status) {
+        function chuThichTrangThai(status) {
             if (status === "done") return "Đã hoàn thành";
             if (status === "active") return "Đang thực hiện";
-            return "Chưa nhập";
+            return "Chưa hoàn thành";
         }
 
-        window.dfUpdateSidebar = function (activeIdx, tabs, isInit) {
+        // Xử lý update trạng thái sidebar
+        window.dfUpdateSidebar = function (idxDangActive, tabs, laLanDau) {
             tabs = Array.isArray(tabs) ? tabs : [];
+
             var total = tabs.length;
-            var completed = tabs.filter(function (t) { return !!t.isCompleted; }).length;
-            var pct = total ? Math.round((completed / total) * 100) : 0;
+            var hoanThanh = tabs.filter(function (t) { return !!t.isCompleted; }).length;
+            var phanTram = total ? Math.round((hoanThanh / total) * 100) : 0;
 
+            var $pct = $("#df-sidebar-progress-pct");
+            var $fill = $("#df-sidebar-progress-fill");
+            var $label = $("#df-sidebar-progress-label");
+            var $list = $("#df-sidebar-steps");
 
-            var pctEl = document.getElementById("df-sidebar-progress-pct");
-            var fillEl = document.getElementById("df-sidebar-progress-fill");
-            var labelEl = document.getElementById("df-sidebar-progress-label");
-            var listEl = document.getElementById("df-sidebar-steps");
+            if (!$list.length) return;
 
-            if (!isInit) {
-                if (pctEl) pctEl.textContent = pct + "%";
-                if (fillEl) fillEl.style.width = pct + "%";
-                if (labelEl) labelEl.textContent = completed + "/" + total + " bước hoàn thành";
-                if (!listEl) return;
+            if (!laLanDau) {
+                $pct.text(phanTram + "%");
+                $fill.css("width", phanTram + "%");
+                $label.text(`${hoanThanh}/${total} bước hoàn thành`);
             }
 
-            var html = "";
-            tabs.forEach(function (tab, idx) {
-                var status = statusOf(idx, activeIdx, tab, isInit);
+            var html = tabs.map(function (tab, idx) {
+                var status = trangThaiCuaBuoc(idx, idxDangActive, tab, laLanDau);
                 var itemClass = status === "active" ? "is-active" : (status === "done" ? "is-done" : "");
-                var label = tab && tab.tabLabel ? tab.tabLabel : ("Bước " + (idx + 1));
+                var nhanBuoc = tab && tab.tabLabel ? tab.tabLabel : `Bước ${idx + 1}`;
 
-                html += ""
-                    + "<li class='step-item " + itemClass + "' onclick='window.dfGoToTab && window.dfGoToTab(" + idx + ")'>"
-                    + "<span class='step-badge " + status + "'>" + (idx + 1) + "</span>"
-                    + "<div class='step-info'>"
-                    + "<div class='step-info-title'>" + esc(label) + "</div>"
-                    + "<div class='step-info-sub " + status + "'>" + subText(status) + "</div>"
-                    + "</div>"
-                    + "</li>";
-            });
+                return `
+                    <li class="step-item ${itemClass}" data-idx="${idx}" onclick="window.dfGoToTab && window.dfGoToTab(${idx})">
+                        <span class="step-badge ${status}">${idx + 1}</span>
+                        <div class="step-info">
+                            <div class="step-info-title">${esc(nhanBuoc)}</div>
+                            <div class="step-info-sub ${status}">${chuThichTrangThai(status)}</div>
+                        </div>
+                    </li>`;
+            }).join("");
 
-            listEl.innerHTML = html;
+            $list.html(html);
         };
-    })();
+
+    })(jQuery);
 </script>

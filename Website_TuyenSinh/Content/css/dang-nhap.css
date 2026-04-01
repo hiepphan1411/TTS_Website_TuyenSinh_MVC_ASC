@@ -109,10 +109,10 @@ body {
         color: var(--primary-blue);
     }
 
-    .main-title {
-        font-size: 24px;
-        font-weight: 700;
-    }
+.main-title {
+    font-size: 24px;
+    font-weight: 700;
+}
 
 .sub-title {
     font-size: 16px;
