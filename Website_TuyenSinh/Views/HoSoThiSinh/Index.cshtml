@@ -11,6 +11,30 @@
 
 }
 
+<!-- @(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+    .Items(items =>
+    {
+        items.Add()
+            .Text("HỒ SƠ THÍ SINH")
+            .LoadContentFrom("TabHoSoThiSinh", "HoSoThiSinh");
+
+
+        items.Add()
+            .Text("KHUNG HỒ SƠ")
+            .LoadContentFrom("TabKhungHoSo", "HoSoThiSinh");
+
+        items.Add()
+            .Text("THAY ĐỔI MẬT KHẨU")
+            .LoadContentFrom("TabThayDoiMatKhau", "HoSoThiSinh");
+
+        items.Add()
+            .Text("TRA CỨU KẾT QUẢ")
+            .LoadContentFrom("TabTraCuuKetQua", "HoSoThiSinh");
+    })
+) -->
+
 <div class="container-lg mt-4">
 
     <!-- Header Tabs -->

@@ -302,16 +302,16 @@
     background: #fff;
 }
 
-.group-box > legend {
-    float: none;
-    width: auto;
-    margin: 0 0 6px;
-    padding: 0 8px;
-    font-size: 14px;
-    color: #666;
-    background: #fff;
-    line-height: 1;
-}
+    .group-box > legend {
+        float: none;
+        width: auto;
+        margin: 0 0 6px;
+        padding: 0 8px;
+        font-size: 14px;
+        color: #666;
+        background: #fff;
+        line-height: 1;
+    }
 
 .df-toggle-buttons {
     display: flex;
@@ -327,6 +327,7 @@
     font-weight: 600;
     border-radius: 8px 0px 0px 8px;
 }
+
 .btn-toggle-not-has {
     border: none;
     padding: 5px 15px;
@@ -350,18 +351,18 @@ fieldset {
     transition: max-height 0.5s ease;
 }
 
-fieldset .content {
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
+    fieldset .content {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
 
-fieldset:has(.btn-toggle-not-has.active) {
-    max-height: 5px;
-}
+    fieldset:has(.btn-toggle-not-has.active) {
+        max-height: 5px;
+    }
 
-fieldset:has(.btn-toggle-not-has.active) .content {
-    opacity: 0;
-}
+        fieldset:has(.btn-toggle-not-has.active) .content {
+            opacity: 0;
+        }
 
 .df-nav-bar {
     display: flex;
@@ -395,19 +396,20 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     transition: ease 0.15s;
 }
 
-.df-btn-next:hover {
-    background: #1d4ed8;
-}
+    .df-btn-next:hover {
+        background: #1d4ed8;
+    }
 
-.df-btn-next:disabled {
-    background: var(--df-gray-400);
-    cursor: not-allowed;
-}
+    .df-btn-next:disabled {
+        background: var(--df-gray-400);
+        cursor: not-allowed;
+    }
 
 @media (max-width: 576px) {
     .df-card {
         padding: 16px 16px;
     }
+
     .df-radio-group {
         flex-direction: column;
     }
@@ -425,18 +427,18 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     border-bottom: 2px solid var(--df-gray-200);
 }
 
-.df-review-header h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--df-gray-900);
-    margin: 0 0 8px 0;
-}
+    .df-review-header h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--df-gray-900);
+        margin: 0 0 8px 0;
+    }
 
-.df-review-header p {
-    font-size: 13px;
-    color: var(--df-gray-500);
-    margin: 0;
-}
+    .df-review-header p {
+        font-size: 13px;
+        color: var(--df-gray-500);
+        margin: 0;
+    }
 
 .df-review-content {
     margin-bottom: 28px;
@@ -447,9 +449,9 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     border-bottom: 1px solid var(--df-gray-100);
 }
 
-.df-review-section:last-of-type {
-    border-bottom: none;
-}
+    .df-review-section:last-of-type {
+        border-bottom: none;
+    }
 
 .df-review-section-header {
     display: flex;
@@ -522,27 +524,27 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     gap: 10px;
 }
 
-.df-confirm-checkbox label {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    cursor: pointer;
-    margin: 0;
-}
+    .df-confirm-checkbox label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        cursor: pointer;
+        margin: 0;
+    }
 
-.df-confirm-checkbox input[type='checkbox'] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    cursor: pointer;
-    flex-shrink: 0;
-}
+    .df-confirm-checkbox input[type='checkbox'] {
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
 
-.df-confirm-checkbox span {
-    font-size: 13px;
-    color: var(--df-gray-700);
-    line-height: 1.6;
-}
+    .df-confirm-checkbox span {
+        font-size: 13px;
+        color: var(--df-gray-700);
+        line-height: 1.6;
+    }
 
 .df-review-group-box {
     grid-column: span 12;
@@ -586,9 +588,9 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     margin: 0;
 }
 
-.df-review-group-items .df-review-item {
-    padding: 0;
-}
+    .df-review-group-items .df-review-item {
+        padding: 0;
+    }
 
 .df-captcha-section {
     padding: 20px;
@@ -634,11 +636,11 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     gap: 8px;
 }
 
-.df-captcha-input-wrapper label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--df-gray-800);
-}
+    .df-captcha-input-wrapper label {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--df-gray-800);
+    }
 
 .df-captcha-input-box {
     display: flex;
@@ -704,9 +706,9 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     border-radius: 8px;
 }
 
-.btn-captcha-submit:hover {
-    background-color: var(--primary-blue-hover);
-}
+    .btn-captcha-submit:hover {
+        background-color: var(--primary-blue-hover);
+    }
 
 .df-table-section {
     margin-bottom: 20px;
@@ -721,55 +723,55 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     overflow: hidden;
 }
 
-.df-review-table thead {
-    background-color: var(--df-gray-100);
-    border-bottom: 2px solid var(--df-gray-300);
-}
+    .df-review-table thead {
+        background-color: var(--df-gray-100);
+        border-bottom: 2px solid var(--df-gray-300);
+    }
 
-.df-review-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--df-gray-700);
-    white-space: normal;
-    word-break: break-word;
-    border-right: 1px solid var(--df-gray-200);
-}
+    .df-review-table th {
+        padding: 12px 16px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--df-gray-700);
+        white-space: normal;
+        word-break: break-word;
+        border-right: 1px solid var(--df-gray-200);
+    }
 
-.df-review-table th:last-child {
-    border-right: none;
-}
+        .df-review-table th:last-child {
+            border-right: none;
+        }
 
-.df-review-table tbody tr {
-    border-bottom: 1px solid var(--df-gray-200);
-    transition: background-color 0.2s ease;
-}
+    .df-review-table tbody tr {
+        border-bottom: 1px solid var(--df-gray-200);
+        transition: background-color 0.2s ease;
+    }
 
-.df-review-table tbody tr:hover {
-    background-color: var(--df-gray-50);
-}
+        .df-review-table tbody tr:hover {
+            background-color: var(--df-gray-50);
+        }
 
-.df-review-table tbody tr:last-child {
-    border-bottom: none;
-}
+        .df-review-table tbody tr:last-child {
+            border-bottom: none;
+        }
 
-.df-review-table td {
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--df-gray-800);
-    border-right: 1px solid var(--df-gray-200);
-}
+    .df-review-table td {
+        padding: 12px 16px;
+        font-size: 13px;
+        color: var(--df-gray-800);
+        border-right: 1px solid var(--df-gray-200);
+    }
 
-.df-review-table td:last-child {
-    border-right: none;
-}
+        .df-review-table td:last-child {
+            border-right: none;
+        }
 
-.df-review-table td.td-diem {
-    font-weight: 600;
-    color: var(--primary-blue);
-    text-align: center;
-}
+        .df-review-table td.td-diem {
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-align: center;
+        }
 
 /* Chi tiết header */
 
@@ -788,21 +790,21 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     color: var(--df-gray-800);
 }
 
-.header-info strong {
-    color: var(--df-gray-900);
-    font-weight: 600;
-}
+    .header-info strong {
+        color: var(--df-gray-900);
+        font-weight: 600;
+    }
 
-.header-info .badge {
-    display: inline-block;
-    background: #dcfce7;
-    color: var(--success-green);
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 12px;
-    margin-left: 8px;
-}
+    .header-info .badge {
+        display: inline-block;
+        background: #dcfce7;
+        color: var(--success-green);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 12px;
+        margin-left: 8px;
+    }
 
 @media (max-width: 1400px) {
     .df-review-item {
@@ -813,13 +815,16 @@ fieldset:has(.btn-toggle-not-has.active) .content {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (max-width: 1200px) {
     .df-review-item {
         grid-column: span 4;
     }
+
     .df-review-sub-footer {
         width: 80%;
     }
+
     .df-captcha-heading {
         font-size: 14px;
     }
@@ -833,20 +838,25 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     .df-review-item {
         grid-column: span 6;
     }
+
     .df-review-section-header {
         gap: 10px;
     }
+
     .df-review-header h3 {
         font-size: 16px;
     }
+
     .df-review-sub-footer {
         width: 90%;
     }
 }
+
 @media (max-width: 430px) {
     .df-review-item {
         grid-column: span 12;
     }
+
     .df-review-sub-footer {
         width: 95%;
     }
@@ -858,6 +868,7 @@ fieldset:has(.btn-toggle-not-has.active) .content {
     .df-captcha-description {
         font-size: 11px;
     }
+
     .df-captcha-note {
         font-size: 11px;
     }

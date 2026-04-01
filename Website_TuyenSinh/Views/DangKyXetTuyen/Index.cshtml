@@ -1,11 +1,13 @@
+
 @{
     ViewData["Title"] = "Đăng ký xét tuyển";
     Layout = "~/Views/Shared/_LayoutTuyenSinh.cshtml";
 }
 
 @section styles {
-    <link rel="stylesheet" href="~/Content/css/dang-ky-tuyen-sinh.css"/>    
+    <link rel="stylesheet" href="~/Content/css/dang-ky-tuyen-sinh.css" />
 }
+
 
 <script id="form-config-data" type="application/json">
     @Html.Raw(ViewBag.FormConfigJson)
@@ -28,7 +30,7 @@
     </div>
 </div>
 
+
 @section Scripts {
-    <script src="~/Scripts/js/load-cau-hinh-tuyen-sinh.js">
-    </script>
+    <script src="~/Scripts/js/load-cau-hinh-tuyen-sinh.js"></script>
 }

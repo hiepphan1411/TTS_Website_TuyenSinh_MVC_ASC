@@ -1465,14 +1465,13 @@ $(function () {
                         <input type="checkbox" id="df-confirm-review" />
                         <div class="df-captcha-heading">Tôi cam đoan những thông tin trên đúng sự thật</div>
                     </div>
-                     <div class="df-captcha-description">
+                    <div class="df-captcha-description">
                         Vui lòng lòng kiểm tra kỹ mọi thông tin trước khi xác nhận. Thông tin không chính xác có thể ảnh hưởng đến kết quả xét tuyển.
                     </div>
-                  </div>`,
+                </div>`,
         );
         $captchaSection.append(
             `<div class="df-captcha-content">
-                   
                     <div class="df-captcha-input-wrapper">
                         <div class="df-captcha-input-box">
                             <input type="text" id="df-captcha-input" class="df-captcha-field" placeholder="Nhập mã" />
@@ -1484,7 +1483,6 @@ $(function () {
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <span class="df-captcha-note">Lưu ý: Mã bảo vệ chỉ nhập 1 lần. Nếu sai, vui lòng nhấn nút làm mới để tạo mã khác. Hệ thống không cho phép sửa ký tự sai.</span>
                 

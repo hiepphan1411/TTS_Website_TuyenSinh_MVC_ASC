@@ -114,9 +114,8 @@ $(function () {
                               </div>
                             </div>
 
-                            ${
-                                isSuccess
-                                    ? `
+                            ${isSuccess
+                ? `
                             <div class="success-badge">
                                 <i class="fas fa-check-circle"></i>
                                 <div class="badge-text">
@@ -125,7 +124,7 @@ $(function () {
                                 </div>
                             </div>
                             `
-                                    : `
+                : `
                             <div class="error-badge">
                                 <i class="fas fa-times-circle"></i>
                                 <div class="badge-text">
@@ -134,7 +133,7 @@ $(function () {
                                 </div>
                             </div>
                             `
-                            }
+            }
                         </div>
                     </div>
 
@@ -144,15 +143,14 @@ $(function () {
                             <!-- Header với nút -->
                             <div class="card-header">
                                 <h3 class="card-title">Thông tin trúng tuyển</h3>
-                                ${
-                                    isSuccess
-                                        ? `
+                                ${isSuccess
+                ? `
                                 <a href="javascript:void(0)" class="btn btn-success btn-sm">
                                     <i class="fa fa-graduation-cap"></i> ĐỢT XẾT TUYỂN 2026-DHCQ
                                 </a>
                                 `
-                                        : ''
-                                }
+                : ''
+            }
                             </div>
 
                             <!-- Content -->
@@ -181,9 +179,8 @@ $(function () {
                                 </div>
 
                                 <!-- Actions -->
-                                ${
-                                    isSuccess
-                                        ? `
+                                ${isSuccess
+                ? `
                                 <div class="card-actions">
                                     <button type="button" class="btn btn-primary btn-lg">
                                         <i class="fa fa-paper-plane" aria-hidden="true"></i> NHẬP HỌC NGAY
@@ -193,8 +190,8 @@ $(function () {
                                     </button>
                                 </div>
                                 `
-                                        : ''
-                                }
+                : ''
+            }
                             </div>
                         </div>
                     </div>

@@ -235,3 +235,4 @@ N:\thuctap\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Newtonsoft.Json.x
 N:\thuctap\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Antlr3.Runtime.pdb
 N:\thuctap\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 N:\thuctap\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_.9E6BD646.Up2Date
+N:\thuctap\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Kendo.Mvc.dll
