@@ -126,6 +126,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DangKyXetTuyenController.cs" />
     <Compile Include="Controllers\HoSoThiSinhController.cs" />
+    <Compile Include="Controllers\ThongKeDiemDanhKTXController.cs" />
     <Compile Include="Controllers\ThongKeDiemDanhNoiTruController.cs" />
     <Compile Include="Controllers\TraCuuKetQuaController.cs" />
     <Compile Include="Controllers\TraCuuThongTinController.cs" />
@@ -133,9 +134,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_DanhMuc.cs" />
+    <Compile Include="Models\DM_TieuChiTuyenSinh.cs" />
     <Compile Include="Models\ParamThongKeDiemDanhNoiTru.cs" />
+    <Compile Include="Models\repositories\TieuChiTSRepository.cs" />
     <Compile Include="Models\repositories\TuyenSinhRepository.cs" />
     <Compile Include="Models\ThongKeDiemDanhNoiTruViewModel.cs" />
+    <Compile Include="Models\TieuChiTuyenSinhViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +223,7 @@
     <Content Include="Scripts\js\ho-so-thi-sinh.js" />
     <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv2.js" />
     <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv3.js" />
+    <Content Include="Scripts\js\razor-form-handler.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.min.js" />
     <Content Include="Scripts\lib\bootstrap.esm.js" />
@@ -289,6 +294,10 @@
     <Content Include="Views\HoSoThiSinh\Index.cshtml" />
     <Content Include="Views\Shared\_InfomationSearch.cshtml" />
     <Content Include="Views\ThongKeDiemDanhNoiTru\Index.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_NguyenVongSimple.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_NguyenVongTHPT.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\RazorLogicChinhQuy.cshtml" />
+    <Content Include="Views\ThongKeDiemDanhKTX\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\kendo\" />

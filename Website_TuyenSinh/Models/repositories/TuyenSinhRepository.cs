@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using TuyenSinh.Models.Entities;
+using WebApplicationTest3.Models.repositories;
 
 namespace Website_TuyenSinh.Models.repositories
 {
@@ -54,7 +55,7 @@ namespace Website_TuyenSinh.Models.repositories
                                 Text15 = reader.IsDBNull(reader.GetOrdinal("Text15")) ? null : reader.GetString(reader.GetOrdinal("Text15")),
                                 BoolValue01 = reader.IsDBNull(reader.GetOrdinal("BoolValue01")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue01")),
                                 BoolValue02 = reader.IsDBNull(reader.GetOrdinal("BoolValue02")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue02")),
-                                BoolValue03 = reader.GetBoolean(reader.GetOrdinal("BoolValue03")),
+                                BoolValue03 = reader.IsDBNull(reader.GetOrdinal("BoolValue03")) ? false : reader.GetBoolean(reader.GetOrdinal("BoolValue03")),
                                 BoolValue04 = reader.IsDBNull(reader.GetOrdinal("BoolValue04")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue04")),
                                 BoolValue05 = reader.IsDBNull(reader.GetOrdinal("BoolValue05")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue05")),
                                 IsVisible = reader.GetBoolean(reader.GetOrdinal("IsVisible")),
@@ -121,7 +122,53 @@ namespace Website_TuyenSinh.Models.repositories
                     }
                 }
             }
+
             return results;
+        }
+
+        //Lấy cấu hình cho thông tin xét tuyển
+        public List<DM_TieuChiTuyenSinh> getAllTieuChiTS()
+        {
+            var result = new List<DM_TieuChiTuyenSinh>();
+            const string sql = @"SELECT * FROM _DM_TieuChiTuyenSinh WHERE IsSuDung = 1";
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = sql;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var item = new DM_TieuChiTuyenSinh()
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                MaTieuChi = reader["MaTieuChi"] as string,
+                                TenTieuChi = reader["TenTieuChi"] as string,
+                                Fields = reader["Fields"] as string,
+                                CongThucTinhDiemTongCong = reader["CongThucTinhDiemTongCong"] as string,
+                                STT = reader["STT"] != DBNull.Value
+                                    ? Convert.ToInt32(reader["STT"]) : (int?)null,
+                                IsSuDung = reader["IsSuDung"] != DBNull.Value
+                                    ? Convert.ToBoolean(reader["IsSuDung"]) : (bool?)null,
+                                StepLamTron = reader["StepLamTron"] != DBNull.Value
+                                    ? Convert.ToDecimal(reader["StepLamTron"]) : (decimal?)null,
+                                IDCachNhapDiem = reader["IDCachNhapDiem"] != DBNull.Value
+                                    ? Convert.ToInt32(reader["IDCachNhapDiem"]) : (int?)null,
+                                DSIDHeDT = reader["DSIDHeDT"] as string,
+                                DSIDLoaiHinhDT = reader["DSIDLoaiHinhDT"] as string,
+                                DSIDNganh = reader["DSIDNganh"] as string
+                            };
+                            result.Add(item);
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

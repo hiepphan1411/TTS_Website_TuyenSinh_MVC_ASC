@@ -5,7 +5,7 @@
 @model WebApplicationTest3.Models.TieuChiTuyenSinhViewModel
 @{
     ViewBag.Title = "Đăng ký tuyển sinh";
-    Layout = "~/Views/Shared/_LayoutTuyenSinh.cshtml";
+    Layout = null;
 
     var doiTuongList = new List<string>
 {
@@ -45,10 +45,10 @@
 }
 
 <div class="tab-container">
-    <div class="tab-header d-flex flex-column gap-1 justify-content-start">
+    @*<div class="tab-header d-flex flex-column gap-1 justify-content-start">
         <div class="tab-title fw-bold">Thông tin xét tuyển</div>
         <div class="tab-subtitle fw-semibold">Vui lòng chọn phương thức xét tuyển và nhập thông tin tương ứng cho từng phương thức.</div>
-    </div>
+    </div>*@
 
     <div class="tab-body d-flex flex-column justify-content-center gap-3">
         <div class="warning-title text-danger">
@@ -753,7 +753,7 @@
     </div>
 </div>
 
-@section Scripts
+@*@section Scripts
 {
     <script src="~/Scripts/js/razor-form-handler.js"></script>
     <script>
@@ -847,4 +847,4 @@
             </div>
         </div>
     </script>
-}
+}*@
