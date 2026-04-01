@@ -2,7 +2,7 @@
 
 :root {
   /* Border */
-  --border-color: #bfdbfe;
+  --border-color: #e4e4e4;
   --border-color-e0: #e0e0e0;
   --border-color-d0: #d0d0d0;
   --gray-icon-color: #656565;
@@ -42,7 +42,6 @@
   --blue-bg-light: #e8f4fd;
   --orange-bg-light: #fff4e6;
   --color-blue-light: #f8f9fa;
-  --color-blue-light: #f8f9fa;
   --color-blue-lighter: #f0f5ff;
   --color-blue-lightest: #e8f0fe;
   --color-blue-heavy: #e3f2fd;
@@ -59,6 +58,7 @@
   --color-text-primary: #505050;
   --color-text-secondary: #8e8e8e;
   --text-light: #666666;
+  --color-text-light: #a4a4a4;
   --text-muted: #6c757d;
   --text-blue: #56a2e8;
   --red-text: #dc0000;
@@ -413,19 +413,21 @@ body {
 /* Content */
 /* Home */
 .banner {
-    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('/Content/images/login-background.png');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
+    url("/Content/images/login-background.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-banner {
@@ -904,197 +906,198 @@ p {
   border-bottom: 1px solid #ccc;
 }
 
-
 /*Custom cho progress bar dawng ky cho mobile*/
 .df-mobile-chip {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 950px) {
-    .sidebar-progress {
-        display: none !important;
-    }
+  .sidebar-progress {
+    display: none !important;
+  }
 
-    .df-mobile-chip {
-        display: block;
-        position: sticky;
-        top: 8px;
-        z-index: 999;
-        margin: 0 12px 8px;
-        transition: opacity 0.35s ease, transform 0.35s ease;
-    }
+  .df-mobile-chip {
+    display: block;
+    position: sticky;
+    top: 8px;
+    z-index: 999;
+    margin: 0 12px 8px;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
 
-    .df-chip-hidden {
-        opacity: 0;
-        transform: translateY(-8px);
-        pointer-events: none;
-    }
+  .df-chip-hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+  }
 
-    .df-chip-visible {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: all;
-    }
+  .df-chip-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
 
-    .df-chip-bar {
-        background: var(--primary-blue);
-        border-radius: 8px;
-        padding: 8px 16px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-        user-select: none;
-        box-shadow: 0 2px 8px rgba(58,116,240,0.3);
-    }
+  .df-chip-bar {
+    background: var(--primary-blue);
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(58, 116, 240, 0.3);
+  }
 
-    .df-chip-icon {
-        font-size: 14px;
-        line-height: 1;
-    }
+  .df-chip-icon {
+    font-size: 14px;
+    line-height: 1;
+  }
 
-    .df-chip-pct {
-        font-size: 14px;
-        font-weight: 700;
-        color: #fff;
-        min-width: 36px;
-    }
+  .df-chip-pct {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 36px;
+  }
 
-    .df-chip-divider {
-        width: 1px;
-        height: 14px;
-        background: rgba(255,255,255,0.3);
-        flex-shrink: 0;
-    }
+  .df-chip-divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+  }
 
-    .df-chip-label {
-        font-size: 12px;
-        color: rgba(255,255,255,0.85);
-        flex: 1;
-    }
+  .df-chip-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    flex: 1;
+  }
 
-    .step-info-title {
-        font-size: 14px;
-        color: rgba(255,255,255,0.85);
-        flex: 1;
-    }
+  .step-info-title {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    flex: 1;
+  }
 
-    .df-chip-arrow {
-        font-size: 11px;
-        color: rgba(255,255,255,0.75);
-        white-space: nowrap;
-        transition: transform 0.25s ease;
-    }
+  .df-chip-arrow {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    transition: transform 0.25s ease;
+  }
 
-    .df-chip-dropdown {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        margin-top: 4px;
-    }
+  .df-chip-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 4px;
+  }
 
-        .df-chip-dropdown.df-chip-open {
-            max-height: 400px;
-        }
+  .df-chip-dropdown.df-chip-open {
+    max-height: 400px;
+  }
 
-    .df-chip-steps {
-        list-style: none;
-        margin: 0;
-        padding: 6px 0;
-        background: #fff;
-        border-radius: 14px;
-        border: 1px solid #bfdbfe;
-        overflow: hidden;
-    }
+  .df-chip-steps {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #bfdbfe;
+    overflow: hidden;
+  }
 
-    .df-chip-step {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 7px 14px;
-        border-bottom: 1px solid #f3f4f6;
-        cursor: pointer;
-        transition: background 0.15s;
-    }
+  .df-chip-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
 
-        .df-chip-step:last-child {
-            border-bottom: none;
-        }
+  .df-chip-step:last-child {
+    border-bottom: none;
+  }
 
-        .df-chip-step.is-active {
-            background: #fff7ed;
-        }
+  .df-chip-step.is-active {
+    background: #fff7ed;
+  }
 
-        .df-chip-step:hover {
-            background: #f0f5ff;
-        }
+  .df-chip-step:hover {
+    background: #f0f5ff;
+  }
 
-    .df-chip-badge {
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        font-size: 10px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
+  .df-chip-badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
 
-        .df-chip-badge.done {
-            background: #3a74f0;
-            color: #fff;
-        }
+  .df-chip-badge.done {
+    background: #3a74f0;
+    color: #fff;
+  }
 
-        .df-chip-badge.active {
-            background: #ffc107;
-            color: #fff;
-        }
+  .df-chip-badge.active {
+    background: #ffc107;
+    color: #fff;
+  }
 
-        .df-chip-badge.pending {
-            background: #e2e8f0;
-            color: #9ba9bd;
-        }
+  .df-chip-badge.pending {
+    background: #e2e8f0;
+    color: #9ba9bd;
+  }
 
-    .df-chip-step-info {
-        flex: 1;
-        min-width: 0;
-    }
+  .df-chip-step-info {
+    flex: 1;
+    min-width: 0;
+  }
 
-    .df-chip-step-title {
-        font-size: 12px;
-        font-weight: 600;
-        color: #505050;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  .df-chip-step-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #505050;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-    .df-chip-step-sub {
-        font-size: 10px;
-        color: #9ba9bd;
-    }
+  .df-chip-step-sub {
+    font-size: 10px;
+    color: #9ba9bd;
+  }
 
-        .df-chip-step-sub.done {
-            color: #3a74f0;
-        }
+  .df-chip-step-sub.done {
+    color: #3a74f0;
+  }
 
-        .df-chip-step-sub.active {
-            color: #ffa500;
-        }
+  .df-chip-step-sub.active {
+    color: #ffa500;
+  }
 }
 
 /*Custom combobox*/
 
 .k-list .k-item.k-state-selected {
-    background-color: #007bff !important;
-    color: #fff !important;
+  background-color: #007bff !important;
+  color: #fff !important;
 }
 
 .k-list .k-item.k-state-hover {
-    background-color: #cce5ff !important;
+  background-color: #cce5ff !important;
 }
 
 .k-combobox.k-state-focused {
-    border-color: #007bff !important;
+  border-color: #007bff !important;
 }

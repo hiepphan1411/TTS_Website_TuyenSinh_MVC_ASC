@@ -21,7 +21,7 @@ namespace Website_TuyenSinh.Controllers
             ContractResolver = new CamelCasePropertyNamesContractResolver(),
             NullValueHandling = NullValueHandling.Ignore
         };
-        string apiToHop = "https://ts-dntu.ascvn.vn/TuyenSinh/GetToHopMonForSelect";
+        string apiToHop = "";
 
         // GET: DangKyChinhQuy, TuyenSinhSauDaiHoc
         public ActionResult Index(int typeCauHinh)
@@ -74,34 +74,10 @@ namespace Website_TuyenSinh.Controllers
 
             TieuChiTuyenSinhViewModel model = null;
 
-            if (!string.IsNullOrEmpty(apiToHop))
+            model = new TieuChiTuyenSinhViewModel
             {
-                using (var client = new HttpClient())
-                {
-                    var json = JsonConvert.SerializeObject(requestData);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    try
-                    {
-                        var response = await client.PostAsync(apiToHop, content);
-                        var responseString = await response.Content.ReadAsStringAsync();
-
-                        model = new TieuChiTuyenSinhViewModel
-                        {
-                            TieuChiList = danhMucRepo.getAllTieuChiTS(),
-                            ToHopMonJson = responseString
-                        };
-                    }
-                    catch (Exception e)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"API call failed: {e.Message}");
-                        model = new TieuChiTuyenSinhViewModel
-                        {
-                            TieuChiList = danhMucRepo.getAllTieuChiTS()
-                        };
-                    }
-                }
-            }
+                TieuChiList = danhMucRepo.getAllTieuChiTS(),
+            };
 
             return View(model);
         }

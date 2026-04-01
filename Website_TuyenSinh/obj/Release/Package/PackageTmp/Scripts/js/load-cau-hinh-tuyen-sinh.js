@@ -76,14 +76,15 @@ $(function () {
             maDanhMuc: rec.maDanhMuc,
             tenDanhMuc: rec.tenDanhMuc,
             tab: rec.text02,
-            colSpan: col,
+            isRequired: rec.text03 === '1',
             parentField: rec.text04 || '',
+            colSpan: col,
             isParent: rec.text06 === '1',
             fieldType: fType,
             controller: rec.text08 || '',
             actionName: rec.text09 || '',
             cascadeField: rec.text10 || '',
-            isRequired: rec.text03 === '1',
+            minLength: minLen,
             maxLength: maxLen,
             placeHolder: rec.text14 || '',
             readOnly: rec.text15 === '1',
@@ -364,20 +365,9 @@ $(function () {
 
     //T1
     function bTextBox(f) {
-        return (
-            lbl(f) +
-            '<input type="text" id="' +
-            inputId(f) +
-            '" name="' +
-            inputName(f) +
-            '" data-field-key="' +
-            esc(f.maDanhMuc) +
-            '" class="df-input" ' +
-            ph(f) +
-            ml(f) +
-            ro(f) +
-            ' />'
-        );
+        return lbl(f) +
+            '<input type="text" id="' + inputId(f) + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" class="df-input" ' +
+            ph(f) + ml(f) + ro(f) + ' />';
     }
 
     //T2
@@ -425,19 +415,9 @@ $(function () {
             lbl(f) + '<div class="df-radio-group" id="rg-' + inputId(f) + '">';
         $.each(f.options || [], function (i, o) {
             var rId = inputId(f) + '_' + i;
-            h +=
-                '<label class="df-radio-item">' +
-                '<input type="radio" id="' +
-                rId +
-                '" name="' +
-                inputName(f) +
-                '" data-field-key="' +
-                esc(f.maDanhMuc) +
-                '" value="' +
-                esc(o.value) +
-                '" />' +
-                esc(o.text) +
-                '</label > ';
+            h += '<label class="df-radio-item">' +
+                '<input type="radio" id="' + rId + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" value="' + esc(o.value) + '" />' +
+                esc(o.text) + '</label > ';
         });
         h += '</div > ';
         return h;
@@ -445,27 +425,11 @@ $(function () {
 
     //T4
     function bComboBox(f) {
-        var h =
-            lbl(f) +
-            '<select id="' +
-            inputId(f) +
-            '" name="' +
-            inputName(f) +
-            '" data-field-key="' +
-            esc(f.maDanhMuc) +
-            '" class="df-select" ' +
-            (f.readOnly ? ' disabled' : '') +
-            '>' +
-            '<option value="">' +
-            (f.placeHolder || '-- Chọn --') +
-            '</option>';
+        var h = lbl(f) +
+            '<select id="' + inputId(f) + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" class="df-select" ' + (f.readOnly ? ' disabled' : '') + '>' +
+            '<option value="">' + (f.placeHolder || '-- Chọn --') + '</option>';
         $.each(f.options || [], function (_, o) {
-            h +=
-                '<option value="' +
-                esc(o.value) +
-                '">' +
-                esc(o.text) +
-                '</option>';
+            h += '<option value="' + esc(o.value) + '">' + esc(o.text) + '</option>';
         });
         h += '</select>';
         return h;
@@ -722,29 +686,14 @@ $(function () {
                 case 2:
                     var arr = Array.isArray(val) ? val : String(val).split(',');
                     $.each(arr, function (_, v) {
-                        $(
-                            'input[name="' +
-                            inputName(f) +
-                            '" ][value="' +
-                            v.trim() +
-                            '" ]',
-                        ).prop('checked', true);
+                        $('input[name="' + inputName(f) + '" ][value="' + v.trim() + '" ]').prop('checked', true);
                     });
                     break;
                 case 3:
-                    $(
-                        'input[name="' +
-                        inputName(f) +
-                        '" ][value="' +
-                        val +
-                        '" ]',
-                    ).prop('checked', true);
+                    $('input[name="' + inputName(f) + '" ][value="' + val + '" ]').prop('checked', true);
                     break;
                 case 12:
-                    var pv =
-                        typeof val === 'object'
-                            ? val
-                            : { value: val, text: val };
+                    var pv = typeof val === 'object' ? val : { value: val, text: val };
                     $(jqId(inputId(f))).val(pv.value);
                     if (pv.text) {
                         $('#pval-text-' + inputId(f)).text(pv.text);
@@ -753,9 +702,7 @@ $(function () {
                     break;
                 case 8:
                     if (val.preview) {
-                        $('#img-prev-' + inputId(f))
-                            .attr('src', val.preview)
-                            .show();
+                        $('#img-prev-' + inputId(f)).attr('src', val.preview).show();
                         $('#img-ph-' + inputId(f)).hide();
                     }
                     break;
