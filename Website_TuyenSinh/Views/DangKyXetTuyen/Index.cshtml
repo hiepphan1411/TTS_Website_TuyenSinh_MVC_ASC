@@ -1,13 +1,48 @@
+@using System.Text.Json
+@using Newtonsoft.Json;
 
 @{
     ViewData["Title"] = "Đăng ký xét tuyển";
     Layout = "~/Views/Shared/_LayoutTuyenSinh.cshtml";
+
+
+    var doiTuongList = new List<string>
+{
+        "Chứng chỉ IELTS/TOEIC.",
+        "Kết quả kỳ thi ACT.",
+        "Kết quả kỳ thi SAT.",
+        "Thí sinh là học sinh thuộc đội tuyển cấp tỉnh/thành phố hoặc đội tuyển của trường THPT chuyên trực thuộc các trường đại học tham gia kỳ thi học sinh giỏi quốc gia.",
+        "Thí sinh ngoại quốc đủ điều kiện học tập hoặc theo diện cử tuyển.",
+        "Thí sinh tham gia đạt giải các kỳ thi Tay nghề khu vực Asean và Quốc tế.",
+        "Thí sinh tham gia đạt giải ở các cuộc thi Khoa học kỹ thuật.",
+        "Tốt nghiệp trung cấp, cao đẳng, đại học trở lên."
+    };
+
+    var nganh = new List<Dictionary<string, string>>
+{
+        new Dictionary<string, string> { { "value", "CNTT" }, { "text", "Công nghệ thông tin" } },
+        new Dictionary<string, string> { { "value", "TMDT" }, { "text", "Thương mại điện tử" } },
+        new Dictionary<string, string> { { "value", "HH" }, { "text", "Công nghệ kỹ thuật hóa học" } }
+    };
+
+    var subjList = new List<string>()
+{
+        "Toán", "Văn", "Lý", "Hóa", "Sinh", "Lịch sử", "Địa lý", "Tiếng Anh", "Giáo dục Kinh tế và Pháp luật", "Giáo dục công dân"
+    };
+
+    var toHopList = new List<string>()
+{
+        "(A00): Toán, Lý, Hóa",
+        "(D01): Toán, Tiếng Anh, Văn",
+        "(B00): Toán, Hóa, Sinh",
+        "(C00): Văn, Sử, Địa"
+    };
 }
 
 @section styles {
     <link rel="stylesheet" href="~/Content/css/dang-ky-tuyen-sinh.css" />
+    <link rel="stylesheet" href="~/Content/css/razor-logic-style.css" />
 }
-
 
 <script id="form-config-data" type="application/json">
     @Html.Raw(ViewBag.FormConfigJson)
@@ -20,17 +55,116 @@
     </div>
 </div>
 
-<div class="modal fade" id="df-popup-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content rounded-4 border-0 shadow-lg">
-            <div class="modal-header border-0 pb-0">
-                <h5 class="modal-title fw-bold" id="df-popup-title">Tìm kiếm</h5>
-            </div>
-        </div>
+<div id="df-popup-modal" style="display:none; padding: 12px;">
+    <h5 class="fw-bold mb-3" id="df-popup-title">Tìm kiếm</h5>
+    <div class="d-flex gap-2 mb-3">
+        <input type="text" id="df-popup-keyword" class="form-control" placeholder="Nhập từ khóa tìm kiếm" />
+        <button type="button" id="df-popup-search-btn" class="btn btn-primary">Tìm</button>
     </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead id="df-popup-thead"></thead>
+            <tbody id="df-popup-tbody"></tbody>
+        </table>
+    </div>
+    <div class="d-flex flex-wrap gap-2" id="df-popup-paging"></div>
 </div>
 
+<div id="df-kendo-notification"></div>
 
-@section Scripts {
-    <script src="~/Scripts/js/load-cau-hinh-tuyen-sinh.js"></script>
+@section Scripts
+{
+    <script src="~/Scripts/js/razor-form-handler.js"></script>
+    <script src="~/Scripts/js/load-cau-hinh-tuyen-sinhv3.js"></script>
+    <script>
+        var tieuChiList = @Html.Raw(JsonConvert.SerializeObject(Model.TieuChiList));
+
+        //tieuChiList.forEach(function (tieuChi) {
+        //    var selectElement = document.getElementById("CachNhapDiem_01_" + tieuChi.Id);
+        //});
+    </script>
+    <script type="text/template" id="nv-template">
+        <div class="row nguyen-vong-item d-flex align-items-end gap-3">
+            <div class="col-md-4 d-flex flex-column">
+                <label class="fw-semibold nv-label">
+                    Nguyện vọng __INDEX__ <span class="text-danger">*</span>
+                </label>
+                <select class="custom-selection nv-select" style="min-width: 300px;">
+                    <option value="">Chọn ngành</option>
+                    <option value="CNTT">Công nghệ thông tin</option>
+                    <option value="TMDT">Thương mại điện tử</option>
+                </select>
+            </div>
+
+            <div class="col-md-1">
+                <div class="btn-delete">
+                    <i class="fa fa-trash"></i>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="nv-template-thpt">
+        <div class="row nguyen-vong-item nguyen-vong-thpt d-flex justify-between align-items-end gap-3">
+            <div class="col-md-4 d-flex flex-column">
+                <label class="fw-semibold nv-label">
+                    Nguyện vọng __INDEX__ <span class="text-danger">*</span>
+                </label>
+                <select class="custom-selection nv-select" style="min-width: 260px;">
+                    <option value="">Chọn ngành</option>
+                    <option value="CNTT">Công nghệ thông tin</option>
+                    <option value="TMDT">Thương mại điện tử</option>
+                    <option value="HH">Công nghệ kỹ thuật hóa học</option>
+                </select>
+            </div>
+
+            <div class="col-md-3 d-flex flex-column gap-1">
+                <label class="fw-semibold fs-13px">Tổ hợp môn <span class="text-danger">*</span></label>
+                <select class="custom-selection nv-combo-select" style="min-width: 260px;">
+                    <option value="">Chọn tổ hợp môn</option>
+                    <option value="(A00): Toán, Lý, Hóa">(A00): Toán, Lý, Hóa</option>
+                    <option value="(D01): Toán, Tiếng Anh, Văn">(D01): Toán, Tiếng Anh, Văn</option>
+                    <option value="(B00): Toán, Hóa, Sinh">(B00): Toán, Hóa, Sinh</option>
+                    <option value="(C00): Văn, Sử, Địa">(C00): Văn, Sử, Địa</option>
+                </select>
+            </div>
+
+            <div class="col-md-1 d-flex flex-column gap-1 nv-total-score-wrap">
+                <label class="fw-semibold fs-13px">Tổng điểm</label>
+                <span class="score-pill">0.00 điểm</span>
+            </div>
+
+            <div class="col-md-1">
+                <div class="btn-delete">
+                    <i class="fa fa-trash"></i>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="hp-template">
+        <div class="row mb-2">
+            <div class="row text-primary fw-semibold fs-13px">
+                <span class="col-md-2">Môn học phần __INDEX__</span>
+            </div>
+            <div class="row">
+                <div class="col-md-3 d-flex flex-column">
+                    <label class="fw-semibold nv-label">Tên môn</label>
+                    <input type="text" class="custom-input" placeholder="Nhập Tên môn" />
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    <label class="fw-semibold nv-label">DVHT/TC</label>
+                    <input type="number" class="custom-input" placeholder="0.00" />
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    <label class="fw-semibold nv-label">Điểm môn</label>
+                    <input type="number" class="custom-input" placeholder="0.00" />
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <div class="btn-delete-hp">
+                        <i class="fa fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
 }

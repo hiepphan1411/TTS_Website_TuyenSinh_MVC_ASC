@@ -1,0 +1,214 @@
+﻿
+:root {
+    --color-gray-heavy: #94A3B8;
+    --color-gray-light: #CBD5E1;
+}
+
+body {
+    background: var(--light-bg);
+}
+
+.main-container {
+    min-height: 80vh;
+    background: url('../images/login-background.png') no-repeat center center/cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-bg-container {
+    min-height: 80vh;
+    background: var(--light-bg);
+    background-attachment: fixed;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass-card {
+    width: fit-content;
+    min-width: 450px;
+    padding: 15px 35px 25px 35px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-label {
+    font-size: 13px;
+}
+
+.glass-input {
+    background: white;
+    color: var(--color-gray-heavy);
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-light);
+    padding: 8px 14px;
+    font-size: 13px;
+    transition: all 0.25s ease;
+}
+
+    .glass-input:focus {
+        box-shadow: none;
+        transform: translateY(-2px);
+    }
+
+.btn-main {
+    background: var(--primary-blue);
+    border-radius: 15px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 10px;
+    transition: all 0.25s ease;
+}
+
+    .btn-main:hover {
+        background: var(--primary-blue-hover);
+        transform: translateY(-2px);
+    }
+
+.badge-top {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 10px;
+    width: fit-content;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.captcha-box {
+    background: white;
+    border-radius: 12px;
+    border: 2px solid #F0F3F8;
+    padding: 6px 10px 6px 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .captcha-box div {
+        padding: 1px 20px;
+        background: var(--light-gray);
+        color: var(--gray-icon-color);
+        border-radius: 6px;
+    }
+
+    .captcha-box i {
+        font-size: 12px;
+        color: var(--primary-blue);
+    }
+
+.main-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.sub-title {
+    font-size: 16px;
+    font-weight: lighter;
+    color: var(--color-gray-light)
+}
+
+.back-link {
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    transition: all 0.25s ease;
+}
+
+    .back-link:hover {
+        color: var(--primary-blue);
+        transform: translateY(-2px);
+    }
+
+
+/* Component Step Progress */
+.step-wrapper {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+    .step-wrapper::before,
+    .step-wrapper::after {
+        content: '';
+    }
+
+.step-line {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #ccc;
+    z-index: 0;
+}
+
+.step-item-content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.step-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ccc;
+    color: #fff;
+    line-height: 30px;
+    font-size: 14px;
+    margin: auto;
+}
+
+.step-label {
+    font-size: 14px;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.step-item-content.active .step-circle {
+    background: orange;
+}
+
+.step-item-content.active ~ .step-item-content .step-circle {
+    background: #ccc;
+}
+
+
+@media (max-width: 480px) {
+    .glass-card {
+        min-width: 80%;
+        padding: 20px;
+    }
+
+    .main-title {
+        font-size: 20px;
+    }
+
+    .sub-title {
+        font-size: 14px;
+    }
+}

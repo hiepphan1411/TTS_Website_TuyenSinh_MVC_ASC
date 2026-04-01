@@ -21,7 +21,7 @@ $(function () {
     }
 
     var tabs = buildTabs(rawDanhMuc || []);
-    var savedValues = loadSnapshot(tabs);
+    var savedValues = loadLocalSnapshot();
     var curTabIdx = 0;
     var popupCtx = null;
     var tabDomCache = {};
@@ -86,14 +86,15 @@ $(function () {
             maDanhMuc: rec.maDanhMuc,
             tenDanhMuc: rec.tenDanhMuc,
             tab: rec.text02,
-            colSpan: col,
+            isRequired: rec.text03 === '1',
             parentField: rec.text04 || '',
+            colSpan: col,
             isParent: rec.text06 === '1',
             fieldType: fType,
             controller: rec.text08 || '',
             actionName: rec.text09 || '',
             cascadeField: rec.text10 || '',
-            isRequired: rec.text03 === '1',
+            minLength: minLen,
             maxLength: maxLen,
             placeHolder: rec.text14 || '',
             readOnly: rec.text15 === '1',
@@ -396,20 +397,9 @@ $(function () {
 
     //Type2
     function bTextBox(f) {
-        return (
-            lbl(f) +
-            '<input type="text" id="' +
-            inputId(f) +
-            '" name="' +
-            inputName(f) +
-            '" data-field-key="' +
-            esc(f.maDanhMuc) +
-            '" class="df-input" ' +
-            ph(f) +
-            ml(f) +
-            ro(f) +
-            ' />'
-        );
+        return lbl(f) +
+            '<input type="text" id="' + inputId(f) + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" class="df-input" ' +
+            ph(f) + ml(f) + ro(f) + ' />';
     }
 
     //Type3
@@ -460,27 +450,11 @@ $(function () {
 
     //Type5
     function bComboBox(f) {
-        var h =
-            lbl(f) +
-            '<select id="' +
-            inputId(f) +
-            '" name="' +
-            inputName(f) +
-            '" data-field-key="' +
-            esc(f.maDanhMuc) +
-            '" class="df-select" ' +
-            (f.readOnly ? ' disabled' : '') +
-            '>' +
-            '<option value="">' +
-            (f.placeHolder || '-- Chọn --') +
-            '</option>';
+        var h = lbl(f) +
+            '<select id="' + inputId(f) + '" name="' + inputName(f) + '" data-field-key="' + esc(f.maDanhMuc) + '" class="df-select" ' + (f.readOnly ? ' disabled' : '') + '>' +
+            '<option value="">' + (f.placeHolder || '-- Chọn --') + '</option>';
         $.each(f.options || [], function (_, o) {
-            h +=
-                '<option value="' +
-                esc(o.value) +
-                '">' +
-                esc(o.text) +
-                '</option>';
+            h += '<option value="' + esc(o.value) + '">' + esc(o.text) + '</option>';
         });
         h += '</select>';
         return h;
@@ -753,10 +727,7 @@ $(function () {
                     ).prop('checked', true);
                     break;
                 case 12:
-                    var pv =
-                        typeof val === 'object'
-                            ? val
-                            : { value: val, text: val };
+                    var pv = typeof val === 'object' ? val : { value: val, text: val };
                     $(jqId(inputId(f))).val(pv.value);
                     if (pv.text) {
                         $('#pval-text-' + inputId(f)).text(pv.text);
@@ -765,9 +736,7 @@ $(function () {
                     break;
                 case 8:
                     if (val.preview) {
-                        $('#img-prev-' + inputId(f))
-                            .attr('src', val.preview)
-                            .show();
+                        $('#img-prev-' + inputId(f)).attr('src', val.preview).show();
                         $('#img-ph-' + inputId(f)).hide();
                     }
                     break;
@@ -937,7 +906,7 @@ $(function () {
                 var joined = Object.keys(sel).join(',');
                 $hid.val(joined);
                 savedValues[fieldKey] = joined;
-                persistSnapshotIfEnabled();
+                persistLocalSnapshot();
             });
 
             $(document)
@@ -1575,31 +1544,56 @@ $(function () {
             });
     }
 
-    function bindToggleButtons() {
-        $(document)
-            .off('click.toggle-has', '.btn-toggle-has')
-            .on('click.toggle-has', '.btn-toggle-has', function (e) {
-                e.preventDefault();
-                var fieldsetId = $(this).data('fieldset');
-                var $fieldset = $('#' + fieldsetId);
-                $fieldset.addClass('expanded').removeClass('collapsed');
-                $fieldset.find('.form-group').slideDown(300);
-                $(this).addClass('active');
-                $(this).siblings('.btn-toggle-not-has').removeClass('active');
-            });
-
-        $(document)
-            .off('click.toggle-not-has', '.btn-toggle-not-has')
-            .on('click.toggle-not-has', '.btn-toggle-not-has', function (e) {
-                e.preventDefault();
-                var fieldsetId = $(this).data('fieldset');
-                var $fieldset = $('#' + fieldsetId);
-                $fieldset.addClass('collapsed').removeClass('expanded');
-                $fieldset.find('.form-group').slideUp(300);
-                $(this).addClass('active');
-                $(this).siblings('.btn-toggle-has').removeClass('active');
-            });
+    function loadLocalSnapshot() {
+        try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return {};
+            var snap = JSON.parse(raw);
+            if (snap && snap.savedValues) {
+                if (Array.isArray(snap.tabsCompleted)) {
+                    $.each(snap.tabsCompleted, function (_, key) {
+                        var found = tabs.find(function (t) {
+                            return t.tabKey === key;
+                        });
+                        if (found) found.isCompleted = true;
+                    });
+                }
+                return snap.savedValues;
+            }
+        } catch (e) { }
+        return {};
     }
+
+    function persistLocalSnapshot() {
+        var completed = tabs
+            .filter(function (t) {
+                return t.isCompleted;
+            })
+            .map(function (t) {
+                return t.tabKey;
+            });
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify({
+                savedValues: savedValues,
+                tabsCompleted: completed,
+            }),
+        );
+        syncSidebarStep(curTabIdx);
+    }
+
+        // $(document)
+        //     .off('click.toggle-not-has', '.btn-toggle-not-has')
+        //     .on('click.toggle-not-has', '.btn-toggle-not-has', function (e) {
+        //         e.preventDefault();
+        //         var fieldsetId = $(this).data('fieldset');
+        //         var $fieldset = $('#' + fieldsetId);
+        //         $fieldset.addClass('collapsed').removeClass('expanded');
+        //         $fieldset.find('.form-group').slideUp(300);
+        //         $(this).addClass('active');
+        //         $(this).siblings('.btn-toggle-has').removeClass('active');
+        //     });
+    
 
     function syncSidebarStep(idx) {
         $.each(tabs, function (i, t) {
@@ -1608,9 +1602,8 @@ $(function () {
 
         if (typeof window.dfUpdateSidebar === 'function') {
             window.dfUpdateSidebar(idx, tabs, flag_InitLanDau);
+            flag_InitLanDau = false;
         }
-
-        flag_InitLanDau = false;
     }
 
     function persistSnapshotIfEnabled() {

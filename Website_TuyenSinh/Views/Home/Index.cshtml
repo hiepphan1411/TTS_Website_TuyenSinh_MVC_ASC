@@ -2,6 +2,93 @@
     ViewBag.Title = "Trang chủ";
 }
 
+@section styles {
+    <style>
+        .card-register {
+            transition: border-color 0.25s ease, transform 0.28s ease;
+            cursor: pointer;
+        }
+
+            .card-register:hover {
+                border-color: var(--primary-blue);
+                transform: translateY(-5px);
+            }
+
+        .effect {
+            transition: color 0.25s, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .card-register:hover .effect {
+            /*                color: #0F6E56;*/
+            transform: scale(1.25) rotate(-8deg);
+        }
+
+        .card-register p:first-of-type {
+            position: relative;
+            display: inline-block;
+        }
+
+            .card-register p:first-of-type::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--primary-blue);
+                transition: width 0.4s ease;
+            }
+
+        .card-register:hover p:first-of-type::after {
+            width: 100%;
+        }
+
+        .card-register .btn-outline-primary {
+            transition: transform 0.25s ease, background 0.25s, color 0.25s;
+        }
+
+        .card-register:hover .btn-outline-primary {
+            background: white;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            transform: scale(1.06);
+        }
+
+        .card-register svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+        /*Custom effect cho scroll*/
+        .card-register.active-effect {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+
+            .card-register.active-effect .effect {
+                transform: scale(1.25) rotate(-8deg);
+            }
+
+            .card-register.active-effect p:first-of-type::after {
+                width: 100%;
+            }
+
+            .card-register.active-effect .btn-outline-primary {
+                background: white;
+                color: var(--primary-blue);
+                border-color: var(--primary-blue);
+                transform: scale(1.06);
+            }
+    </style>
+}
+
 <div class="banner">
     <div class="card-banner">
         <p>CỔNG THÔNG TIN TUYỂN SINH</p>
@@ -10,7 +97,7 @@
         <p>Khám phá cơ hội học tập tại môi trường giáo dục hàng đầu, nơi kiến tạo tương lai và phát triển tiềm năng của bạn.</p>
 
         <div class="d-flex banner-btn justify-content-center gap-3 mt-4">
-            <a href="#" class="btn-now-register">Đăng ký xét tuyển ngay</a>
+            <button class="btn-now-register">Đăng ký xét tuyển ngay</button>
             <a href="#" class="btn-detail">Xem chi tiết ngành học</a>
         </div>
 
@@ -30,44 +117,45 @@
         </div>
         <div class="row g-4">
             <div class="col-lg-3 col-md-6">
-                <div class="card-register">
+                <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 43 })" class="card-register" style="text-decoration:none; color:inherit;">
                     <div>
-                        <i class="fa fa-graduation-cap"></i>
+                        <i class="fa fa-graduation-cap effect"></i>
                     </div>
                     <p>ĐẠI HỌC - CHÍNH QUY</p>
+
                     <p>Đào tạo bằng đại học chính quy với chương trình chuẩn quốc gia, thời gian 4 năm.</p>
-                    <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 43 })" class="btn-outline-primary">Đăng ký ngay →</a>
-                </div>
+                    <span class="btn-outline-primary">Đăng ký ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="card-register">
+                <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 112 })" class="card-register" style="text-decoration:none; color:inherit;">
                     <div>
-                        <i class="fa fa-file-text"></i>
+                        <i class="fa fa-file-text effect"></i>
                     </div>
                     <P>XÉT TUYỂN SAU ĐẠI HỌC</P>
                     <p>Chương trình đào tạo cao học, thạc sĩ, tiến sĩ cho sinh viên tốt nghiệp đại học.</p>
-                    <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 112 })" class="btn-outline-primary">Đăng ký ngay →</a>
-                </div>
+                    <span href="" class="btn-outline-primary">Đăng ký ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="card-register">
+                <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 112 })" class="card-register" style="text-decoration:none; color:inherit;">
                     <div>
-                        <i class="fa fa-link"></i>
+                        <i class="fa fa-link effect"></i>
                     </div>
                     <p>ĐẠI HỌC - LIÊN THÔNG</p>
                     <p>Chương trình liên thông từ cao đẳng lên đại học, rút ngắn thời gian học.</p>
-                    <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 166 })" class="btn-outline-primary">Đăng ký ngay →</a>
-                </div>
+                    <span class="btn-outline-primary">Đăng ký ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="card-register">
+                <a href="@Url.Action("Index", "TraCuuKetQua")" class="card-register" style="text-decoration:none; color:inherit;">
                     <div>
-                        <i class="fa fa-search"></i>
+                        <i class="fa fa-search effect"></i>
                     </div>
                     <p>TRA CỨU KẾT QUẢ XÉT TUYỂN</p>
                     <p>Kiểm tra kết quả xét tuyển và tình trạng hồ sơ của bạn.</p>
-                    <a href="#" class="btn-outline-primary">Tra cứu ngay →</a>
-                </div>
+                    <span class="btn-outline-primary">Tra cứu ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
             </div>
         </div>
     </div>
@@ -134,6 +222,7 @@
     </div>
 </div>
 
+<!-- Bootstrap JS -->
 <script src="~/Scripts/lib/bootstrap.bundle.min.js"></script>
 <script src="~/Scripts/lib/jquery-3.7.0.min.js"></script>
 <script>
@@ -144,8 +233,14 @@
 
                 $("html, body").animate({
                     scrollTop: targetPosition
-                }, 300);
+                }, 300, function () {
+                    $(".card-register").addClass("active-effect");
+
+                    setTimeout(function () {
+                        $(".card-register").removeClass("active-effect");
+                    }, 500);
+                });
             });
-        }
-    )
+        });
+
 </script>

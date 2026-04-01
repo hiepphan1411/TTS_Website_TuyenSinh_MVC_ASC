@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TempDbsContext-Web.config Connection String" description="TempDbsContext Connection String used in web.config by the application to access the database." defaultValue="Server=SQL8011.site4now.net;Database=db_ac6a33_studentportaldb;User ID=db_ac6a33_studentportaldb_admin;Password=@Student1411;MultipleActiveResultSets=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Project\\TTS_Website_TuyenSinh_MVC_ASC\\Website_TuyenSinh\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TempDbsContext']/@connectionString" />
+  </parameter>
+</parameters>

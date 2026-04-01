@@ -17,11 +17,16 @@
 <nav class="navbar px-3 py-2">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-            <img src="/images/logo.png"
+            <img src="~/Content/images/logo-ASC.png"
+                 alt="Logo trường"
+                  height="48"
+                 onerror="this.style.display='none'" />
+
+            @*<img src="~/Content/images/logo-ASC.png"
                  alt="Logo trường"
                  width="48" height="48"
                  class="rounded-circle border"
-                 onerror="this.style.display='none'" />
+                 onerror="this.style.display='none'" />*@
             <div>
                 <div class="navbar-brand-name">TRƯỜNG ĐẠI HỌC …</div>
                 <div class="navbar-brand-sub">… University</div>
@@ -31,7 +36,7 @@
         <!-- Right actions -->
         <div class="d-flex align-items-center gap-2 ms-auto">
             <a href="@Url.Action("Index", "Home")" class="nav-link text-dark fw-500 me-2">Trang chủ</a>
-            <a href="/tracuu" class=" btn-tracuu">Tra cứu</a>
+            <a href="/tracuuthongtin" class=" btn-tracuu">Tra cứu</a>
             <a href="/dangnhap" class=" btn-dangnhap">Đăng nhập</a>
         </div>
     </div>

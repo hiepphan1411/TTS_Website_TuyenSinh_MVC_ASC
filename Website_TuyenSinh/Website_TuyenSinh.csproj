@@ -124,8 +124,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HoSoThiSinhController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DashboardTuyenSinhController.cs" />
     <Compile Include="Controllers\DatLaiMatKhauController.cs" />
@@ -134,23 +132,31 @@
     <Compile Include="Controllers\TraCuuThongTinController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DangKyXetTuyenController.cs" />
+    <Compile Include="Controllers\HoSoThiSinhController.cs" />
+    <Compile Include="Controllers\ThongKeDiemDanhKTXController.cs" />
+    <Compile Include="Controllers\ThongKeDiemDanhNoiTruController.cs" />
     <Compile Include="Controllers\TraCuuKetQuaController.cs" />
     <Compile Include="Controllers\TraCuuThongTinController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_DanhMuc.cs" />
+    <Compile Include="Models\DM_TieuChiTuyenSinh.cs" />
+    <Compile Include="Models\ParamThongKeDiemDanhNoiTru.cs" />
+    <Compile Include="Models\repositories\TieuChiTSRepository.cs" />
     <Compile Include="Models\repositories\TuyenSinhRepository.cs" />
-    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\ThongKeDiemDanhNoiTruViewModel.cs" />
+    <Compile Include="Models\TieuChiTuyenSinhViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\dang-ky-tuyen-sinh.css" />
-    <Content Include="Content\css\ho-so-thi-sinh.css" />
     <Content Include="Content\css\dang-nhap.css" />
     <Content Include="Content\css\dashboard-filter.css" />
     <Content Include="Content\css\dashboard-tuyensinh.css" />
+    <Content Include="Content\css\ho-so-thi-sinh.css" />
+    <Content Include="Content\css\thongke-ktx-theo-lop.css" />
     <Content Include="Content\images\logo-ASC.png" />
     <Content Include="Content\images\login-background.png" />
     <Content Include="Content\kendo\2016.3.1118-source\gulpfile.js" />
@@ -787,6 +793,13 @@
     <Content Include="Content\kendo\2016.3.1118\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2016.3.1118\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2016.3.1118\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo.ui\kendo.all.min.js" />
+    <Content Include="Content\kendo.ui\kendo.aspnetmvc.min.js" />
+    <Content Include="Content\kendo.ui\kendo.cms.min.css" />
+    <Content Include="Content\kendo.ui\kendo.common.min.css" />
+    <Content Include="Content\kendo.ui\kendo.culture.vi-VN.min.js" />
+    <Content Include="Content\kendo.ui\kendo.timezones.min.js" />
+    <Content Include="Content\kendo.ui\kendo.web.min.js" />
     <Content Include="Content\lib\bootstrap-grid.css" />
     <Content Include="Content\lib\bootstrap-grid.min.css" />
     <Content Include="Content\lib\bootstrap-grid.rtl.css" />
@@ -1405,6 +1418,10 @@
     <Content Include="Scripts\kendo\2016.3.1118\messages\kendo.messages.zh-CN.min.js" />
     <Content Include="Scripts\kendo\2016.3.1118\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\kendo\2016.3.1118\messages\kendo.messages.zh-TW.min.js" />
+    <Content Include="Scripts\js\ho-so-thi-sinh.js" />
+    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv2.js" />
+    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv3.js" />
+    <Content Include="Scripts\js\razor-form-handler.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.min.js" />
     <Content Include="Scripts\lib\bootstrap.esm.js" />
@@ -2412,6 +2429,23 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\ho-so-thi-sinh.js" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy1.pubxml" />
+    <None Include="Scripts\lib\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\dbs\scripts.sql" />
+    <Content Include="Scripts\lib\jquery-3.7.0.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\lib\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\lib\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\lib\jquery.validate.js" />
+    <Content Include="Scripts\lib\jquery.validate.min.js" />
+    <Content Include="Scripts\lib\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\lib\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\dashboard-tuyensinh.js" />
+    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
     <Content Include="Scripts\lib\kendo.all.min%402016.3.1118.js" />
     <Content Include="Scripts\lib\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
@@ -2445,22 +2479,22 @@
     <Content Include="Views\HoSoThiSinh\HoSoThiSinh_KhungHoSo.cshtml" />
     <Content Include="Views\HoSoThiSinh\HoSoThiSinh_ThayDoiMatKhau.cshtml" />
     <Content Include="Views\HoSoThiSinh\HoSoThiSinh_TraCuuKetQua.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\DangKyXetTuyen\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
-    <Content Include="Views\DangNhap\Index.cshtml" />
-    <Content Include="Views\DatLaiMatKhau\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout-NoSidebar.cshtml" />
-    <Content Include="Views\TraCuuKetQua\Index.cshtml" />
-    <Content Include="Views\TraCuuThongTin\Index.cshtml" />
     <Content Include="Views\DashboardTuyenSinh\Index.cshtml" />
     <Content Include="Views\Shared\DashboardTuyenSinh\_LayoutDashboard.cshtml" />
     <Content Include="Views\Shared\DashboardTuyenSinh\_Header.cshtml" />
     <Content Include="Views\Shared\DashboardTuyenSinh\_Sidebar.cshtml" />
+    <Content Include="Views\HoSoThiSinh\Index.cshtml" />
+    <Content Include="Views\Shared\_InfomationSearch.cshtml" />
+    <Content Include="Views\ThongKeDiemDanhNoiTru\Index.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_NguyenVongSimple.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_NguyenVongTHPT.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\RazorLogicChinhQuy.cshtml" />
+    <Content Include="Views\ThongKeDiemDanhKTX\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\kendo\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\lib\bootstrap.min.js.map" />

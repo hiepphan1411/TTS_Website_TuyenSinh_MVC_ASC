@@ -14,9 +14,6 @@
     <link href="~/Content/lib/kendo-ui.common.min.css" rel="stylesheet" />
     <link href="~/Content/lib/kendo.default.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/css/dashboard-filter.css" />
-    <link href="https://kendo.cdn.telerik.com/2016.3.1118/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="https://kendo.cdn.telerik.com/2016.3.1118/styles/kendo.default.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://kit.fontawesome.com/6f955e325d.js" crossorigin="anonymous"></script>
 
     @RenderSection("Styles", required: false)
@@ -24,8 +21,6 @@
 <body>
 
     @Html.Partial("_Header")
-
-    @*@Html.Partial("_DashboardFilter")*@
 
     <div class="page-wrapper">
         <main class="content-area">
@@ -35,9 +30,8 @@
 
     @Html.Partial("_Footer")
 
-    <script src="~/Scripts/lib/bootstrap.bundle.min.js"></script>
-    <script src="~/Scripts/lib/jquery-3.7.0.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2016.3.1118/js/kendo.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

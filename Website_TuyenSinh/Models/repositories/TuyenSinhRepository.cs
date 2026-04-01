@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using TuyenSinh.Models.Entities;
+using WebApplicationTest3.Models.repositories;
 
 namespace Website_TuyenSinh.Models.repositories
 {
@@ -54,7 +55,7 @@ namespace Website_TuyenSinh.Models.repositories
                                 Text15 = reader.IsDBNull(reader.GetOrdinal("Text15")) ? null : reader.GetString(reader.GetOrdinal("Text15")),
                                 BoolValue01 = reader.IsDBNull(reader.GetOrdinal("BoolValue01")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue01")),
                                 BoolValue02 = reader.IsDBNull(reader.GetOrdinal("BoolValue02")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue02")),
-                                BoolValue03 = reader.GetBoolean(reader.GetOrdinal("BoolValue03")),
+                                BoolValue03 = reader.IsDBNull(reader.GetOrdinal("BoolValue03")) ? false : reader.GetBoolean(reader.GetOrdinal("BoolValue03")),
                                 BoolValue04 = reader.IsDBNull(reader.GetOrdinal("BoolValue04")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue04")),
                                 BoolValue05 = reader.IsDBNull(reader.GetOrdinal("BoolValue05")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("BoolValue05")),
                                 IsVisible = reader.GetBoolean(reader.GetOrdinal("IsVisible")),
@@ -121,7 +122,9 @@ namespace Website_TuyenSinh.Models.repositories
                     }
                 }
             }
+
             return results;
         }
+
     }
 }

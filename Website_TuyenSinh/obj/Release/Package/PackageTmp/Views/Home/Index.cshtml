@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+
+@section styles {
+    <style>
+        .card-register {
+            transition: border-color 0.25s ease, transform 0.28s ease;
+            cursor: pointer;
+        }
+
+            .card-register:hover {
+                border-color: var(--primary-blue);
+                transform: translateY(-5px);
+            }
+
+        .effect {
+            transition: color 0.25s, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .card-register:hover .effect {
+            /*                color: #0F6E56;*/
+            transform: scale(1.25) rotate(-8deg);
+        }
+
+        .card-register p:first-of-type {
+            position: relative;
+            display: inline-block;
+        }
+
+            .card-register p:first-of-type::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--primary-blue);
+                transition: width 0.4s ease;
+            }
+
+        .card-register:hover p:first-of-type::after {
+            width: 100%;
+        }
+
+        .card-register .btn-outline-primary {
+            transition: transform 0.25s ease, background 0.25s, color 0.25s;
+        }
+
+        .card-register:hover .btn-outline-primary {
+            background: white;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            transform: scale(1.06);
+        }
+
+        .card-register svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+        /*Custom effect cho scroll*/
+        .card-register.active-effect {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+
+            .card-register.active-effect .effect {
+                transform: scale(1.25) rotate(-8deg);
+            }
+
+            .card-register.active-effect p:first-of-type::after {
+                width: 100%;
+            }
+
+            .card-register.active-effect .btn-outline-primary {
+                background: white;
+                color: var(--primary-blue);
+                border-color: var(--primary-blue);
+                transform: scale(1.06);
+            }
+    </style>
+}
+
+<div class="banner">
+    <div class="card-banner">
+        <p>CỔNG THÔNG TIN TUYỂN SINH</p>
+        <p>TUYỂN SINH ĐẠI HỌC</p>
+        <p>CHÍNH QUY NĂM 2026</p>
+        <p>Khám phá cơ hội học tập tại môi trường giáo dục hàng đầu, nơi kiến tạo tương lai và phát triển tiềm năng của bạn.</p>
+
+        <div class="d-flex banner-btn justify-content-center gap-3 mt-4">
+            <button class="btn-now-register">Đăng ký xét tuyển ngay</button>
+            <a href="#" class="btn-detail">Xem chi tiết ngành học</a>
+        </div>
+
+        <div class="card-banner-footer">
+            <span><i class="fa fa-graduation-cap"></i> Học bổng lên đến 20 tỷ</span>
+            <span><i class="fa fa-briefcase"></i> Thực tập lương cao</span>
+        </div>
+    </div>
+</div>
+
+<!-- Bậc đào tạo & Đăng ký -->
+<div class="card-section">
+    <div class="container-lg">
+        <p class="title-center" id="section-dk">BẬC ĐÀO TẠO VÀ ĐĂNG KÝ</p>
+        <div class="d-flex justify-content-center mb-4">
+            <div class="line"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 43 })" class="card-register" style="text-decoration:none; color:inherit;">
+                    <div>
+                        <i class="fa fa-graduation-cap effect"></i>
+                    </div>
+                    <p>ĐẠI HỌC - CHÍNH QUY</p>
+
+                    <p>Đào tạo bằng đại học chính quy với chương trình chuẩn quốc gia, thời gian 4 năm.</p>
+                    <span class="btn-outline-primary">Đăng ký ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 112 })" class="card-register" style="text-decoration:none; color:inherit;">
+                    <div>
+                        <i class="fa fa-file-text effect"></i>
+                    </div>
+                    <P>XÉT TUYỂN SAU ĐẠI HỌC</P>
+                    <p>Chương trình đào tạo cao học, thạc sĩ, tiến sĩ cho sinh viên tốt nghiệp đại học.</p>
+                    <span href="" class="btn-outline-primary">Đăng ký ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="@Url.Action("Index", "DangKyXetTuyen", new { typeCauHinh = 112 })" class="card-register" style="text-decoration:none; color:inherit;">
+                    <div>
+                        <i class="fa fa-link effect"></i>
+                    </div>
+                    <p>ĐẠI HỌC - LIÊN THÔNG</p>
+                    <p>Chương trình liên thông từ cao đẳng lên đại học, rút ngắn thời gian học.</p>
+                    <span class="btn-outline-primary">Đăng ký ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="@Url.Action("Index", "TraCuuKetQua")" class="card-register" style="text-decoration:none; color:inherit;">
+                    <div>
+                        <i class="fa fa-search effect"></i>
+                    </div>
+                    <p>TRA CỨU KẾT QUẢ XÉT TUYỂN</p>
+                    <p>Kiểm tra kết quả xét tuyển và tình trạng hồ sơ của bạn.</p>
+                    <span class="btn-outline-primary">Tra cứu ngay <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="title-center">THÔNG TIN TUYỂN SINH</p>
+        <div class="d-flex justify-content-center">
+            <div class="line"></div>
+        </div>
+        <div class="row g-4 py-4">
+            <div class="col-md-4">
+                <div class="card-info">
+                    <div>
+                        <i class="fa fa-map-marker"></i>
+                        <p>Địa chỉ</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Trụ sở chính: </p>
+                        <p class="info-detail">Số 8, đường Phú Nghĩa, xã Phú Nghĩa, TP. Hà Nội</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Cơ sở đào tạo: </p>
+                        <p class="info-detail">608 Nguyễn Huy Tưởng, P. Thanh Xuân, TP. Hà Nội</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-info">
+                    <div>
+                        <i class="fa fa-phone"></i>
+                        <p>Liên hệ</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Hotline: </p>
+                        <p class="info-detail">012345678 - 0982 245 123</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Website: </p>
+                        <p class="info-detail">a.edu.vn</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-title">Email: </p>
+                        <p class="info-detail">tuyensinh@a.edu.vn</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-info">
+                    <div>
+                        <i class="fa fa-gift"></i>
+                        <p>Ưu đãi đặc biệt</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-detail">Học bổng toàn phần cho sinh viên xuất sắc</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-detail">Cơ hội thực tập tại doanh nghiệp lớn</p>
+                    </div>
+                    <div class="info">
+                        <p class="info-detail">Môi trường học tập hiện đại, quốc tế</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="~/Scripts/lib/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/lib/jquery-3.7.0.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            $(".btn-now-register").click(function () {
+                var targetPosition = $("#section-dk").offset().top;
+
+                $("html, body").animate({
+                    scrollTop: targetPosition
+                }, 300, function () {
+                    $(".card-register").addClass("active-effect");
+
+                    setTimeout(function () {
+                        $(".card-register").removeClass("active-effect");
+                    }, 500);
+                });
+            });
+        });
+
+</script>

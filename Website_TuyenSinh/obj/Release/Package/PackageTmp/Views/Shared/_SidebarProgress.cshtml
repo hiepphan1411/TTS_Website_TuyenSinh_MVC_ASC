@@ -1,0 +1,185 @@
+<aside class="sidebar-progress" id="df-sidebar-aside">
+    <div class="sidebar-card">
+        <div class="sidebar-title"><i class="bi bi-list-check me-1"></i>Mục lục đăng ký</div>
+        <div class="text-center">
+            <div class="progress-pct" id="df-sidebar-progress-pct">0%</div>
+        </div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="df-sidebar-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-label text-center" id="df-sidebar-progress-label">0/0 bước hoàn thành</div>
+        <ul class="step-list" id="df-sidebar-steps"></ul>
+    </div>
+</aside>
+
+<!-- Custom cho mobile-->
+<div id="df-mobile-chip" class="df-mobile-chip df-chip-hidden">
+    <div class="df-chip-bar" id="df-chip-toggle">
+        <span class="df-chip-icon"><i class="fa fa-check-square-o" style="color: white;" aria-hidden="true"></i></span>
+        <span class="df-chip-pct" id="df-chip-pct">0%</span>
+        <span class="df-chip-divider"></span>
+        <span class="d-flex flex-row df-chip-label gap-2 align-items-center">
+            <span id="df-chip-label">Bước 0/0</span>
+            <span class="step-info-title" id="df-chip-title">-</span>
+        </span>
+        <span class="df-chip-arrow" id="df-chip-arrow"><i class="fa fa-caret-down" aria-hidden="true"></i> Chi tiết</span>
+    </div>
+    <div class="df-chip-dropdown" id="df-chip-dropdown">
+        <ul class="df-chip-steps" id="df-chip-steps"></ul>
+    </div>
+</div>
+
+<script src="~/Scripts/lib/jquery-3.7.0.min.js"></script>
+
+<script>
+    (function ($) {
+
+        // Utils
+        function esc(s) {
+            return s == null ? "" : String(s)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        function trangThaiCuaBuoc(idx, idxDangActive, tab, laLanDau) {
+            if (idx === idxDangActive) return "active";
+            if (laLanDau) return "pending";
+            if (tab && tab.isCompleted) return "done";
+            return "pending";
+        }
+
+        function chuThichTrangThai(status) {
+            if (status === "done") return "Đã hoàn thành";
+            if (status === "active") return "Đang thực hiện";
+            return "Chưa hoàn thành";
+        }
+
+        // Xử lý update trạng thái sidebar
+        window.dfUpdateSidebar = function (idxDangActive, tabs, laLanDau) {
+            tabs = Array.isArray(tabs) ? tabs : [];
+
+            var total = tabs.length;
+            var hoanThanh = tabs.filter(function (t) { return !!t.isCompleted; }).length;
+            var phanTram = total ? Math.round((hoanThanh / total) * 100) : 0;
+
+            var $pct = $("#df-sidebar-progress-pct");
+            var $fill = $("#df-sidebar-progress-fill");
+            var $label = $("#df-sidebar-progress-label");
+            var $list = $("#df-sidebar-steps");
+
+            if (!$list.length) return;
+
+            if (!laLanDau) {
+                $pct.text(phanTram + "%");
+                $fill.css("width", phanTram + "%");
+                $label.text(`${hoanThanh}/${total} bước hoàn thành`);
+            }
+
+            var html = tabs.map(function (tab, idx) {
+                var status = trangThaiCuaBuoc(idx, idxDangActive, tab, laLanDau);
+                var itemClass = status === "active" ? "is-active" : (status === "done" ? "is-done" : "");
+                var nhanBuoc = tab && tab.tabLabel ? tab.tabLabel : `Bước ${idx + 1}`;
+
+                return `
+                    <li class="step-item ${itemClass}" data-idx="${idx}" onclick="window.dfGoToTab && window.dfGoToTab(${idx})">
+                        <span class="step-badge ${status}">${idx + 1}</span>
+                        <div class="step-info">
+                            <div class="step-info-title">${esc(nhanBuoc)}</div>
+                            <div class="step-info-sub ${status}">${chuThichTrangThai(status)}</div>
+                        </div>
+                    </li>`;
+            }).join("");
+
+            $list.html(html);
+        };
+
+        // Xu ly tren mobile
+        (function () {
+            var $chip = $("#df-mobile-chip");
+            var $pct = $("#df-chip-pct");
+            var $title = $("#df-chip-title")
+            var $label = $("#df-chip-label");
+            var $steps = $("#df-chip-steps");
+            var $dropdown = $("#df-chip-dropdown");
+            var $arrow = $("#df-chip-arrow");
+            var hideTimer = null;
+            var isOpen = false;
+
+            function isMobile() { return window.innerWidth <= 950; }
+
+
+            function showChip() {
+                if (!isMobile()) return;
+                clearTimeout(hideTimer);
+                $chip.removeClass("df-chip-hidden").addClass("df-chip-visible");
+                hideTimer = setTimeout(function () {
+                    if (!isOpen) hideChip();
+                }, 3000);
+            }
+
+            function hideChip() {
+                $chip.removeClass("df-chip-visible").addClass("df-chip-hidden");
+            }
+
+
+            $("#df-chip-toggle").on("click", function () {
+                isOpen = !isOpen;
+                $dropdown.toggleClass("df-chip-open", isOpen);
+                $arrow.html(
+                    isOpen
+                        ? "<i class='fa fa-caret-up' aria-hidden='true'></i> Thu gọn"
+                        : "<i class='fa fa-caret-down' aria-hidden='true'></i> Chi tiết"
+                );
+                if (isOpen) {
+                    clearTimeout(hideTimer);
+                    $chip.removeClass("df-chip-hidden").addClass("df-chip-visible");
+                }
+            });
+
+
+            var lastScrollY = window.scrollY;
+            $(window).on("scroll", function () {
+                if (!isMobile()) return;
+                var cur = window.scrollY;
+                if (cur > lastScrollY + 10) showChip();
+                lastScrollY = cur;
+            });
+
+            var _origUpdate = window.dfUpdateSidebar;
+            window.dfUpdateSidebar = function (idxDangActive, tabs, laLanDau) {
+                _origUpdate(idxDangActive, tabs, laLanDau);
+                if (!isMobile()) return;
+
+                tabs = Array.isArray(tabs) ? tabs : [];
+                var total = tabs.length;
+                var hoanThanh = tabs.filter(function (t) { return !!t.isCompleted; }).length;
+                var pct = total ? Math.round((hoanThanh / total) * 100) : 0;
+                var title = tabs[idxDangActive].tabLabel ? tabs[idxDangActive].tabLabel : "-";
+
+                $title.text(title);
+                $pct.text(pct + "%");
+                $label.text("Bước " + (idxDangActive + 1) + "/" + total + ": ");
+
+                var html = tabs.map(function (tab, idx) {
+                    var status = idx === idxDangActive ? "active"
+                        : (tab && tab.isCompleted ? "done" : "pending");
+                    var sub = status === "done" ? "Đã hoàn thành"
+                        : status === "active" ? "Đang thực hiện"
+                            : "Chưa hoàn thành";
+                    var name = tab && tab.tabLabel ? tab.tabLabel : ("Bước " + (idx + 1));
+                    return '<li class="df-chip-step ' + (status === "active" ? "is-active" : "") + '" onclick="window.dfGoToTab && window.dfGoToTab(' + idx + ')">'
+                        + '<div class="df-chip-badge ' + status + '">' + (idx + 1) + '</div>'
+                        + '<div class="df-chip-step-info">'
+                        + '<div class="df-chip-step-title">' + name + '</div>'
+                        + '<div class="df-chip-step-sub ' + status + '">' + sub + '</div>'
+                        + '</div></li>';
+                }).join("");
+                $steps.html(html);
+
+                showChip();
+            };
+        })();
+    })(jQuery);
+</script>

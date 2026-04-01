@@ -64,6 +64,7 @@
 .check-status {
     display: flex;
     align-items: center;
+    gap: 8px;
     border-radius: 12px;
     background-color: var(--color-green-light);
     padding: 2px 8px;
