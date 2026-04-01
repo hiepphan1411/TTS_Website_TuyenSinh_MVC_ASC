@@ -29,21 +29,21 @@ namespace TuyenSinh.Models.Entities
 
         //Is cấu hình cha
         [MaxLength(5)]   public string Text06 { get; set; }
-
+        //Kiểu hiển thị
         [MaxLength(5)]   public string Text07 { get; set; }
-
+        //Controller
         [MaxLength(200)] public string Text08 { get; set; }
-
+        //Action Name
         [MaxLength(200)] public string Text09 { get; set; }
-
+        //Cascade
         [MaxLength(100)] public string Text10 { get; set; }
-
+        //Min
         [MaxLength(5)]   public string Text12 { get; set; }
-
+        //Max
         [MaxLength(20)]  public string Text13 { get; set; }
-
+        //Placeholder
         [MaxLength(500)] public string Text14 { get; set; }
-
+        //ReadOnly
         [MaxLength(5)]   public string Text15 { get; set; }
 
         public bool?  BoolValue01 { get; set; }  // IsRequired

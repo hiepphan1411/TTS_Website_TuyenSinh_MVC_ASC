@@ -1,0 +1,45 @@
+@model dynamic
+@{
+    // - idPrefix: string (ví dụ: "TuyenThang_01", "DanhGiaNangLuc_01")
+    // - idTarget: string (ví dụ: "nguyen-vong-list-tuyen-thang", "nguyen-vong-list-dgnl")
+    // - dataTemplate: string (ví dụ: "nv-template")
+    // - item: object (TieuChiList item)
+    // - nganh: List<Dictionary<string, string>>
+
+    string idPrefix = ViewBag.IdPrefix ?? "";
+    string idTarget = ViewBag.IdTarget ?? "nguyen-vong-list";
+    string dataTemplate = ViewBag.DataTemplate ?? "nv-template";
+    dynamic item = ViewBag.Item;
+    int typeNum = ViewBag.TypeNum;
+    List<Dictionary<string, string>> nganh = ViewBag.Nganh;
+}
+
+<div class="d-flex flex-column gap-3" style="margin-top: 20px;">
+    <div id="@idTarget" class="nguyen-vong-list d-flex flex-column gap-3">
+        @for (int i = 1; i <= 1; i++)
+        {
+            <div class="row nguyen-vong-item d-flex align-items-end gap-3" data-nv-index="@i">
+                <div class="col-md-4 d-flex flex-column">
+                    <label class="fw-semibold nv-label">
+                        Nguyện vọng @i
+                        <span class="text-danger">*</span>
+                    </label>
+                    <select class="custom-selection nv-select" style="width: 300px;" id="@(idPrefix)_@(typeNum)_@(item.Id)_IDCTTuyenSinh@(i)_input">
+                        <option value="">Chọn ngành</option>
+                        @foreach (var ng in nganh)
+                        {
+                            <option value="@ng["value"]">@ng["text"]</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="d-flex justify-content-center pt-2">
+    <button type="button" class="btn btn-add d-flex align-items-center gap-1 fw-semibold" data-template="@dataTemplate" data-target="@idTarget">
+        <i class="fa fa-plus fs-13px" aria-hidden="true"></i>
+        Thêm nguyện vọng
+    </button>
+</div>

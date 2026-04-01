@@ -1,0 +1,73 @@
+@using Newtonsoft.Json
+@model dynamic
+@{
+    // Tham số từ ViewBag:
+    // - IdPrefix: string (ví dụ: "DiemTB101112_01", "KetQuaTHPTQuocGia_01")
+    // - IdTarget: string (id của container, ví dụ: "nguyen-vong-list-thpt")
+    // - DataTemplate: string (ví dụ: "nv-template-thpt")
+    // - Item: object (item từ Model.TieuChiList)
+    // - Nganh: List<Dictionary<string, string>>
+    // - ToHopList: List<string>
+    
+    string idPrefix = ViewBag.IdPrefix ?? "";
+    string idTarget = ViewBag.IdTarget ?? "nguyen-vong-list-thpt";
+    string dataTemplate = ViewBag.DataTemplate ?? "nv-template-thpt";
+    dynamic item = ViewBag.Item;
+    int typeNum = ViewBag.TypeNum;
+    string toHopMonJson = ViewBag.ToHopMonJson ?? "[]";
+    List<Dictionary<string, string>> nganh = ViewBag.Nganh;
+    List<string> toHopList = ViewBag.ToHopList;
+}
+
+<div class="d-flex flex-column gap-3" style="margin-top: 20px;">
+    <div id="@idTarget" class="nguyen-vong-list d-flex flex-column gap-3">
+        @for (int i = 1; i <= 1; i++) 
+        {
+            <div class="row nguyen-vong-item nguyen-vong-thpt d-flex justify-between align-items-end gap-3" data-nv-index="@i">
+                <div class="col-md-4 d-flex flex-column">
+                    <label class="fw-semibold nv-label">
+                        Nguyện vọng @i
+                        <span class="text-danger">*</span>
+                    </label>
+                    <select class="custom-selection nv-select" style="min-width: 260px;" id="@(idPrefix)_@(typeNum)_@(item.Id)_IDCTTuyenSinh@(i)_input">
+                        <option value="">Chọn ngành</option>
+                        @foreach (var ng in nganh)
+                        {
+                            <option value="@ng["value"]">@ng["text"]</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex flex-column gap-1">
+                    <label class="fw-semibold fs-13px">Tổ hợp môn <span class="text-danger">*</span></label>
+                    <select class="custom-selection nv-combo-select" style="min-width: 260px;" id="@(idPrefix)_@(typeNum)_@(item.Id)_IDToHopMon@(i)_input">
+                        <option value="">Chọn tổ hợp môn</option>
+                        @{
+                            if (toHopMonJson != null)
+                            {
+                                foreach (var toHop in toHopMonJson)
+                                {
+                                    <option value="@toHop">@toHop</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-1 d-flex flex-column gap-1 nv-total-score-wrap">
+                    <label class="fw-semibold fs-13px">Tổng điểm</label>
+                    <span class="score-pill">0.00 điểm</span>
+                </div>
+
+                <div class="col-md-1"></div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="d-flex justify-content-center pt-2">
+    <button type="button" class="btn btn-add d-flex align-items-center gap-1 fw-semibold" data-template="@dataTemplate" data-target="@idTarget">
+        <i class="fa fa-plus fs-13px" aria-hidden="true"></i>
+        Thêm nguyện vọng
+    </button>
+</div>
