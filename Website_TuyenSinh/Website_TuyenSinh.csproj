@@ -208,7 +208,8 @@
     <Content Include="Content\lib\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv2.js" />
+    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
+    <Content Include="Scripts\js\tra-cuu-ket-qua.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.min.js" />
     <Content Include="Scripts\lib\bootstrap.esm.js" />
@@ -243,7 +244,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\ho-so-thi-sinh.js" />
-    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
     <Content Include="Scripts\lib\kendo.all.min%402016.3.1118.js" />
     <Content Include="Scripts\lib\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
@@ -260,7 +260,6 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_SidebarProgress.cshtml" />
-
     <Content Include="Views\XetTuyenDaiHoc\Index.cshtml" />
     <Content Include="Views\HoSoThiSinh\Index.cshtml" />
     <Content Include="Views\DangNhap\Index.cshtml" />
@@ -269,15 +268,12 @@
     <Content Include="Views\TraCuuKetQua\Index.cshtml" />
     <Content Include="Views\TraCuuThongTin\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardFilter.cshtml" />
-    <Content Include="Views\DangKyXetTuyen\DangKyChinhQuy.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
     <Content Include="Views\TuyenSinhSauDaiHoc.cshtml" />
-    <Content Include="Views\DangKyXetTuyen\TuyenSinhSauDaiHoc.cshtml" />
     <Content Include="Views\Shared\_InfomationSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Content Include="Views\DangKyXetTuyen\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTuyenSinh.cshtml" />
@@ -290,7 +286,6 @@
     <Content Include="Views\Shared\DashboardTuyenSinh\_LayoutDashboard.cshtml" />
     <Content Include="Views\Shared\DashboardTuyenSinh\_Header.cshtml" />
     <Content Include="Views\Shared\DashboardTuyenSinh\_Sidebar.cshtml" />
-
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
