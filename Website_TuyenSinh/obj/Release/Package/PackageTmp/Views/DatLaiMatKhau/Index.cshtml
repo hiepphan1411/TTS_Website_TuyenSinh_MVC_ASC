@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Đặt lại mật khẩu";
+    Layout = "~/Views/Shared/_Layout-NoSidebar.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/dang-nhap.css" />
+}
+
+<div class="main-container w-100 d-flex justify-content-center align-items-center">
+    <div class="glass-card text-center">
+
+        <div class="login-title d-flex flex-column justify-content-center align-items-center">
+            <div class="main-title">THÍ SINH QUÊN MẬT KHẨU</div>
+        </div>
+
+        <form method="post" action="#" class="w-100 d-flex flex-column gap-1">
+
+            <!-- Số CCCD -->
+            <div class="text-start">
+                <label class="form-label fw-medium mb-1">Số CCCD/CMND</label>
+                <input type="text" class="form-control glass-input" placeholder="Nhập số CCCD/CMND" />
+            </div>
+
+            <!-- Mã hồ sơ -->
+            <div class="text-start position-relative">
+                <label class="form-label fw-medium mb-1">Mã hồ sơ</label>
+                <input type="password" class="form-control glass-input" placeholder="Nhập mã hồ sơ" id="password" />
+                <i class="fa fa-eye-slash position-absolute"
+                   aria-hidden="true"
+                   role="button"
+                   style="top: 64%; right: 20px; color: var(--color-gray-heavy); font-size: 13px;"
+                   onclick="togglePassword()"></i>
+            </div>
+
+            <!-- Captcha -->
+            <div class="d-flex align-items-center gap-3 pt-3">
+                <input type="text" class="form-control glass-input" style="max-width: 150px;" placeholder="Nhập mã" />
+
+                <div class="captcha-box">
+                    <div>aBd7</div>
+                    <i class="fa fa-repeat" aria-hidden="true" role="button"></i>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-main w-100 text-white d-flex justify-content-center align-items-center gap-2 mt-3">
+                <i class="fa fa-refresh" aria-hidden="true" style="font-size: 12px;"></i> Reset mật khẩu
+            </button>
+        </form>
+        <a href="@Url.Action("Index", "DangNhap")" 
+           class="back-link w-100 d-flex justify-content-center align-items-center gap-2 mt-3">
+            <i class="fa fa-chevron-left" aria-hidden="true" style="font-size: 12px;"></i> Chuyển về trang đăng nhập
+        </a>
+    </div>
+</div>
+

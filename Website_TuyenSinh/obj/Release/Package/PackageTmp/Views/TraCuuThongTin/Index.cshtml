@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Tra cứu thông tin";
+    Layout = "~/Views/Shared/_Layout-NoSidebar.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/dang-nhap.css" />
+}
+
+<div class="white-bg-container w-100 d-flex justify-content-center align-items-center gap-3">
+    
+    <!-- Component Step Progress -->
+    <div class="step-wrapper">
+        <div class="step-line"></div>
+
+        <div class="step-item-content active">
+            <div class="step-circle">1</div>
+            <div class="step-label">Tra cứu</div>
+        </div>
+
+        <div class="step-item-content">
+            <div class="step-circle">2</div>
+            <div class="step-label">Thông tin</div>
+        </div>
+
+        <div class="step-item-content">
+            <div class="step-circle">3</div>
+            <div class="step-label">Liên lạc</div>
+        </div>
+
+        <div class="step-item-content">
+            <div class="step-circle">4</div>
+            <div class="step-label">Thanh toán</div>
+        </div>
+
+        <div class="step-item-content">
+            <div class="step-circle">5</div>
+            <div class="step-label">Kết quả</div>
+        </div>
+    </div>
+
+    <!-- Glass Card -->
+    <div class="glass-card text-center bg-white rounded-4">
+
+        <div class="login-title d-flex flex-column justify-content-center align-items-center gap-1">
+            <div class="main-title fs-5" style="color: var(--primary-blue)">TRA CỨU THÔNG TIN</div>
+            <div class="sub-title fw-lighter w-75" style="color: var(--color-text-primary); font-size: 13px;">Vui lòng nhập đầy đủ và chính xác thông tin đăng ký bên dưới để bắt đầu quá trình nhập học.</div>
+        </div>
+
+        <form method="post" action="#" class="w-100 d-flex flex-column gap-1">
+
+            <!-- Mã hồ sơ -->
+            <div class="text-start">
+                <label class="form-label fw-medium mb-1" style="color: var(--color-text-primary)">Mã hồ sơ
+                    <span class="text-danger">*</span>
+                </label>
+                <input type="text" class="form-control glass-input" placeholder="Nhập mã hồ sơ" />
+            </div>
+
+            <!-- Số CCCD -->
+            <div class="text-start position-relative">
+                <label class="form-label fw-medium mb-1" style="color: var(--color-text-primary)">Số CCCD / Số điện thoại
+                    <span class="text-danger">*</span>
+                </label>
+                <input type="password" class="form-control glass-input" placeholder="Nhập số CCCD hoặc SDT đăng ký" />
+            </div>
+
+            <!-- Captcha -->
+            <div class="d-flex justify-content-center align-items-center gap-3 pt-3">
+                <input type="text" class="form-control glass-input" style="max-width: 150px;" placeholder="Nhập mã" />
+
+                <div class="captcha-box">
+                    <div>aBd7</div>
+                    <i class="fa fa-repeat" aria-hidden="true" role="button"></i>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-main w-100 text-white d-flex justify-content-center align-items-center gap-2 mt-3">
+                <i class="fa fa-search" aria-hidden="true" style="font-size: 12px;"></i> Tra cứu ngay
+            </button>
+
+        </form>
+    </div>
+</div>

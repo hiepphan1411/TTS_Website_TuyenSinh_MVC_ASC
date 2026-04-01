@@ -27,13 +27,5 @@ namespace Website_TuyenSinh.Controllers
 
             return View();
         }
-
-        public ActionResult getCauHinhTuyenSinh()
-        {
-            var repo = new TuyenSinhRepository();
-            var data = repo.getAll();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

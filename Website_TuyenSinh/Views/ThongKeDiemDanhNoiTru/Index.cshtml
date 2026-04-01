@@ -1,0 +1,399 @@
+﻿@{
+    ViewBag.Title = "Thống kê điểm danh KTX";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/thongke-ktx-theo-lop.css" />
+
+}
+
+<div class="header">Thống kê điểm danh ký túc xá</div>
+
+<div class="container">
+
+    <div class="filter-box">
+        <div class="filter-row">
+
+            <label>Tháng</label>
+            <select id="ddlThang">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    int year = DateTime.Now.Year;
+                    string val = $"{i}/{year}";
+                    bool selected = (i == DateTime.Now.Month);
+                    <option value="@i" @(selected ? "selected" : "")>@($"{i:D2}/{year}")</option>
+                }
+            </select>
+
+            <label>Năm</label>
+            <select id="ddlNam">
+                @for (int y = DateTime.Now.Year; y >= DateTime.Now.Year - 3; y--)
+                {
+                    bool selected = (y == DateTime.Now.Year);
+                    <option value="@y" @(selected ? "selected" : "")>@y</option>
+                }
+            </select>
+
+            <label>Địa điểm phòng</label>
+            <select id="ddlNhomDiaDiem">
+                <option value="0">Tất cả</option>
+                <option value="1">KTX cơ sở 1</option>
+                <option value="2">KTX cơ sở 2</option>
+            </select>
+
+            <button class="btn-view" id="btnXem">Xem thống kê</button>
+            <button class="btn-export" id="btnExcel">Xuất Excel</button>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" data-loai="1" id="tab-lop">Theo lớp</div>
+        <div class="tab" data-loai="2" id="tab-sinhvien">Theo sinh viên</div>
+        <div class="tab" data-loai="3" id="tab-phong">Theo phòng KTX</div>
+    </div>
+
+    <div class="table-box" id="tabContent">
+        <div class="empty-msg">Chọn tháng / địa điểm rồi nhấn <strong>Xem thống kê</strong> hoặc click vào tab.</div>
+    </div>
+
+    @*<div class="table-box tab-content" id="lop">
+            @foreach (var tab in new List<string> { "Thông kê theo lớp", "Thống kê theo sinh viên", "Thống kê theo phòng KTX" })
+            {
+                <h3>@tab</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            @if (hasIDNguoiONoiTru)
+                            {
+                                <th>ID Người ở Nội Trú</th>
+                            }
+                            @if (hasIDPhong)
+                            {
+                                <th>ID Phòng</th>
+                            }
+                            @if (hasVangMat)
+                            {
+                                <th>Vắng mặt</th>
+                            }
+                            @if (hasNgayDiemDanh)
+                            {
+                                <th>Ngày điểm danh</th>
+                            }
+                            @if (hasNguoiDiemDanh)
+                            {
+                                <th>Người điểm danh</th>
+                            }
+                            @if (hasIDLop)
+                            {
+                                <th>ID lớp học</th>
+                            }
+                            @if (hasTenLop)
+                            {
+                                <th>Tên lớp học</th>
+                            }
+                            @if (hasMaNoiTru)
+                            {
+                                <th>Mã nội trú</th>
+                            }
+                            @if (hasHoDem)
+                            {
+                                <th>Họ đệm</th>
+                            }
+                            @if (hasTen)
+                            {
+                                <th>Tên</th>
+                            }
+                            @if (hasTenNhomDiaDiem)
+                            {
+                                <th>Tên nhóm địa điểm</th>
+                            }
+                            @if (hasTenDayNha)
+                            {
+                                <th>tên dãy nhà</th>
+                            }
+                            @if (hasMaDayNha)
+                            {
+                                <th>Mã dãy nhà</th>
+                            }
+                            @if (hasPhong)
+                            {
+                                <th>Phòng</th>
+                            }
+                            @if (hasIDPhanLoaiDoiTuong)
+                            {
+                                <th>ID Phân loại đối tượng</th>
+                            }
+                            @if (hasHoVaTen)
+                            {
+                                <th>Họ và tên</th>
+                            }
+                            @if (hasSLVang)
+                            {
+                                <th>Số lần vắng</th>
+                            }
+                            @if (hasNgayVang)
+                            {
+                                <th>Ngày vắng</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int stt = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                @if (hasIDNguoiONoiTru)
+                                {
+                                    <td>@item.IDNguoiONoiTru</td>
+                                }
+                                @if (hasIDPhong)
+                                {
+                                    <td>@item.IDPhong</td>
+                                }
+                                @if (hasVangMat)
+                                {
+                                    <td>@item.VangMat</td>
+                                }
+                                @if (hasNgayDiemDanh)
+                                {
+                                    <td>@item.NgayDiemDanh</td>
+                                }
+                                @if (hasNguoiDiemDanh)
+                                {
+                                    <td>@item.NguoiDiemDanh</td>
+                                }
+                                @if (hasIDLop)
+                                {
+                                    <td>@item.IDLopHoc</td>
+                                }
+                                @if (hasTenLop)
+                                {
+                                    <td>@item.TenLopHoc</td>
+                                }
+                                @if (hasMaNoiTru)
+                                {
+                                    <td>@item.MaNoiTru</td>
+                                }
+                                @if (hasHoDem)
+                                {
+                                    <td>@item.HoDem</td>
+                                }
+                                @if (hasTen)
+                                {
+                                    <td>@item.Ten</td>
+                                }
+                                @if (hasTenNhomDiaDiem)
+                                {
+                                    <td>@item.TenNhomDiaDiemPhong</td>
+                                }
+                                @if (hasTenDayNha)
+                                {
+                                    <td>@item.TenDayNha</td>
+                                }
+                                @if (hasMaDayNha)
+                                {
+                                    <td>@item.MaDayNha</td>
+                                }
+                                @if (hasPhong)
+                                {
+                                    <td>@item.MaPhong</td>
+                                }
+                                @if (hasIDPhanLoaiDoiTuong)
+                                {
+                                    <td>@item.IDPhanLoaiDoiTuong</td>
+                                }
+                                @if (hasHoVaTen)
+                                {
+                                    <td>@item.HoVaTen</td>
+                                }
+                                @if (hasSLVang)
+                                {
+                                    <td>@item.SLVang</td>
+                                }
+                                @if (hasNgayVang)
+                                {
+                                    <td>@item.NgayVang</td>
+                                }
+                            </tr>
+                            stt++;
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>*@
+
+
+</div>
+@section scripts {
+    <script>
+        $(function () {
+
+            var currentLoai = 1;
+            var dataCache   = {};
+
+            function getParam(loai) {
+                return {
+                    Thang:        parseInt($("#ddlThang").val()),
+                    Nam:          parseInt($("#ddlNam").val()),
+                    IDNhomDiaDiem: parseInt($("#ddlNhomDiaDiem").val()),
+                    LoaiThongKe:  loai
+                };
+            }
+
+            function loadData(loai, forceReload) {
+                if (!forceReload && dataCache[loai]) {
+                    renderTable(loai, dataCache[loai]);
+                    return;
+                }
+
+                showLoading();
+
+                $.ajax({
+                    url:         "@Url.Action("GetThongKe", "ThongKeDiemDanhNoiTru")",
+                    type:        "POST",
+                    contentType: "application/json",
+                    data:        JSON.stringify(getParam(loai)),
+                    success: function (res) {
+                        if (res.success) {
+                            dataCache[loai] = res.data;
+                            renderTable(loai, res.data);
+                        } else {
+                            showError(res.message || "Có lỗi xảy ra.");
+                        }
+                    },
+                    error: function () {
+                        showError("Không thể kết nối máy chủ.");
+                    }
+                });
+            }
+
+
+
+            //function renderTable(loai, data) {
+            //    if (!data || data.length === 0) {
+            //        $("#tabContent").html('<div class="empty-msg">Không có dữ liệu phù hợp.</div>');
+            //        return;
+            //    }
+
+            //    var html = "<table><thead><tr>";
+
+            //    Object.keys(data[0]).forEach(k => {
+            //        html += "<th>" + k + "</th>";
+            //    });
+
+            //    html += "</tr></thead><tbody>";
+
+            //    data.forEach(row => {
+            //        html += "<tr>";
+            //        Object.values(row).forEach(v => {
+            //            html += "<td>" + (v ?? "") + "</td>";
+            //        });
+            //        html += "</tr>";
+            //    });
+
+            //    html += "</tbody></table>";
+
+            //    $("#tabContent").html(html);
+            //}
+
+            function renderTable(loai, data) {
+                if (!data || data.length === 0) {
+                    $("#tabContent").html('<div class="empty-msg">Không có dữ liệu phù hợp.</div>');
+                    return;
+                }
+
+                var html = "";
+
+                switch (loai) {
+
+                    case 1:
+                        html += "<h3>Thống kê theo lớp</h3>";
+                        html += "<table><thead><tr>"
+                              + "<th>STT</th><th>Tên lớp</th>"
+                              + "<th>Số lượng vắng</th><th>Ngày vắng</th>"
+                              + "</tr></thead><tbody>";
+                            data.forEach(row => {
+                                html += "<tr>";
+                                Object.values(row).forEach(v => {
+                                    html += "<td>" + (v ?? "") + "</td>";
+                                });
+                                html += "</tr>";
+                            });
+                        html += "</tbody></table>";
+                        break;
+
+                    case 2:
+                        html += "<h3>Thống kê theo sinh viên</h3>";
+                        html += "<table><thead><tr>"
+                              + "<th>STT</th><th>Mã SV</th><th>Họ và tên</th>"
+                              + "<th>Lớp</th><th>Địa điểm</th><th>Dãy nhà</th>"
+                              + "<th>Phòng</th><th>Số lần vắng</th><th>Ngày vắng</th>"
+                              + "</tr></thead><tbody>";
+                        $.each(data, function (i, row) {
+                            html += "<tr>"
+                                  + "<td>" + row.stt                  + "</td>"
+                                  + "<td>" + row.maNoiTru              + "</td>"
+                                  + "<td>" + row.hoVaTen               + "</td>"
+                                  + "<td>" + row.tenLopHoc             + "</td>"
+                                  + "<td>" + row.tenNhomDiaDiemPhong   + "</td>"
+                                  + "<td>" + row.tenDayNha             + "</td>"
+                                  + "<td>" + row.maPhong               + "</td>"
+                                  + "<td>" + row.slVang                + "</td>"
+                                  + "<td>" + row.ngayVang              + "</td>"
+                                  + "</tr>";
+                        });
+                        html += "</tbody></table>";
+                        break;
+
+                    case 3:
+                        html += "<h3>Thống kê theo phòng KTX</h3>";
+                        html += "<table><thead><tr>"
+                              + "<th>STT</th><th>Địa điểm phòng</th><th>Dãy nhà</th>"
+                              + "<th>Phòng</th><th>Số SV vắng</th><th>Ngày vắng</th>"
+                              + "</tr></thead><tbody>";
+                        $.each(data, function (i, row) {
+                            html += "<tr>"
+                                  + "<td>" + row.stt                   + "</td>"
+                                  + "<td>" + row.tenNhomDiaDiemPhong    + "</td>"
+                                  + "<td>" + row.tenDayNha              + "</td>"
+                                  + "<td>" + row.maPhong                + "</td>"
+                                  + "<td>" + row.slsvVang               + "</td>"
+                                  + "<td>" + row.ngayVang               + "</td>"
+                                  + "</tr>";
+                        });
+                        html += "</tbody></table>";
+                        break;
+                }
+
+                $("#tabContent").html(html);
+            }
+
+            function showLoading() {
+                $("#tabContent").html('<div class="loading">Đang tải dữ liệu...</div>');
+            }
+
+            function showError(msg) {
+                $("#tabContent").html('<div class="empty-msg" style="color:#c0392b;">' + msg + '</div>');
+            }
+
+            $(".tab").on("click", function () {
+                $(".tab").removeClass("active");
+                $(this).addClass("active");
+
+                currentLoai = parseInt($(this).data("loai"));
+                loadData(currentLoai, false);
+            });
+
+            $("#btnXem").on("click", function () {
+                dataCache = {};
+                loadData(currentLoai, true);
+            });
+
+            loadData(currentLoai, true);
+        });
+    </script>
+}
