@@ -28,7 +28,7 @@ namespace WebApplicationTest3
             routes.MapRoute(
                 name: "LienThong",
                 url: "lien-thong-dai-hoc",
-                defaults: new { controller = "DangKyXetTuyen", action = "Index", typeCauHinh = 166 }
+                defaults: new { controller = "DangKyXetTuyen", action = "Index", typeCauHinh = 153 }
             );
 
             routes.MapRoute(

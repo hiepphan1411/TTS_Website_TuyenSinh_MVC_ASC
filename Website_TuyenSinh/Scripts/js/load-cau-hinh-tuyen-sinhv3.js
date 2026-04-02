@@ -1,5 +1,5 @@
 $(function () {
-    //Site test: Không lưu(option 1), Lưu dưới dạng mã hóa (option 2)
+    //Site test: Không lưu(option 1), Lưu dưới dạng mã hóa (option 2);
     var cheDoLuu = 2;
 
     var CAU_HINH_LUU = {
@@ -9,10 +9,13 @@ $(function () {
     };
 
     //State
-    var flag_InitLanDau = true;
+    var flag_InitLanDau = false;
     var rawDanhMuc;
+    var typeCauHinh;
     try {
-        rawDanhMuc = JSON.parse($('#form-config-data').text() || '[]');
+        const parsed = JSON.parse($("#form-config-data").text() || "{}");
+        rawDanhMuc = parsed.danhMuc || [];
+        typeCauHinh = parsed.typeCauHinh;
     } catch (e) {
         $('#df-wrapper').html(
             '<div class="alert alert-danger">Lỗi tải cấu hình form.</div>',
@@ -30,7 +33,127 @@ $(function () {
     //Init
     renderTieuDeNoiDungTab();
     bindGlobalEvents();
-    renderTab(0);
+    showResumeDialogIfNeeded();
+
+    function getSnapshotStorageKey() {
+        var suffix = typeCauHinh == null ? "default" : String(typeCauHinh);
+        return CAU_HINH_LUU.tenKhoa + "_" + suffix;
+    }
+
+    function showResumeDialogIfNeeded() {
+        if (!hasSavedLocalData()) {
+            renderTab(0);
+            return;
+        }
+
+        var contentHtml =
+            '<div class="df-resume-dialog">' +
+            '<div class="df-resume-title">Phát hiện dữ liệu đăng ký đã lưu</div>' +
+            '<div class="df-resume-desc">Bạn có muốn tiếp tục hồ sơ lần trước không?</div>' +
+            "</div>";
+
+        if (window.kendo && kendo.ui && kendo.ui.Dialog) {
+            var $dlg = $("#df-resume-dialog");
+
+            if (!$dlg.length) {
+                $dlg = $('<div id="df-resume-dialog"></div>').appendTo("body");
+            }
+
+            var oldDlg = $dlg.data("kendoDialog");
+            if (oldDlg) {
+                oldDlg.destroy();
+                $dlg.remove();
+                $dlg = $('<div id="df-resume-dialog"></div>').appendTo("body");
+            }
+
+            $dlg.kendoDialog({
+                width: "520px",
+                title: "Khôi phục hồ sơ đăng ký",
+                closable: false,
+                modal: true,
+                content: contentHtml,
+                actions: [
+                    {
+                        text: "Tạo mới",
+                        action: function () {
+                            resetLocalSnapshotAndState();
+                            renderTab(0);
+                            return true;
+                        },
+                    },
+                    {
+                        text: "Tiếp tục hồ sơ",
+                        primary: true,
+                        action: function () {
+                            renderTab(findResumeTabIndex());
+                            return true;
+                        },
+                    },
+                ],
+            });
+
+            $dlg.data("kendoDialog").open();
+            return;
+        }
+
+        function findResumeTabIndex() {
+            var resumeKey = window.__dfResumeTabKey;
+            if (resumeKey) {
+                var idxByKey = tabs.findIndex(function (t) {
+                    return !t.isReviewTab && t.tabKey === resumeKey;
+                });
+                if (idxByKey >= 0) return idxByKey;
+            }
+
+            for (var i = 0; i < tabs.length; i++) {
+                var t = tabs[i];
+                if (t.isReviewTab || t.isCompleted) continue;
+
+                var hasData = (t.fields || []).some(function (f) {
+                    return hasMeaningfulValue(f, savedValues[f.maDanhMuc]);
+                });
+
+                if (hasData) return i;
+            }
+
+            for (var j = 0; j < tabs.length; j++) {
+                if (!tabs[j].isReviewTab && !tabs[j].isCompleted) return j;
+            }
+
+            return 0;
+        }
+
+        function resetLocalSnapshotAndState() {
+            try {
+                localStorage.removeItem(getSnapshotStorageKey());
+            } catch (e) { }
+
+            savedValues = {};
+            $.each(tabs, function (_, t) {
+                t.isCompleted = false;
+                t.isSeen = false;
+            });
+
+            curTabIdx = 0;
+            tabDomCache = {};
+            $activePanel = null;
+        }
+
+        if (
+            window.confirm(
+                "Phát hiện dữ liệu đã lưu. Bạn có muốn tiếp tục hồ sơ cũ không?",
+            )
+        ) {
+            flag_InitLanDau = false;
+            renderTab(findResumeTabIndex());
+            //   $.each(tabsRef, function (index, tab) {
+            //     syncSidebarStep(index);
+            //   });
+        } else {
+            resetLocalSnapshotAndState();
+            renderTab(0);
+        }
+    }
 
     function buildTabs(records) {
         var byTab = {};
@@ -83,7 +206,7 @@ $(function () {
     }
 
     function mapField(rec) {
-        var col = parseInt(rec.text05 || rec.text03 || 12, 10);
+        var col = parseInt(rec.text05 || 12, 10);
         if (!col || col < 1 || col > 12) col = 12;
 
         var fType = parseInt(rec.text07 || 1, 10);
@@ -117,26 +240,30 @@ $(function () {
 
     function getTenTab(tabKey) {
         switch (tabKey) {
-            case 'ThongTinThiSinh':
-                return 'Thông tin thí sinh';
-            case 'ThongTinDangKy':
-                return 'Thông tin đăng ký';
-            case 'QuaTrinhDaoTao':
-                return 'Quá trình đào tạo';
-            case 'ThongTinNguoiGioiThieu':
-                return 'Thông tin người giới thiệu';
-            case 'ThongTinKhac':
-                return 'Thông tin khác';
-            case 'ChungChiNgoaiNgu':
-                return 'Chứng chỉ ngoại ngữ';
-            case 'ThongTinXetTuyen':
-                return 'Thông tin xét tuyển';
-            case 'ThongTinKhaoSat':
-                return 'Thông tin khảo sát';
-            case 'HoanTatDangKy':
-                return 'Hoàn tất đăng ký';
-            case 'ThongTinChungChiNN':
-                return 'Thông tin chứng chỉ ngoại ngữ';
+            case "ThongTinThiSinh":
+                return "Thông tin thí sinh";
+            case "ThongTinDangKy":
+                return "Thông tin đăng ký";
+            case "QuaTrinhDaoTao":
+                return "Quá trình đào tạo";
+            case "ThongTinNguoiGioiThieu":
+                return "Thông tin người giới thiệu";
+            case "ThongTinKhac":
+                return "Thông tin khác";
+            case "ChungChiNgoaiNgu":
+                return "Chứng chỉ ngoại ngữ";
+            case "ThongTinXetTuyen":
+                return "Thông tin xét tuyển";
+            case "ThongTinKhaoSat":
+                return "Thông tin khảo sát";
+            case "HoanTatDangKy":
+                return "Hoàn tất đăng ký";
+            case "ThongTinDVCongTac":
+                return "Thông tin đơn vị công tác";
+            case "ThongTinCCHN":
+                return "Thông tin chứng chỉ hành nghề";
+            case "ThongTinChungChiNN":
+                return "Thông tin chứng chỉ ngoại ngữ";
             default:
                 return tabKey;
         }
@@ -282,6 +409,17 @@ $(function () {
         }
     }
 
+    function hasSavedLocalData() {
+        if (cheDoLuu !== 2) return false;
+        if (!savedValues || Object.keys(savedValues).length === 0) return false;
+        try {
+            var encrypted = localStorage.getItem(getSnapshotStorageKey());
+            return !!encrypted;
+        } catch (e) {
+            return false;
+        }
+    }
+
     window.dfGoToTab = function (idx) {
         if (typeof idx !== 'number') return;
         if (idx < 0 || idx >= tabs.length) return;
@@ -293,19 +431,34 @@ $(function () {
 
     //Build nội dung của tab tương ứng
     function buildTabPanel(tab) {
-        if (tab.tabKey === 'ThongTinXetTuyen') {
+        if (tab.tabKey === "ThongTinXetTuyen") {
             var $panel = $('<div class="df-tab-panel"></div>');
 
-            $panel.html(
-                '<div class="text-center p-3">Đang tải dữ liệu...</div>',
-            );
+            $panel.html('<div class="text-center p-3">Đang tải dữ liệu...</div>');
 
-            $.get('/DangKyXetTuyen/RazorLogicChinhQuy', function (html) {
-                $panel.html(html);
-            }).fail(function () {
-                $panel.html(
-                    '<div class="alert alert-danger">Không tải được dữ liệu xét tuyển</div>',
-                );
+            $.ajax({
+                url: "/DangKyXetTuyen/RazorLogicChinhQuy",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    tieuChiList: tieuChiList,
+                }),
+                cache: false,
+                success: function (html) {
+                    $panel.html(html);
+
+                    if (window.kendo) {
+                        kendo.init($panel);
+                    }
+                },
+                error: function (xhr) {
+                    $panel.html(
+                        '<div class="alert alert-danger">' +
+                        "Lỗi: " +
+                        (xhr.responseText || "Không tải được dữ liệu") +
+                        "</div>",
+                    );
+                },
             });
 
             return $panel;
@@ -456,6 +609,22 @@ $(function () {
                 if (rawVal) {
                     $(id).data('kendoDatePicker').value(rawVal);
                 }
+                break;
+            case 9:
+                $("#file-" + inputId(f)).kendoUpload({
+                    //     {
+                    //     saveUrl: "/upload/save",
+                    //     removeUrl: "/upload/remove",
+                    //     autoUpload: true,
+                    //   }
+                    async: false,
+                    autoUpload: false,
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: f.extensions || [".jpg", ".png", ".pdf"],
+                        maxFileSize: f.maxSize || 4194304,
+                    },
+                });
                 break;
 
             case 14:
@@ -617,7 +786,7 @@ $(function () {
     function bComboBox(f) {
         return (
             lbl(f) +
-            `<select class="w-100  df-combobox" id="${inputId(f)}" name="${inputName(f)}"></select>`
+            `<select class="w-100 df-combobox" id="${inputId(f)}" name="${inputName(f)}"></select>`
         );
     }
 
@@ -636,7 +805,10 @@ $(function () {
 
     //Type8
     function bLabel(f) {
-        return `
+        if (f.maDanhMuc == "Space") {
+            return '<div class="col-md-' + f.colSpan + '" id="' + inputId(f) + '"></div>';
+        } else {
+            return `
             <div class="df-label-field">
                 <span class="df-label mb-0">
                     ${esc(f.tenDanhMuc)} :
@@ -645,6 +817,7 @@ $(function () {
                 <span id="${inputId(f)}">${savedValues[f.maDanhMuc] || '-'}</span>
             </div>
         `;
+        }
     }
 
     //Type9
@@ -678,28 +851,36 @@ $(function () {
     }
 
     //Type10
+    //   function bFileAttach(f) {
+    //     var id = inputId(f);
+    //     return (
+    //       lbl(f) +
+    //       '<div class="df-file-zone" data-trigger="#file-' +
+    //       id +
+    //       '">' +
+    //       '<i class="bi bi-cloud-upload fs-5 d-block mb-1"></i>' +
+    //       "Nhấn để chọn tệp đính kèm" +
+    //       '<div class="df-file-name" id="fname-' +
+    //       id +
+    //       '"></div>' +
+    //       "</div>" +
+    //       '<input type="file" id="file-' +
+    //       id +
+    //       '" name="' +
+    //       inputName(f) +
+    //       '" data-field-key="' +
+    //       esc(f.maDanhMuc) +
+    //       '" data-type="file" data-fname="#fname-' +
+    //       id +
+    //       '" />'
+    //     );
+    //   }
+
     function bFileAttach(f) {
         var id = inputId(f);
+
         return (
-            lbl(f) +
-            '<div class="df-file-zone" data-trigger="#file-' +
-            id +
-            '">' +
-            '<i class="bi bi-cloud-upload fs-5 d-block mb-1"></i>' +
-            'Nhấn để chọn tệp đính kèm' +
-            '<div class="df-file-name" id="fname-' +
-            id +
-            '"></div>' +
-            '</div>' +
-            '<input type="file" id="file-' +
-            id +
-            '" name="' +
-            inputName(f) +
-            '" data-field-key="' +
-            esc(f.maDanhMuc) +
-            '" data-type="file" data-fname="#fname-' +
-            id +
-            '" />'
+            lbl(f) + `<input id="file-${id}" name="${inputName(f)}" type="file" />`
         );
     }
 
@@ -2791,14 +2972,17 @@ $(function () {
             var payload = {
                 version: 1,
                 createdAt: Date.now(),
-                expireAt:
-                    Date.now() +
-                    CAU_HINH_LUU.soNgayHetHan * 24 * 60 * 60 * 1000,
-                data: { savedValues: savedValues, tabsCompleted: completed },
+                expireAt: Date.now() + CAU_HINH_LUU.soNgayHetHan * 24 * 60 * 60 * 1000,
+                data: {
+                    savedValues: savedValues,
+                    tabsCompleted: completed,
+                    currentTabKey: tabs[curTabIdx] ? tabs[curTabIdx].tabKey : null,
+                    typeCauHinh: typeCauHinh == null ? null : String(typeCauHinh),
+                },
             };
             var raw = JSON.stringify(payload);
             var encrypted = maHoaNoiDung(raw, CAU_HINH_LUU.saltMaHoa);
-            localStorage.setItem(CAU_HINH_LUU.tenKhoa, encrypted);
+            localStorage.setItem(getSnapshotStorageKey(), encrypted);
             syncSidebarStep(curTabIdx);
         } catch (e) {}
     }
@@ -2806,13 +2990,13 @@ $(function () {
     function loadSnapshot(tabsRef) {
         if (cheDoLuu !== 2) return {};
         try {
-            var encrypted = localStorage.getItem(CAU_HINH_LUU.tenKhoa);
+            var encrypted = localStorage.getItem(getSnapshotStorageKey());
             if (!encrypted) return {};
             var raw = giaiMaNoiDung(encrypted, CAU_HINH_LUU.saltMaHoa);
             var snap = JSON.parse(raw);
 
             if (!snap || !snap.expireAt || Date.now() > snap.expireAt) {
-                localStorage.removeItem(CAU_HINH_LUU.tenKhoa);
+                localStorage.removeItem(getSnapshotStorageKey());
                 return {};
             }
 
@@ -2821,18 +3005,18 @@ $(function () {
                     var found = tabsRef.find(function (t) {
                         return t.tabKey === key;
                     });
-                    if (found) found.isCompleted = true;
+                    if (found) {
+                        found.isCompleted = true;
+                        found.isSeen = true;
+                    }
                 });
             }
-            $.each(tabsRef, function (index, tab) {
-                syncSidebarStep(index);
-            });
 
             return snap && snap.data && snap.data.savedValues
                 ? snap.data.savedValues
                 : {};
         } catch (e) {
-            localStorage.removeItem(CAU_HINH_LUU.tenKhoa);
+            localStorage.removeItem(getSnapshotStorageKey());
             return {};
         }
     }

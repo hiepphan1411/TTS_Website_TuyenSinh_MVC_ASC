@@ -84,11 +84,16 @@
 
                 return `
                     <li class="step-item ${itemClass}" data-idx="${idx}" onclick="window.dfGoToTab && window.dfGoToTab(${idx})">
-                        <span class="step-badge ${status}">${idx + 1}</span>
-                        <div class="step-info">
-                            <div class="step-info-title">${esc(nhanBuoc)}</div>
-                            <div class="step-info-sub ${status}">${chuThichTrangThai(status)}</div>
+                        <div class="d-flex flex-row gap-2 align-items-center">
+                            <span class="step-badge ${status}">${idx + 1}</span>
+                            <div class="step-info">
+                                <div class="step-info-title">${esc(nhanBuoc)}</div>
+                                <div class="step-info-sub ${status}">${chuThichTrangThai(status)}</div>
+                            </div>
                         </div>
+                        ${tab.isSeen === false
+                        ? '<span class="lock-icon" style="color: var(--primary-gray);"><i class="fa fa-lock" aria-hidden="true"></i></span>'
+                        : ''}      
                     </li>`;
             }).join("");
 

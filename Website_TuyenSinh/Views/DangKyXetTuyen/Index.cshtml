@@ -75,14 +75,10 @@
 @section Scripts
 {
     <script src="~/Scripts/js/razor-form-handler.js"></script>
-    <script src="~/Scripts/js/load-cau-hinh-tuyen-sinhv3.js"></script>
     <script>
         var tieuChiList = @Html.Raw(JsonConvert.SerializeObject(Model.TieuChiList));
-
-        //tieuChiList.forEach(function (tieuChi) {
-        //    var selectElement = document.getElementById("CachNhapDiem_01_" + tieuChi.Id);
-        //});
     </script>
+    <script src="~/Scripts/js/load-cau-hinh-tuyen-sinhv3.js"></script>
     <script type="text/template" id="nv-template">
         <div class="row nguyen-vong-item d-flex align-items-end gap-3">
             <div class="col-md-4 d-flex flex-column">
