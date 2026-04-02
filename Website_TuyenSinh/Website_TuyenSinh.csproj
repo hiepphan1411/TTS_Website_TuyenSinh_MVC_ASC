@@ -301,7 +301,7 @@
     <Content Include="Views\ThongKeDiemDanhNoiTru\Index.cshtml" />
     <Content Include="Views\DangKyXetTuyen\_NguyenVongSimple.cshtml" />
     <Content Include="Views\DangKyXetTuyen\_NguyenVongTHPT.cshtml" />
-    <Content Include="Views\DangKyXetTuyen\RazorLogicChinhQuy.cshtml" />
+    <Content Include="Views\DangKyXetTuyen\_RazorLogicChinhQuy.cshtml" />
     <Content Include="Views\ThongKeDiemDanhKTX\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

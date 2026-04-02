@@ -8,7 +8,6 @@ $(function () {
     ];
 
     function togglePhuongThucBody($header) {
-        console.log("RENDER TEST: " + $header);
         const $container = $header.closest(".phuongthuc-container");
         const $body = $container.find(".phuongthuc-body");
         const $icon = $header.find(".dropdown-icon");

@@ -50,33 +50,60 @@ namespace Website_TuyenSinh.Controllers
                     Text02 = "ThongTinXetTuyen"
                 });
             }
-            ViewBag.FormConfigJson = JsonConvert.SerializeObject(data, _jsonSettings);
+
+            var jsonData = new
+            {
+                typeCauHinh = typeCauHinh,
+                danhMuc = data
+            };
+
+            ViewBag.FormConfigJson = JsonConvert.SerializeObject(jsonData, _jsonSettings);
 
             return View(model);
         }
 
         // GET: DangKyTuyenSinh
-        public async Task<ActionResult> RazorLogicChinhQuy()
+        //public ActionResult RazorLogicChinhQuy(List<DM_TieuChiTuyenSinh> tieuChiList)
+        //{
+        //    var danhMucRepo = new TieuChiTSRepository();
+        //    var requestData = new
+        //    {
+        //        pIDCTTS = 226,
+        //        pIDTieuChiTS = 1
+        //    };
+
+        //    var model = new TieuChiTuyenSinhViewModel
+        //    {
+        //        TieuChiList = danhMucRepo.getAllTieuChiTS()
+        //    };
+
+        //    return PartialView("_RazorLogicChinhQuy", model); ;
+        //}
+
+
+        public class RazorLogicRequest
         {
-            var repo = new TuyenSinhRepository();
-            var danhMucRepo = new TieuChiTSRepository();
-
-            var requestData = new
-            {
-                pIDCTTS = 226,
-                pIDTieuChiTS = 1
-            };
-
-            TieuChiTuyenSinhViewModel model = null;
-
-            model = new TieuChiTuyenSinhViewModel
-            {
-                TieuChiList = danhMucRepo.getAllTieuChiTS(),
-            };
-
-            return View(model);
+            public List<DM_TieuChiTuyenSinh> TieuChiList { get; set; }
         }
 
+        [HttpPost]
+        public ActionResult RazorLogicChinhQuy(RazorLogicRequest request)
+        {
+            var data = request?.TieuChiList;
+
+            if (data == null || data.Count == 0)
+            {
+                var danhMucRepo = new TieuChiTSRepository();
+                data = danhMucRepo.getAllTieuChiTS(); 
+            }
+
+            var model = new TieuChiTuyenSinhViewModel
+            {
+                TieuChiList = data
+            };
+
+            return PartialView("_RazorLogicChinhQuy", model);
+        }
         public ActionResult getCauHinhTuyenSinh()
         {
             var repo = new TuyenSinhRepository();
