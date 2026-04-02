@@ -303,16 +303,16 @@
     background: #fff;
 }
 
-    .group-box > legend {
-        float: none;
-        width: auto;
-        margin: 0 0 6px;
-        padding: 0 8px;
-        font-size: 14px;
-        color: #666;
-        background: #fff;
-        line-height: 1;
-    }
+.group-box > legend {
+    float: none;
+    width: auto;
+    margin: 0 0 6px;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    line-height: 1;
+}
 
 .df-toggle-buttons {
     display: flex;
@@ -352,18 +352,18 @@ fieldset {
     transition: max-height 0.5s ease;
 }
 
-    fieldset .content {
-        opacity: 1;
-        transition: opacity 0.5s ease;
-    }
+fieldset .content {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
 
-    fieldset:has(.btn-toggle-not-has.active) {
-        max-height: 5px;
-    }
+fieldset:has(.btn-toggle-not-has.active) {
+    max-height: 5px;
+}
 
-        fieldset:has(.btn-toggle-not-has.active) .content {
-            opacity: 0;
-        }
+fieldset:has(.btn-toggle-not-has.active) .content {
+    opacity: 0;
+}
 
 .df-nav-bar {
     display: flex;
@@ -397,14 +397,14 @@ fieldset {
     transition: ease 0.15s;
 }
 
-    .df-btn-next:hover {
-        background: #1d4ed8;
-    }
+.df-btn-next:hover {
+    background: #1d4ed8;
+}
 
-    .df-btn-next:disabled {
-        background: var(--df-gray-400);
-        cursor: not-allowed;
-    }
+.df-btn-next:disabled {
+    background: var(--df-gray-400);
+    cursor: not-allowed;
+}
 
 @media (max-width: 576px) {
     .df-card {
@@ -426,18 +426,18 @@ fieldset {
     border-bottom: 2px solid var(--df-gray-200);
 }
 
-    .df-review-header h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--color-text-primary);
-        margin: 0 0 8px 0;
-    }
+.df-review-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 8px 0;
+}
 
-    .df-review-header p {
-        font-size: 13px;
-        color: var(--df-gray-500);
-        margin: 0;
-    }
+.df-review-header p {
+    font-size: 13px;
+    color: var(--df-gray-500);
+    margin: 0;
+}
 
 .df-review-content {
     margin-bottom: 28px;
@@ -448,9 +448,9 @@ fieldset {
     border-bottom: 1px solid var(--df-gray-100);
 }
 
-    .df-review-section:last-of-type {
-        border-bottom: none;
-    }
+.df-review-section:last-of-type {
+    border-bottom: none;
+}
 
 .df-review-section-header {
     display: flex;
@@ -474,6 +474,14 @@ fieldset {
     font-size: 15px;
     font-weight: 700;
     margin: 0;
+}
+.df-section-title-ttxt {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 16px;
 }
 
 .df-review-items-grid {
@@ -506,6 +514,9 @@ fieldset {
     word-break: break-word;
 }
 
+.df-review-ttxt-items-grid {
+}
+
 .df-review-footer {
     background: #f8fafc;
     border-radius: 10px;
@@ -523,27 +534,27 @@ fieldset {
     gap: 10px;
 }
 
-    .df-confirm-checkbox label {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        cursor: pointer;
-        margin: 0;
-    }
+.df-confirm-checkbox label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    margin: 0;
+}
 
-    .df-confirm-checkbox input[type='checkbox'] {
-        width: 18px;
-        height: 18px;
-        margin-top: 2px;
-        cursor: pointer;
-        flex-shrink: 0;
-    }
+.df-confirm-checkbox input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
 
-    .df-confirm-checkbox span {
-        font-size: 13px;
-        color: var(--df-gray-700);
-        line-height: 1.6;
-    }
+.df-confirm-checkbox span {
+    font-size: 13px;
+    color: var(--df-gray-700);
+    line-height: 1.6;
+}
 
 .df-review-group-box {
     grid-column: span 12;
@@ -587,9 +598,9 @@ fieldset {
     margin: 0;
 }
 
-    .df-review-group-items .df-review-item {
-        padding: 0;
-    }
+.df-review-group-items .df-review-item {
+    padding: 0;
+}
 
 .df-captcha-section {
     padding: 20px;
@@ -635,11 +646,11 @@ fieldset {
     gap: 8px;
 }
 
-    .df-captcha-input-wrapper label {
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--df-gray-800);
-    }
+.df-captcha-input-wrapper label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--df-gray-800);
+}
 
 .df-captcha-input-box {
     display: flex;
@@ -705,9 +716,9 @@ fieldset {
     border-radius: 8px;
 }
 
-    .btn-captcha-submit:hover {
-        background-color: var(--primary-blue-hover);
-    }
+.btn-captcha-submit:hover {
+    background-color: var(--primary-blue-hover);
+}
 
 .df-table-section {
     margin-bottom: 20px;
@@ -722,55 +733,55 @@ fieldset {
     overflow: hidden;
 }
 
-    .df-review-table thead {
-        background-color: var(--df-gray-100);
-        border-bottom: 2px solid var(--df-gray-300);
-    }
+.df-review-table thead {
+    background-color: var(--df-gray-100);
+    border-bottom: 2px solid var(--df-gray-300);
+}
 
-    .df-review-table th {
-        padding: 12px 16px;
-        text-align: left;
-        font-weight: 700;
-        font-size: 13px;
-        color: var(--df-gray-700);
-        white-space: normal;
-        word-break: break-word;
-        border-right: 1px solid var(--df-gray-200);
-    }
+.df-review-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--df-gray-700);
+    white-space: normal;
+    word-break: break-word;
+    border-right: 1px solid var(--df-gray-200);
+}
 
-        .df-review-table th:last-child {
-            border-right: none;
-        }
+.df-review-table th:last-child {
+    border-right: none;
+}
 
-    .df-review-table tbody tr {
-        border-bottom: 1px solid var(--df-gray-200);
-        transition: background-color 0.2s ease;
-    }
+.df-review-table tbody tr {
+    border-bottom: 1px solid var(--df-gray-200);
+    transition: background-color 0.2s ease;
+}
 
-        .df-review-table tbody tr:hover {
-            background-color: var(--df-gray-50);
-        }
+.df-review-table tbody tr:hover {
+    background-color: var(--df-gray-50);
+}
 
-        .df-review-table tbody tr:last-child {
-            border-bottom: none;
-        }
+.df-review-table tbody tr:last-child {
+    border-bottom: none;
+}
 
-    .df-review-table td {
-        padding: 12px 16px;
-        font-size: 13px;
-        color: var(--df-gray-800);
-        border-right: 1px solid var(--df-gray-200);
-    }
+.df-review-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--df-gray-800);
+    border-right: 1px solid var(--df-gray-200);
+}
 
-        .df-review-table td:last-child {
-            border-right: none;
-        }
+.df-review-table td:last-child {
+    border-right: none;
+}
 
-        .df-review-table td.td-diem {
-            font-weight: 600;
-            color: var(--primary-blue);
-            text-align: center;
-        }
+.df-review-table td.td-diem {
+    font-weight: 600;
+    color: var(--primary-blue);
+    text-align: center;
+}
 
 /* Chi tiết header */
 
@@ -789,21 +800,21 @@ fieldset {
     color: var(--df-gray-800);
 }
 
-    .header-info strong {
-        color: var(--color-text-primary);
-        font-weight: 600;
-    }
+.header-info strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
 
-    .header-info .badge {
-        display: inline-block;
-        background: #dcfce7;
-        color: var(--success-green);
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 12px;
-        margin-left: 8px;
-    }
+.header-info .badge {
+    display: inline-block;
+    background: #dcfce7;
+    color: var(--success-green);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    margin-left: 8px;
+}
 
 @media (max-width: 1400px) {
     .df-review-item {
@@ -874,5 +885,111 @@ fieldset {
 
     .df-captcha-field {
         font-size: 14px;
+    }
+}
+
+/* ========== XÉT TUYỂN DYNAMIC REVIEW ========== */
+.df-review-methods-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.df-review-method-item {
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.df-review-method-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #007bff;
+    margin-bottom: 12px;
+}
+
+.df-review-method-header .df-method-icon {
+    font-size: 20px;
+}
+
+.df-review-method-header .df-method-name {
+    font-weight: 600;
+    color: #003366;
+    font-size: 14px;
+}
+
+.df-review-group {
+    background: #fff;
+    border-left: 4px solid #28a745;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.df-review-subgroup {
+    background: #fff;
+    border-left: 4px solid #ff9800;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.df-review-subgroup-title {
+    font-weight: 600;
+    color: #ff9800;
+    font-size: 13px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.df-review-list-item {
+    background: #fff9e6;
+    border: 1px solid #ffe5a0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.df-review-list-item:last-child {
+    margin-bottom: 0;
+}
+
+.df-review-item-number {
+    font-weight: 600;
+    color: #ff9800;
+    font-size: 12px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ffe5a0;
+}
+
+.df-review-item:last-child {
+    margin-bottom: 0;
+}
+
+.df-review-empty-msg {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .df-review-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .df-review-method-item {
+        padding: 12px;
+    }
+
+    .df-review-label,
+    .df-review-value {
+        font-size: 11px;
     }
 }

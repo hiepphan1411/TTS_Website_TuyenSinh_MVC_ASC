@@ -127,7 +127,6 @@
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DashboardTuyenSinhController.cs" />
     <Compile Include="Controllers\DatLaiMatKhauController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TraCuuKetQuaController.cs" />
     <Compile Include="Controllers\TraCuuThongTinController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -861,7 +860,6 @@
     <Content Include="Content\lib\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
     <Content Include="Scripts\js\tra-cuu-ket-qua.js" />
     <Content Include="Scripts\kendo\2016.3.1118\angular.min.js" />
     <Content Include="Scripts\kendo\2016.3.1118\cultures\kendo.culture.af-ZA.min.js" />
@@ -1419,7 +1417,6 @@
     <Content Include="Scripts\kendo\2016.3.1118\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\kendo\2016.3.1118\messages\kendo.messages.zh-TW.min.js" />
     <Content Include="Scripts\js\ho-so-thi-sinh.js" />
-    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv2.js" />
     <Content Include="Scripts\js\load-cau-hinh-tuyen-sinhv3.js" />
     <Content Include="Scripts\js\razor-form-handler.js" />
     <Content Include="Scripts\lib\bootstrap.bundle.js" />
@@ -2419,15 +2416,6 @@
     <Content Include="Content\kendo\2016.3.1118-source\common\transitions.less" />
     <None Include="Scripts\lib\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\dbs\scripts.sql" />
-    <Content Include="Scripts\jquery-3.7.0.js" />
-    <Content Include="Scripts\jquery-3.7.0.min.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\ho-so-thi-sinh.js" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP1.pubxml" />
@@ -2445,7 +2433,6 @@
     <Content Include="Scripts\lib\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\dashboard-tuyensinh.js" />
-    <Content Include="Scripts\js\load-cau-hinh-tuyen-sinh.js" />
     <Content Include="Scripts\lib\kendo.all.min%402016.3.1118.js" />
     <Content Include="Scripts\lib\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
@@ -2492,9 +2479,7 @@
     <Content Include="Views\DangKyXetTuyen\RazorLogicChinhQuy.cshtml" />
     <Content Include="Views\ThongKeDiemDanhKTX\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\kendo\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\lib\bootstrap.min.js.map" />
