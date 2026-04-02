@@ -269,7 +269,9 @@ body {
   font-size: 12px;
 }
 
+
 /*Css cho sidebar progress đăng ký*/
+
 .sidebar-card {
   background: white;
   border-radius: 10px;
@@ -411,24 +413,26 @@ body {
   color: var(--primary-gray);
 }
 
+
 /* Content */
+
+
 /* Home */
+
 .banner {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
-    url("/Content/images/login-background.png");
-  background-size: cover;
-  background-position: center;
-  color: white;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('/Content/images/login-background.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-banner {
@@ -485,9 +489,10 @@ body {
 }
 
 .btn-now-register:hover {
-  background-color: var(--primary-blue-hover);
-  color: white;
-  transition: all 0.3s;
+    background-color: var(--primary-blue-hover);
+    color: white;
+    transition: all 0.3s;
+    text-decoration: underline;
 }
 
 .btn-detail {
@@ -853,6 +858,7 @@ p {
 }
 
 /*Xử lý nút spinner */
+
 .df-numeric-wrap {
   position: relative;
   display: inline-block;

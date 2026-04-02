@@ -1,4 +1,8 @@
-﻿.tab-content {
+﻿.content-area {
+    background-color: var(--light-gray);
+}
+
+.tab-content {
     display: flex;
     background-color: white;
 }
@@ -52,8 +56,8 @@
 }
 
 .name {
-    font-weight: 600;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 20px;
     color: var(--color-text-primary);
 }
 
@@ -64,6 +68,7 @@
     border-radius: 12px;
     background-color: var(--color-green-light);
     padding: 2px 8px;
+    gap: 5px;
 }
 
     .check-status.bg-success {
@@ -246,7 +251,6 @@
 .button-group {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
     width: 100%;
     margin-top: 16px;
 }
@@ -879,22 +883,6 @@
     word-break: break-word;
 }
 
-@media (max-width: 768px) {
-    .chi-tiet-content {
-        padding: 20px;
-    }
-
-    .chi-tiet-header-row {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .chi-tiet-review-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-}
-
 .chi-tiet-info-box {
     display: flex;
     padding: 20px;
@@ -922,7 +910,7 @@
     background-color: var(--blue-bg-light);
     font-size: 20px;
     height: fit-content;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 8px;
     color: var(--primary-blue);
 }
@@ -1076,4 +1064,203 @@
 
 .btn-back-detail i {
     font-size: 14px;
+}
+
+@media (max-width: 1200px) {
+    .btn-detail-record,
+    .btn-print,
+    .btn-export {
+        font-size: 14px;
+    }
+
+    .btn-enrollment {
+        font-size: 14px;
+        padding: 13px 0;
+    }
+
+    .chi-tiet-review-grid.chi-tiet-grid-6col {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .header-black {
+        font-size: 20px;
+    }
+
+    .name {
+        font-size: 19px;
+    }
+
+    .tab-item {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+
+    .time-submit p {
+        font-size: 13px;
+    }
+
+    .chi-tiet-content {
+        padding: 15px;
+    }
+
+    .status {
+        font-size: 10px;
+    }
+
+    .chi-tiet-header-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .chi-tiet-review-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .note-status div:first-child,
+    .note-status div:last-child {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .admission-method div p:last-child {
+        font-size: 13px;
+    }
+
+    .info-student-title {
+        font-size: 11px;
+    }
+
+    .info-student-content {
+        font-size: 14px;
+    }
+
+    .timeline li strong {
+        font-size: 14px;
+    }
+
+    .chi-tiet-review-grid.chi-tiet-grid-6col {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .chi-tiet-grid-3col {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 710px) {
+    .tab-item {
+        font-size: 12px;
+        padding: 5px 10x;
+        text-align: center;
+    }
+
+    .header-black {
+        font-size: 16px;
+    }
+
+    .name {
+        font-size: 16px;
+    }
+
+    .check-status {
+        font-size: 10px;
+    }
+
+    .time-submit p {
+        font-size: 10px;
+    }
+
+    .note-status div:first-child,
+    .note-status div:last-child {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+
+    .page-wrapper {
+        padding: 10px;
+    }
+
+    .note-status div:first-child,
+    .note-status div:last-child {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .icon-record-candidate {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+
+    .record-candidate {
+        gap: 0px;
+        padding: 15px;
+    }
+
+    .chi-tiet-review-grid.chi-tiet-grid-6col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chi-tiet-content {
+        padding: 10px;
+    }
+
+    .chi-tiet-review-grid.chi-tiet-grid-6col {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .chi-tiet-certificate-box {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .chi-tiet-section-content {
+        padding: 10px;
+    }
+
+    .chi-tiet-certificate-box-sub {
+        flex-wrap: wrap;
+    }
+
+    .chi-tiet-certificate-box-center {
+        border: none;
+        padding-left: 52px;
+    }
+
+    .chi-tiet-info-box {
+        padding: 10px;
+    }
+
+    .chi-tiet-info-value {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 510px) {
+    .chi-tiet-grid-3col {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 430px) {
+    .chi-tiet-section-title {
+        font-size: 14px;
+    }
+
+    .tab-content {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+        .tab-content > * {
+            width: calc(50% - 5px);
+        }
 }

@@ -6,6 +6,7 @@
 
 @section styles {
     <link rel="stylesheet" href="~/Content/css/dang-nhap.css" />
+    <link rel="stylesheet" href="~/Content/css/tra-cuu-ket-qua.css" />
 }
 
 <div class="main-container w-100 d-flex justify-content-center align-items-center">
@@ -16,13 +17,14 @@
             <div class="sub-title fw-semibold" style="color: var(--color-current)">Xét tuyển Đại học chính quy 2026</div>
         </div>
 
-        <form method="post" action="#" class="w-100 d-flex flex-column gap-1">
+        <form id="frmTraCuu" method="post" action="#" class="w-100 d-flex flex-column gap-1">
 
             <!-- Thông tin thí sinh -->
             <div class="text-start position-relative">
                 <label class="form-label fw-medium mb-1">Thông tin thí sinh</label>
-                <input type="password" class="form-control glass-input" 
-                       placeholder="Nhập CMND / CCCD / Mã hồ sơ / SĐT" id="password" />
+                <input type="text" class="form-control glass-input" 
+                       id="maHoSo"
+                       placeholder="Nhập CMND / CCCD / Mã hồ sơ / SĐT" />
             </div>
 
             <!-- Notes -->
@@ -38,4 +40,13 @@
         </form>
     </div>
 </div>
+
+<!-- Container cho kết quả -->
+<div class="container mt-4">
+    <div id="resultContainer" style="display: none;"></div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/tra-cuu-ket-qua.js"></script>
+}
 
