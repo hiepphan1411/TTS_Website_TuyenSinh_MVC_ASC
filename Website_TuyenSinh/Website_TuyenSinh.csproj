@@ -252,9 +252,11 @@
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP2.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP3.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy2.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy3.pubxml" />
     <None Include="Scripts\lib\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\dbs\scripts.sql" />
     <Content Include="Scripts\lib\jquery-3.7.0.js" />

@@ -331,6 +331,7 @@ body {
   cursor: pointer;
   transition: background 0.15s;
   margin-bottom: 5px;
+  justify-content: space-between;
 }
 
 .step-item:hover {
