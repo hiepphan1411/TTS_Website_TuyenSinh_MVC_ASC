@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Text.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -149,6 +151,7 @@
     <Content Include="Content\css\dashboard-filter.css" />
     <Content Include="Content\css\dashboard-tuyensinh.css" />
     <Content Include="Content\css\ho-so-thi-sinh.css" />
+    <Content Include="Content\css\razor-logic-style.css" />
     <Content Include="Content\css\thongke-ktx-theo-lop.css" />
     <Content Include="Content\images\logo-ASC.png" />
     <Content Include="Content\images\login-background.png" />
@@ -248,8 +251,10 @@
     <Content Include="App_Data\dashboard-data-test.json" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - FTP2.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\phanphuochiep-001-site1 - Web Deploy2.pubxml" />
     <None Include="Scripts\lib\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\dbs\scripts.sql" />
     <Content Include="Scripts\lib\jquery-3.7.0.js" />

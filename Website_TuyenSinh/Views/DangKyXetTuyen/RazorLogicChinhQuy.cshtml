@@ -44,45 +44,523 @@
     <link rel="stylesheet" href="~/Content/css/razor-logic-style.css" />
 }
 
-<div class="tab-container">
+<div class="tab-container d-flex flex-column justify-content-center gap-3">
     @*<div class="tab-header d-flex flex-column gap-1 justify-content-start">
-        <div class="tab-title fw-bold">Thông tin xét tuyển</div>
-        <div class="tab-subtitle fw-semibold">Vui lòng chọn phương thức xét tuyển và nhập thông tin tương ứng cho từng phương thức.</div>
-    </div>*@
+            <div class="tab-title fw-bold">Thông tin xét tuyển</div>
+            <div class="tab-subtitle fw-semibold">Vui lòng chọn phương thức xét tuyển và nhập thông tin tương ứng cho từng phương thức.</div>
+        </div>*@
 
-    <div class="tab-body d-flex flex-column justify-content-center gap-3">
-        <div class="warning-title text-danger">
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            <span class="fw-semibold">Lưu ý: Vui lòng chọn hình thức xét tuyển đăng ký</span>
-        </div>
+    <div class="warning-title text-danger">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <span class="fw-semibold">Lưu ý: Vui lòng chọn hình thức xét tuyển đăng ký</span>
+    </div>
 
-        @foreach (var item in Model.TieuChiList)
-        {
-            <div class="phuongthuc-container">
-                <div class="phuongthuc-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex justify-content-start align-items-center gap-2">
-                        <input type="checkbox" class="phuongthuc-checkbox" />
-                        <span>@item.TenTieuChi</span>
-                    </div>
-                    <i class="fa fa-angle-down dropdown-icon" aria-hidden="true" style="transition: transform 0.3s;"></i>
+    @foreach (var item in Model.TieuChiList)
+    {
+        <div class="phuongthuc-container">
+            <div class="phuongthuc-header d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-start align-items-center gap-2">
+                    <input type="checkbox" class="phuongthuc-checkbox" />
+                    <span>@item.TenTieuChi</span>
                 </div>
+                <i class="fa fa-angle-down dropdown-icon" aria-hidden="true" style="transition: transform 0.3s;"></i>
+            </div>
 
-                @switch (item.IDCachNhapDiem ?? 0)
-                {
-                    @*Cả năm Lớp 9*@
-                    case 1:
-                        {
-                            <div class="phuongthuc-body">
-                                <div class="row">
-                                    <div class="col-md-4 d-flex flex-column w-fit gap-2">
-                                        <label class="fw-semibold nv-label">Điểm tổng cộng</label>
-                                        <input type="number" class="custom-input" style="min-width: 260px;" placeholder="Nhập điểm" id="CaNamLop09_01_@(item.Id)_01" />
+            @switch (item.IDCachNhapDiem ?? 0)
+            {
+                @*Cả năm Lớp 9*@
+                case 1:
+                    {
+                        <div class="phuongthuc-body">
+                            <div class="row">
+                                <div class="col-md-4 d-flex flex-column w-fit gap-2">
+                                    <label class="fw-semibold nv-label">Điểm tổng cộng</label>
+                                    <input type="number" class="custom-input" style="min-width: 260px;" placeholder="Nhập điểm" id="CaNamLop09_01_@(item.Id)_01" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
+                                @{
+                                    ViewBag.IdPrefix = "CaNamLop09";
+                                    ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
+                                    ViewBag.DataTemplate = "nv-template";
+                                    ViewBag.Item = item;
+                                    ViewBag.Nganh = nganh;
+                                    ViewBag.TypeNum = 1;
+                                    ViewBag.ToHopList = toHopList;
+                                }
+                                @Html.Partial("_NguyenVongSimple")
+                            </div>
+                        </div>
+                        break;
+                    }
+
+                case 2:
+                    {
+
+                        break;
+                    }
+
+                @*Điểm HB 6 học kỳ*@
+                @*Điểm TB 11, 12*@
+                @*Điểm TB 10, 11, 12*@
+                case 3:
+                    {
+                        <div class="phuongthuc-body">
+                            <div>
+                                <table class="table thpt-result-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="ps-2">MÔN</th>
+                                            @{
+                                                var str = item.Fields;
+                                                var list = (str ?? "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList(); ;
+                                                bool hasHK1 = list.Any(x => x.Contains("HK1"));
+
+                                                List<string> result;
+                                                if (hasHK1)
+                                                {
+                                                    result = list.Select(x =>
+                                                    {
+                                                        var hk = x.Contains("HK1") ? "HK1" : "HK2";
+                                                        var lop = x.Substring(x.Length - 2);
+                                                        return $"{hk} Lớp {lop}";
+                                                    }).ToList();
+                                                }
+                                                else
+                                                {
+                                                    result = list.Select(x =>
+                                                    {
+                                                        var lop = x.Substring(x.Length - 2);
+                                                        return $"CN Lớp {lop}";
+                                                    }).ToList();
+                                                }
+
+                                                foreach (var lop in result)
+                                                {
+                                                    <th class="text-center">ĐIỂM @lop</th>
+                                                }
+                                            }
+                                            <th class="text-center">ĐIỂM MÔN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var subj in subjList)
+                                        {
+                                            <tr>
+                                                <td>@subj</td>
+                                                @foreach (var lop in list)
+                                                {
+                                                    <td class="text-center">
+                                                        <input type="number"
+                                                               class="custom-input"
+                                                               placeholder="Nhập điểm @subj"
+                                                               id="@lop"
+                                                               data-field="@lop"
+                                                               data-matieuchi="@item.MaTieuChi" />
+                                                    </td>
+
+                                                }
+                                                <td class="text-center"><span class="score-pill">0.00</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="thpt-table-block thpt-table-first">
+                                <h6 class="thpt-table-title">Kết quả điểm các tổ hợp</h6>
+                                <div class="table-responsive">
+                                    <table class="table thpt-result-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px;">STT</th>
+                                                <th>Tổ hợp môn</th>
+                                                <th style="width: 150px; text-align: center">Tổng điểm tổ hợp môn</th>
+                                                <th style="width: 110px; text-align: center">Tổng điểm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < toHopList.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td>@toHopList[i]</td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="thpt-table-block">
+                                <div class="thpt-table-title">
+                                    <div>
+                                        <i class="fa fa-star" aria-hidden="true" class="text-white fs-6"></i>
                                     </div>
+                                    Tổ hợp môn có điểm cao nhất
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table thpt-result-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px;">STT</th>
+                                                <th>Tổ hợp môn</th>
+                                                <th style="width: 140px; text-align: center">Tổng điểm tổ hợp môn</th>
+                                                <th style="width: 110px; text-align: center">Tổng điểm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < 2; i++)
+                                            {
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td>@toHopList[i]</td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="thpt-note text-danger">
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                Lưu ý: Điểm tổ hợp trên là điểm gốc, chưa nhân hệ số xét tuyển
+                            </div>
+
+                            <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
+                                @{
+                                    if ("201".Equals(item.MaTieuChi))
+                                    {
+                                        ViewBag.IdPrefix = "DiemTB101112";
+                                    }
+                                    else if ("202".Equals(item.MaTieuChi))
+                                    {
+                                        ViewBag.IdPrefix = "DiemTB1112";
+                                    }
+                                    else if ("Test_3".Equals(item.MaTieuChi))
+                                    {
+                                        ViewBag.IdPrefix = "DiemTBHB6HK";
+                                    }
+                                    ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
+                                    ViewBag.DataTemplate = "nv-template-thpt";
+                                    ViewBag.Item = item;
+                                    ViewBag.Nganh = nganh;
+                                    ViewBag.TypeNum = 1;
+                                    ViewBag.ToHopList = toHopList;
+                                    ViewBag.ToHopMonJson = Model.ToHopMonJson;
+                                }
+                                @Html.Partial("_NguyenVongTHPT")
+                            </div>
+                        </div>
+                        break;
+                    }
+
+                case 4:
+                    {
+
+                        break;
+                    }
+
+                @*Tốt nghiệp THPT*@
+                case 5:
+                    {
+                        <div class="phuongthuc-body">
+                            <div class="d-flex gap-3">
+                                <div>
+                                    <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">Điểm thi THPT Quốc gia</span>
+                                    <div class="d-grid thpt-score-grid gap-3" style="margin-top: 10px;">
+                                        @for (int i = 0; i < subjList.Count; i++)
+                                        {
+                                            <div class="d-flex flex-column">
+                                                <label class="fw-semibold nv-label">@subjList[i]</label>
+                                                <input type="number" class="custom-input" placeholder="Nhập điểm @subjList[i]" id="KetQuaTHPTQuocGia_01_@(item.Id)_@(i+1)" />
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="thpt-table-block thpt-table-first">
+                                <h6 class="thpt-table-title">Kết quả điểm các tổ hợp</h6>
+                                <div class="table-responsive">
+                                    <table class="table thpt-result-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px;">STT</th>
+                                                <th>Tổ hợp môn</th>
+                                                <th style="width: 150px; text-align: center">Tổng điểm tổ hợp môn</th>
+                                                <th style="width: 110px; text-align: center">Tổng điểm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < toHopList.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td>@toHopList[i]</td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="thpt-table-block">
+                                <div class="thpt-table-title">
+                                    <div>
+                                        <i class="fa fa-star" aria-hidden="true" class="text-white fs-6"></i>
+                                    </div>
+                                    Tổ hợp môn có điểm cao nhất
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table thpt-result-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px;">STT</th>
+                                                <th>Tổ hợp môn</th>
+                                                <th style="width: 140px; text-align: center">Tổng điểm tổ hợp môn</th>
+                                                <th style="width: 110px; text-align: center">Tổng điểm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < 2; i++)
+                                            {
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td>@toHopList[i]</td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                    <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="thpt-note text-danger">
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                Lưu ý: Điểm tổ hợp trên là điểm gốc, chưa nhân hệ số xét tuyển
+                            </div>
+
+                            <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
+                                @{
+                                    ViewBag.IdPrefix = "KetQuaTHPTQuocGia";
+                                    ViewBag.IdTarget = "nguyen-vong-list-thpt";
+                                    ViewBag.DataTemplate = "nv-template-thpt";
+                                    ViewBag.Item = item;
+                                    ViewBag.Nganh = nganh;
+                                    ViewBag.TypeNum = 1;
+                                    ViewBag.ToHopList = toHopList;
+                                }
+                                @Html.Partial("_NguyenVongTHPT")
+                            </div>
+                        </div>
+                        break;
+                    }
+
+                case 6:
+                    {
+
+                        break;
+                    }
+
+                case 7:
+                    {
+
+                        break;
+                    }
+
+                @*Tuyển thẳng*@
+                case 8:
+                    {
+                        <div class="phuongthuc-body">
+                            <div class="d-flex flex-column gap-1">
+                                <span class="fw-semibold" style="font-size: 15px;">Đối tượng xét tuyển</span>
+                                <ol class="list-doi-tuong d-flex flex-column gap-2 mb-0" style="padding-left: 10px !important;">
+                                    @{
+                                        for (int i = 0; i < doiTuongList.Count; i++)
+                                        {
+                                            <div class="d-flex gap-4 align-items-baseline">
+                                                <input type="checkbox" class="doi-tuong-checkbox" id="CheckTuyenThang_@i" />
+                                            <li>
+                                                <span class="doi-tuong-span">@doiTuongList[i]</span>
+                                            </li>
+                                    </div>
+                                }
+                                    }
+                                    </ol>
                                 </div>
 
                                 <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
                                     @{
-                                        ViewBag.IdPrefix = "CaNamLop09";
+                                        ViewBag.IdPrefix = "TuyenThang";
+                                        ViewBag.IdTarget = "nguyen-vong-list-tuyen-thang";
+                                        ViewBag.DataTemplate = "nv-template";
+                                        ViewBag.Item = item;
+                                        ViewBag.Nganh = nganh;
+                                        ViewBag.TypeNum = 1;
+                                        ViewBag.ToHopList = toHopList;
+                                    }
+                                    @Html.Partial("_NguyenVongSimple")
+                                </div>
+                            </div>
+                            break;
+                        }
+
+                    @*Từ xa*@
+                    @*Liên thông*@
+                    case 9:
+                        {
+                            <div class="phuongthuc-body">
+                                <div class="warning-title text-danger pb-2">
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                    <span class="fw-semibold">Lưu ý: Đối với thí sinh có bảng điểm hệ 4 (tín chỉ) mà không có điểm hệ 10: nhập điểm hệ 4 rồi đánh dấu vào ô Điểm hệ 4</span>
+                                </div>
+
+                                <div class="d-grid">
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="fw-semibold nv-label">Tên môn cơ bản</label>
+                                            <select class="custom-selection" style="min-width: 150px;">
+                                                <option value="">Chọn tên môn</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="fw-semibold nv-label">Điểm cả năm lớp 12</label>
+                                            <input type="number" class="custom-input" placeholder="Nhập điểm" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="fw-semibold nv-label">Tên học phần cơ sở</label>
+                                            <input type="text" class="custom-input" placeholder="Nhập Tên học phần cơ sở" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="fw-semibold nv-label">Điểm môn</label>
+                                            <input type="number" class="custom-input" placeholder="Nhập điểm" />
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="checkbox" id="diem-he-4-checkbox" />
+                                                <label for="diem-he-4-checkbox" class="fw-semibold nv-label">Điểm hệ 4</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="fw-semibold nv-label">Tên học chuyên ngành</label>
+                                            <input type="text" class="custom-input" placeholder="Nhập Tên học chuyên ngành" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="fw-semibold nv-label">Điểm môn</label>
+                                            <input type="number" class="custom-input" placeholder="Nhập điểm" />
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="checkbox" id="diem-he-4-checkbox" />
+                                                <label for="diem-he-4-checkbox" class="fw-semibold nv-label">Điểm hệ 4</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column gap-1">
+                                    <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">ĐỐI VỚI MÔN CHUYÊN MÔN CÓ NHIỀU HỌC PHẦN</span>
+                                    <div class="hoc-phan-list-lienthong">
+                                        <div class="row mb-2">
+                                            <div class="row text-primary fw-semibold fs-13px">
+                                                <span class="col-md-2">Môn học phần 1</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 d-flex flex-column">
+                                                    <label class="fw-semibold nv-label">Tên môn</label>
+                                                    <input type="text" class="custom-input" placeholder="Nhập Tên môn" />
+                                                </div>
+                                                <div class="col-md-3 d-flex flex-column">
+                                                    <label class="fw-semibold nv-label">DVHT/TC</label>
+                                                    <input type="number" class="custom-input" placeholder="0.00" />
+                                                </div>
+                                                <div class="col-md-3 d-flex flex-column">
+                                                    <label class="fw-semibold nv-label">Điểm môn</label>
+                                                    <input type="number" class="custom-input" placeholder="0.00" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pt-2 d-flex justify-content-center">
+                                        <button type="button" class="btn btn-add-hp d-flex align-items-center gap-1 fw-semibold">
+                                            <i class="fa fa-plus fs-13px" aria-hidden="true"></i>
+                                            Thêm môn học phần
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column gap-3 nguyenvong-container">
+                                    @{
+                                        if ("500".Equals(item.MaTieuChi))
+                                        {
+                                            ViewBag.IdPrefix = "LienThong";
+                                        }
+                                        else if ("600".Equals(item.MaTieuChi))
+                                        {
+                                            ViewBag.IdPrefix = "TuXa";
+                                        }
+                                        ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
+                                        ViewBag.DataTemplate = "nv-template-thpt";
+                                        ViewBag.Item = item;
+                                        ViewBag.Nganh = nganh;
+                                        ViewBag.TypeNum = 1;
+                                        ViewBag.ToHopList = toHopList;
+                                    }
+                                    @Html.Partial("_NguyenVongTHPT")
+                                </div>
+                            </div>
+                            break;
+                        }
+
+                    @*Ctrinh liên kết*@
+                    @*Không nhập điểm*@
+                    case 10:
+                        {
+                            <div class="phuongthuc-body">
+                                @switch (item.MaTieuChi)
+                                {
+                                    case "Test_7":
+                                        {
+                                            break;
+                                        }
+                                    case "Test_8":
+                                        {
+                                            <div class="d-flex gap-3">
+                                                <div>
+                                                    <label class="fw-semibold nv-label">Năm tốt nghiệp</label>
+                                                    <select class="custom-selection" style="min-width: 150px;">
+                                                        <option value="">Chọn Năm tốt nghiệp</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            break;
+                                        }
+                                }
+
+                                <div class="d-flex flex-column gap-3">
+                                    @{
+                                        if ("Test_7".Equals(item.MaTieuChi))
+                                        {
+                                            ViewBag.IdPrefix = "KhongNhapDiem";
+                                        }
+                                        else if ("Test_8".Equals(item.MaTieuChi))
+                                        {
+                                            ViewBag.IdPrefix = "ChuongTrinhLienKet";
+                                        }
                                         ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
                                         ViewBag.DataTemplate = "nv-template";
                                         ViewBag.Item = item;
@@ -96,164 +574,106 @@
                             break;
                         }
 
-                    case 2:
-                        {
-
-                            break;
-                        }
-
-                    @*Điểm HB 6 học kỳ*@
-                    @*Điểm TB 11, 12*@
-                    @*Điểm TB 10, 11, 12*@
-                    case 3:
+                    @*ĐGNL*@
+                    case 11:
                         {
                             <div class="phuongthuc-body">
-                                <div>
-                                    <table class="table thpt-result-table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th class="ps-2">MÔN</th>
-                                                @{
-                                                    var str = item.Fields;
-                                                    var list = (str ?? "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList(); ;
-                                                    bool hasHK1 = list.Any(x => x.Contains("HK1"));
-
-                                                    List<string> result;
-                                                    if (hasHK1)
-                                                    {
-                                                        result = list.Select(x =>
-                                                        {
-                                                            var hk = x.Contains("HK1") ? "HK1" : "HK2";
-                                                            var lop = x.Substring(x.Length - 2);
-                                                            return $"{hk} Lớp {lop}";
-                                                        }).ToList();
-                                                    }
-                                                    else
-                                                    {
-                                                        result = list.Select(x =>
-                                                        {
-                                                            var lop = x.Substring(x.Length - 2);
-                                                            return $"CN Lớp {lop}";
-                                                        }).ToList();
-                                                    }
-
-                                                    foreach (var lop in result)
-                                                    {
-                                                        <th class="text-center">ĐIỂM @lop</th>
-                                                    }
-                                                }
-                                                <th class="text-center">ĐIỂM MÔN</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var subj in subjList)
-                                            {
-                                                <tr>
-                                                    <td>@subj</td>
-                                                    @foreach (var lop in list)
-                                                    {
-                                                        <td class="text-center">
-                                                            <input type="number" 
-                                                                   class="custom-input" 
-                                                                   placeholder="Nhập điểm @subj" 
-                                                                   id="@lop" 
-                                                                   data-field="@lop"
-                                                                   data-matieuchi="@item.MaTieuChi" />
-                                                        </td>
-
-                                                    }
-                                                    <td class="text-center"><span class="score-pill">0.00</span></td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="thpt-table-block thpt-table-first">
-                                    <h6 class="thpt-table-title">Kết quả điểm các tổ hợp</h6>
-                                    <div class="table-responsive">
-                                        <table class="table thpt-result-table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;">STT</th>
-                                                    <th>Tổ hợp môn</th>
-                                                    <th style="width: 150px; text-align: center">Tổng điểm tổ hợp môn</th>
-                                                    <th style="width: 110px; text-align: center">Tổng điểm</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @for (int i = 0; i < toHopList.Count; i++)
-                                                {
-                                                    <tr>
-                                                        <td>@(i + 1)</td>
-                                                        <td>@toHopList[i]</td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
+                                <div class="d-flex gap-3">
+                                    <div>
+                                        <label class="fw-semibold nv-label">Đơn vị tổ chức</label>
+                                        <select class="custom-selection" style="min-width: 150px;" id="DanhGiaNangLuc_01_@(item.Id)_LoaiDangKy_input">
+                                            <option value="">Chọn đơn vị</option>
+                                        </select>
                                     </div>
-                                </div>
-
-                                <div class="thpt-table-block">
-                                    <div class="thpt-table-title">
-                                        <div>
-                                            <i class="fa fa-star" aria-hidden="true" class="text-white fs-6"></i>
-                                        </div>
-                                        Tổ hợp môn có điểm cao nhất
+                                    <div>
+                                        <label class="fw-semibold nv-label">Điểm đánh giá</label>
+                                        <input type="number" class="custom-input" placeholder="Nhập điểm" id="DanhGiaNangLuc_01_@(item.Id)_NganhTotNghiepCK" />
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table thpt-result-table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;">STT</th>
-                                                    <th>Tổ hợp môn</th>
-                                                    <th style="width: 140px; text-align: center">Tổng điểm tổ hợp môn</th>
-                                                    <th style="width: 110px; text-align: center">Tổng điểm</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @for (int i = 0; i < 2; i++)
-                                                {
-                                                    <tr>
-                                                        <td>@(i + 1)</td>
-                                                        <td>@toHopList[i]</td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="thpt-note text-danger">
-                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                    Lưu ý: Điểm tổ hợp trên là điểm gốc, chưa nhân hệ số xét tuyển
                                 </div>
 
                                 <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
                                     @{
-                                        if ("201".Equals(item.MaTieuChi))
-                                        {
-                                            ViewBag.IdPrefix = "DiemTB101112";
-                                        }
-                                        else if ("202".Equals(item.MaTieuChi))
-                                        {
-                                            ViewBag.IdPrefix = "DiemTB1112";
-                                        }
-                                        else if ("Test_3".Equals(item.MaTieuChi))
-                                        {
-                                            ViewBag.IdPrefix = "DiemTBHB6HK";
-                                        }
+                                        ViewBag.IdPrefix = "DanhGiaNangLuc";
+                                        ViewBag.IdTarget = "nguyen-vong-list-dgnl";
+                                        ViewBag.DataTemplate = "nv-template";
+                                        ViewBag.Item = item;
+                                        ViewBag.Nganh = nganh;
+                                        ViewBag.TypeNum = 1;
+                                        ViewBag.ToHopList = toHopList;
+                                    }
+                                    @Html.Partial("_NguyenVongSimple")
+                                </div>
+                            </div>
+                            break;
+                        }
+
+                    @*SAT*@
+                    case 12:
+                        {
+                            <div class="phuongthuc-body">
+                                <div class="row d-flex gap-3">
+                                    <div class="col-md-4">
+                                        <label class="fw-semibold nv-label">Điểm SAT</label>
+                                        <input type="number" class="custom-input" placeholder="Nhập điểm SAT" id="SAT_01_@(item.IDCachNhapDiem)_1" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
+                                    @{
+                                        ViewBag.IdPrefix = "SAT";
+                                        ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
+                                        ViewBag.DataTemplate = "nv-template";
+                                        ViewBag.Item = item;
+                                        ViewBag.Nganh = nganh;
+                                        ViewBag.TypeNum = 1;
+                                        ViewBag.ToHopList = toHopList;
+                                    }
+                                    @Html.Partial("_NguyenVongSimple")
+                                </div>
+                            </div>
+                            break;
+                        }
+
+                    @*VSAT*@
+                    case 18:
+                        {
+                            <div class="phuongthuc-body">
+                                <div class="warning-title text-danger pb-2">
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                    <span class="fw-semibold">Lưu ý: Nhập hoặc lấy điểm thi VSAT (nếu có)</span>
+                                </div>
+
+                                <div class="d-grid">
+                                    @for (int i = 0; i < subjList.Count; i++)
+                                    {
+                                        <div class="row mb-3">
+                                            <div class="col-md-4">
+                                                <label class="fw-semibold nv-label">Trường tham gia kỳ thi</label>
+                                                <select class="custom-selection" style="min-width: 150px;" id="VSAT_01_@(item.IDCachNhapDiem)_TruongTG@(i)">
+                                                    <option value="">Chọn trường tham gia kỳ thi</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="fw-semibold nv-label">Số báo danh</label>
+                                                <input type="text" class="custom-input" placeholder="Nhập Số báo danh" id="VSAT_01_@(item.IDCachNhapDiem)_SBD@(i)" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="fw-semibold nv-label">Điểm @subjList[i]</label>
+                                                <input type="number" class="custom-input" placeholder="Nhập điểm @subjList[i]" id="VSAT_01_@(item.IDCachNhapDiem)_Diem@(i)" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="d-flex flex-column gap-3 nguyenvong-container mt-0">
+                                    @{
+                                        ViewBag.IdPrefix = "VSAT";
                                         ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
                                         ViewBag.DataTemplate = "nv-template-thpt";
                                         ViewBag.Item = item;
                                         ViewBag.Nganh = nganh;
                                         ViewBag.TypeNum = 1;
                                         ViewBag.ToHopList = toHopList;
-                                        ViewBag.ToHopMonJson = Model.ToHopMonJson;
                                     }
                                     @Html.Partial("_NguyenVongTHPT")
                                 </div>
@@ -261,100 +681,60 @@
                             break;
                         }
 
-                    case 4:
-                        {
-
-                            break;
-                        }
-
-                    @*Tốt nghiệp THPT*@
-                    case 5:
+                    @*Lớp 12 và TN THPT*@
+                    case 19:
                         {
                             <div class="phuongthuc-body">
-                                <div class="d-flex gap-3">
-                                    <div>
-                                        <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">Điểm thi THPT Quốc gia</span>
-                                        <div class="d-grid thpt-score-grid gap-3" style="margin-top: 10px;">
-                                            @for (int i = 0; i < subjList.Count; i++)
-                                            {
-                                                <div class="d-flex flex-column">
-                                                    <label class="fw-semibold nv-label">@subjList[i]</label>
-                                                    <input type="number" class="custom-input" placeholder="Nhập điểm @subjList[i]" id="KetQuaTHPTQuocGia_01_@(item.Id)_@(i+1)" />
-                                                </div>
-
-                                            }
+                                <div class="row">
+                                    <div class="row">
+                                        <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">ĐIỂM THI THPT</span>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-3">
+                                            <label class="fw-semibold nv-label">Môn 1</label>
+                                            <select class="custom-selection" style="min-width: 150px;" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon1_input">
+                                                <option value="">Chọn môn 1</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="fw-semibold nv-label">Điểm môn 1</label>
+                                            <input type="number" class="custom-input" placeholder="Nhập điểm môn 1" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon1_input" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="fw-semibold nv-label">Môn 2</label>
+                                            <select class="custom-selection" style="min-width: 150px;" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon2_input">
+                                                <option value="">Chọn môn 2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="fw-semibold nv-label">Điểm môn 2</label>
+                                            <input type="number" class="custom-input" placeholder="Nhập điểm môn 2" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon2_input" />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="thpt-table-block thpt-table-first">
-                                    <h6 class="thpt-table-title">Kết quả điểm các tổ hợp</h6>
-                                    <div class="table-responsive">
-                                        <table class="table thpt-result-table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;">STT</th>
-                                                    <th>Tổ hợp môn</th>
-                                                    <th style="width: 150px; text-align: center">Tổng điểm tổ hợp môn</th>
-                                                    <th style="width: 110px; text-align: center">Tổng điểm</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @for (int i = 0; i < toHopList.Count; i++)
-                                                {
-                                                    <tr>
-                                                        <td>@(i + 1)</td>
-                                                        <td>@toHopList[i]</td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
+                                <div class="row mt-3">
+                                    <div class="row">
+                                        <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">ĐIỂM MÔN LỚP 12</span>
                                     </div>
-                                </div>
-
-                                <div class="thpt-table-block">
-                                    <div class="thpt-table-title">
-                                        <div>
-                                            <i class="fa fa-star" aria-hidden="true" class="text-white fs-6"></i>
+                                    <div class="row mt-2">
+                                        <div class="col-md-3">
+                                            <label class="fw-semibold nv-label">Môn 3</label>
+                                            <select class="custom-selection" style="min-width: 150px;" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Lop12_input">
+                                                <option value="">Chọn môn 3</option>
+                                            </select>
                                         </div>
-                                        Tổ hợp môn có điểm cao nhất
+                                        <div class="col-md-3">
+                                            <label class="fw-semibold nv-label">Điểm môn 3</label>
+                                            <input type="number" class="custom-input" placeholder="Nhập điểm môn 3" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Lop12_input" />
+                                        </div>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table thpt-result-table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;">STT</th>
-                                                    <th>Tổ hợp môn</th>
-                                                    <th style="width: 140px; text-align: center">Tổng điểm tổ hợp môn</th>
-                                                    <th style="width: 110px; text-align: center">Tổng điểm</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @for (int i = 0; i < 2; i++)
-                                                {
-                                                    <tr>
-                                                        <td>@(i + 1)</td>
-                                                        <td>@toHopList[i]</td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                        <td class="text-center"><span class="score-pill">0.00 điểm</span></td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="thpt-note text-danger">
-                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                    Lưu ý: Điểm tổ hợp trên là điểm gốc, chưa nhân hệ số xét tuyển
                                 </div>
 
                                 <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
                                     @{
-                                        ViewBag.IdPrefix = "KetQuaTHPTQuocGia";
-                                        ViewBag.IdTarget = "nguyen-vong-list-thpt";
+                                        ViewBag.IdPrefix = "12TNTHPT";
+                                        ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
                                         ViewBag.DataTemplate = "nv-template-thpt";
                                         ViewBag.Item = item;
                                         ViewBag.Nganh = nganh;
@@ -366,485 +746,103 @@
                             </div>
                             break;
                         }
-
-                    case 6:
-                        {
-
-                            break;
-                        }
-
-                    case 7:
-                        {
-
-                            break;
-                        }
-
-                    @*Tuyển thẳng*@
-                    case 8:
-                        {
-                            <div class="phuongthuc-body">
-                                <div class="d-flex flex-column gap-1">
-                                    <span class="fw-semibold" style="font-size: 15px;">Đối tượng xét tuyển</span>
-                                    <ol class="list-doi-tuong d-flex flex-column gap-2 mb-0" style="padding-left: 10px !important;">
-                                        @{
-                                            for (int i = 0; i < doiTuongList.Count; i++)
-                                            {
-                                                <div class="d-flex gap-4 align-items-baseline">
-                                                    <input type="checkbox" class="doi-tuong-checkbox" id="CheckTuyenThang_@i" />
-                                                <li>
-                                                    <span class="doi-tuong-span">@doiTuongList[i]</span>
-                                                </li>
-                                        </div>
-                                    }
-                                        }
-                                        </ol>
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
-                                        @{
-                                            ViewBag.IdPrefix = "TuyenThang";
-                                            ViewBag.IdTarget = "nguyen-vong-list-tuyen-thang";
-                                            ViewBag.DataTemplate = "nv-template";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongSimple")
-                                    </div>
-                                </div>
-                                break;
-                            }
-
-                        @*Từ xa*@
-                        @*Liên thông*@
-                        case 9:
-                            {
-                                <div class="phuongthuc-body">
-                                    <div class="warning-title text-danger pb-2">
-                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        <span class="fw-semibold">Lưu ý: Đối với thí sinh có bảng điểm hệ 4 (tín chỉ) mà không có điểm hệ 10: nhập điểm hệ 4 rồi đánh dấu vào ô Điểm hệ 4</span>
-                                    </div>
-
-                                    <div class="d-grid">
-                                        <div class="row mb-3">
-                                            <div class="col-md-4">
-                                                <label class="fw-semibold nv-label">Tên môn cơ bản</label>
-                                                <select class="custom-selection" style="min-width: 150px;">
-                                                    <option value="">Chọn tên môn</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="fw-semibold nv-label">Điểm cả năm lớp 12</label>
-                                                <input type="number" class="custom-input" placeholder="Nhập điểm" />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-4">
-                                                <label class="fw-semibold nv-label">Tên học phần cơ sở</label>
-                                                <input type="text" class="custom-input" placeholder="Nhập Tên học phần cơ sở" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="fw-semibold nv-label">Điểm môn</label>
-                                                <input type="number" class="custom-input" placeholder="Nhập điểm" />
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <input type="checkbox" id="diem-he-4-checkbox" />
-                                                    <label for="diem-he-4-checkbox" class="fw-semibold nv-label">Điểm hệ 4</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-4">
-                                                <label class="fw-semibold nv-label">Tên học chuyên ngành</label>
-                                                <input type="text" class="custom-input" placeholder="Nhập Tên học chuyên ngành" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="fw-semibold nv-label">Điểm môn</label>
-                                                <input type="number" class="custom-input" placeholder="Nhập điểm" />
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <input type="checkbox" id="diem-he-4-checkbox" />
-                                                    <label for="diem-he-4-checkbox" class="fw-semibold nv-label">Điểm hệ 4</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-1">
-                                        <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">ĐỐI VỚI MÔN CHUYÊN MÔN CÓ NHIỀU HỌC PHẦN</span>
-                                        <div class="hoc-phan-list-lienthong">
-                                            <div class="row mb-2">
-                                                <div class="row text-primary fw-semibold fs-13px">
-                                                    <span class="col-md-2">Môn học phần 1</span>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 d-flex flex-column">
-                                                        <label class="fw-semibold nv-label">Tên môn</label>
-                                                        <input type="text" class="custom-input" placeholder="Nhập Tên môn" />
-                                                    </div>
-                                                    <div class="col-md-3 d-flex flex-column">
-                                                        <label class="fw-semibold nv-label">DVHT/TC</label>
-                                                        <input type="number" class="custom-input" placeholder="0.00" />
-                                                    </div>
-                                                    <div class="col-md-3 d-flex flex-column">
-                                                        <label class="fw-semibold nv-label">Điểm môn</label>
-                                                        <input type="number" class="custom-input" placeholder="0.00" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pt-2 d-flex justify-content-center">
-                                            <button type="button" class="btn btn-add-hp d-flex align-items-center gap-1 fw-semibold">
-                                                <i class="fa fa-plus fs-13px" aria-hidden="true"></i>
-                                                Thêm môn học phần
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-3 nguyenvong-container">
-                                        @{
-                                            if ("500".Equals(item.MaTieuChi))
-                                            {
-                                                ViewBag.IdPrefix = "LienThong";
-                                            }
-                                            else if ("600".Equals(item.MaTieuChi))
-                                            {
-                                                ViewBag.IdPrefix = "TuXa";
-                                            }
-                                            ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
-                                            ViewBag.DataTemplate = "nv-template-thpt";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongTHPT")
-                                    </div>
-                                </div>
-                                break;
-                            }
-
-                        @*Ctrinh liên kết*@
-                        @*Không nhập điểm*@
-                        case 10:
-                            {
-                                <div class="phuongthuc-body">
-                                    @switch (item.MaTieuChi)
-                                    {
-                                        case "Test_7":
-                                            {
-                                                break;
-                                            }
-                                        case "Test_8":
-                                            {
-                                                <div class="d-flex gap-3">
-                                                    <div>
-                                                        <label class="fw-semibold nv-label">Năm tốt nghiệp</label>
-                                                        <select class="custom-selection" style="min-width: 150px;">
-                                                            <option value="">Chọn Năm tốt nghiệp</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                break;
-                                            }
-                                    }
-
-                                    <div class="d-flex flex-column gap-3">
-                                        @{
-                                            if ("Test_7".Equals(item.MaTieuChi))
-                                            {
-                                                ViewBag.IdPrefix = "KhongNhapDiem";
-                                            }
-                                            else if ("Test_8".Equals(item.MaTieuChi))
-                                            {
-                                                ViewBag.IdPrefix = "ChuongTrinhLienKet";
-                                            }
-                                            ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
-                                            ViewBag.DataTemplate = "nv-template";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongSimple")
-                                    </div>
-                                </div>
-                                break;
-                            }
-
-                        @*ĐGNL*@
-                        case 11:
-                            {
-                                <div class="phuongthuc-body">
-                                    <div class="d-flex gap-3">
-                                        <div>
-                                            <label class="fw-semibold nv-label">Đơn vị tổ chức</label>
-                                            <select class="custom-selection" style="min-width: 150px;" id="DanhGiaNangLuc_01_@(item.Id)_LoaiDangKy_input">
-                                                <option value="">Chọn đơn vị</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label class="fw-semibold nv-label">Điểm đánh giá</label>
-                                            <input type="number" class="custom-input" placeholder="Nhập điểm" id="DanhGiaNangLuc_01_@(item.Id)_NganhTotNghiepCK" />
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
-                                        @{
-                                            ViewBag.IdPrefix = "DanhGiaNangLuc";
-                                            ViewBag.IdTarget = "nguyen-vong-list-dgnl";
-                                            ViewBag.DataTemplate = "nv-template";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongSimple")
-                                    </div>
-                                </div>
-                                break;
-                            }
-
-                        @*SAT*@
-                        case 12:
-                            {
-                                <div class="phuongthuc-body">
-                                    <div class="row d-flex gap-3">
-                                        <div class="col-md-4">
-                                            <label class="fw-semibold nv-label">Điểm SAT</label>
-                                            <input type="number" class="custom-input" placeholder="Nhập điểm SAT" id="SAT_01_@(item.IDCachNhapDiem)_1" />
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
-                                        @{
-                                            ViewBag.IdPrefix = "SAT";
-                                            ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
-                                            ViewBag.DataTemplate = "nv-template";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongSimple")
-                                    </div>
-                                </div>
-                                break;
-                            }
-
-                        @*VSAT*@
-                        case 18:
-                            {
-                                <div class="phuongthuc-body">
-                                    <div class="warning-title text-danger pb-2">
-                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        <span class="fw-semibold">Lưu ý: Nhập hoặc lấy điểm thi VSAT (nếu có)</span>
-                                    </div>
-
-                                    <div class="d-grid">
-                                        @for (int i = 0; i < subjList.Count; i++)
-                                        {
-                                            <div class="row mb-3">
-                                                <div class="col-md-4">
-                                                    <label class="fw-semibold nv-label">Trường tham gia kỳ thi</label>
-                                                    <select class="custom-selection" style="min-width: 150px;" id="VSAT_01_@(item.IDCachNhapDiem)_TruongTG@(i)">
-                                                        <option value="">Chọn trường tham gia kỳ thi</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="fw-semibold nv-label">Số báo danh</label>
-                                                    <input type="text" class="custom-input" placeholder="Nhập Số báo danh" id="VSAT_01_@(item.IDCachNhapDiem)_SBD@(i)" />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="fw-semibold nv-label">Điểm @subjList[i]</label>
-                                                    <input type="number" class="custom-input" placeholder="Nhập điểm @subjList[i]" id="VSAT_01_@(item.IDCachNhapDiem)_Diem@(i)" />
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-3 nguyenvong-container mt-0">
-                                        @{
-                                            ViewBag.IdPrefix = "VSAT";
-                                            ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
-                                            ViewBag.DataTemplate = "nv-template-thpt";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongTHPT")
-                                    </div>
-                                </div>
-                                break;
-                            }
-
-                        @*Lớp 12 và TN THPT*@
-                        case 19:
-                            {
-                                <div class="phuongthuc-body">
-                                    <div class="row">
-                                        <div class="row">
-                                            <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">ĐIỂM THI THPT</span>
-                                        </div>
-                                        <div class="row mt-2">
-                                            <div class="col-md-3">
-                                                <label class="fw-semibold nv-label">Môn 1</label>
-                                                <select class="custom-selection" style="min-width: 150px;" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon1_input">
-                                                    <option value="">Chọn môn 1</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="fw-semibold nv-label">Điểm môn 1</label>
-                                                <input type="number" class="custom-input" placeholder="Nhập điểm môn 1" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon1_input" />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="fw-semibold nv-label">Môn 2</label>
-                                                <select class="custom-selection" style="min-width: 150px;" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon2_input">
-                                                    <option value="">Chọn môn 2</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="fw-semibold nv-label">Điểm môn 2</label>
-                                                <input type="number" class="custom-input" placeholder="Nhập điểm môn 2" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Mon2_input" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-3">
-                                        <div class="row">
-                                            <span class="fw-bold text-uppercase" style="font-size: 14px; color: var(--color-text-light)">ĐIỂM MÔN LỚP 12</span>
-                                        </div>
-                                        <div class="row mt-2">
-                                            <div class="col-md-3">
-                                                <label class="fw-semibold nv-label">Môn 3</label>
-                                                <select class="custom-selection" style="min-width: 150px;" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Lop12_input">
-                                                    <option value="">Chọn môn 3</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="fw-semibold nv-label">Điểm môn 3</label>
-                                                <input type="number" class="custom-input" placeholder="Nhập điểm môn 3" id="DiemThiTHPT_01_@(item.IDCachNhapDiem)_Lop12_input" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-column gap-3" style="margin-top: 20px;">
-                                        @{
-                                            ViewBag.IdPrefix = "12TNTHPT";
-                                            ViewBag.IdTarget = "nguyen-vong-list-@item.Id";
-                                            ViewBag.DataTemplate = "nv-template-thpt";
-                                            ViewBag.Item = item;
-                                            ViewBag.Nganh = nganh;
-                                            ViewBag.TypeNum = 1;
-                                            ViewBag.ToHopList = toHopList;
-                                        }
-                                        @Html.Partial("_NguyenVongTHPT")
-                                    </div>
-                                </div>
-                                break;
-                            }
-                    }
-            </div>
-        }
-    </div>
+                }
+        </div>
+    }
 </div>
 
-@*@section Scripts
-{
-    <script src="~/Scripts/js/razor-form-handler.js"></script>
-    <script>
-        var tieuChiList = @Html.Raw(JsonConvert.SerializeObject(Model.TieuChiList));
+    @*@section Scripts
+        {
+            <script src="~/Scripts/js/razor-form-handler.js"></script>
+            <script>
+                var tieuChiList = @Html.Raw(JsonConvert.SerializeObject(Model.TieuChiList));
 
-        tieuChiList.forEach(function (tieuChi) {
-            var selectElement = document.getElementById("CachNhapDiem_01_" + tieuChi.Id);
-        });    
-    </script>
-    <script type="text/template" id="nv-template">
-        <div class="row nguyen-vong-item d-flex align-items-end gap-3">
-            <div class="col-md-4 d-flex flex-column">
-                <label class="fw-semibold nv-label">
-                    Nguyện vọng __INDEX__ <span class="text-danger">*</span>
-                </label>
-                <select class="custom-selection nv-select" style="min-width: 300px;">
-                    <option value="">Chọn ngành</option>
-                    <option value="CNTT">Công nghệ thông tin</option>
-                    <option value="TMDT">Thương mại điện tử</option>
-                </select>
-            </div>
+                tieuChiList.forEach(function (tieuChi) {
+                    var selectElement = document.getElementById("CachNhapDiem_01_" + tieuChi.Id);
+                });
+            </script>
+            <script type="text/template" id="nv-template">
+                <div class="row nguyen-vong-item d-flex align-items-end gap-3">
+                    <div class="col-md-4 d-flex flex-column">
+                        <label class="fw-semibold nv-label">
+                            Nguyện vọng __INDEX__ <span class="text-danger">*</span>
+                        </label>
+                        <select class="custom-selection nv-select" style="min-width: 300px;">
+                            <option value="">Chọn ngành</option>
+                            <option value="CNTT">Công nghệ thông tin</option>
+                            <option value="TMDT">Thương mại điện tử</option>
+                        </select>
+                    </div>
 
-            <div class="col-md-1">
-                <div class="btn-delete">
-                    <i class="fa fa-trash"></i>
-                </div>
-            </div>
-        </div>
-    </script>
-
-    <script type="text/template" id="nv-template-thpt">
-        <div class="row nguyen-vong-item nguyen-vong-thpt d-flex justify-between align-items-end gap-3">
-            <div class="col-md-4 d-flex flex-column">
-                <label class="fw-semibold nv-label">
-                    Nguyện vọng __INDEX__ <span class="text-danger">*</span>
-                </label>
-                <select class="custom-selection nv-select" style="min-width: 260px;">
-                    <option value="">Chọn ngành</option>
-                    <option value="CNTT">Công nghệ thông tin</option>
-                    <option value="TMDT">Thương mại điện tử</option>
-                    <option value="HH">Công nghệ kỹ thuật hóa học</option>
-                </select>
-            </div>
-
-            <div class="col-md-3 d-flex flex-column gap-1">
-                <label class="fw-semibold fs-13px">Tổ hợp môn <span class="text-danger">*</span></label>
-                <select class="custom-selection nv-combo-select" style="min-width: 260px;">
-                    <option value="">Chọn tổ hợp môn</option>
-                    <option value="(A00): Toán, Lý, Hóa">(A00): Toán, Lý, Hóa</option>
-                    <option value="(D01): Toán, Tiếng Anh, Văn">(D01): Toán, Tiếng Anh, Văn</option>
-                    <option value="(B00): Toán, Hóa, Sinh">(B00): Toán, Hóa, Sinh</option>
-                    <option value="(C00): Văn, Sử, Địa">(C00): Văn, Sử, Địa</option>
-                </select>
-            </div>
-
-            <div class="col-md-1 d-flex flex-column gap-1 nv-total-score-wrap">
-                <label class="fw-semibold fs-13px">Tổng điểm</label>
-                <span class="score-pill">0.00 điểm</span>
-            </div>
-
-            <div class="col-md-1">
-                <div class="btn-delete">
-                    <i class="fa fa-trash"></i>
-                </div>
-            </div>
-        </div>
-    </script>
-    <script type="text/template" id="hp-template">
-        <div class="row mb-2">
-            <div class="row text-primary fw-semibold fs-13px">
-                <span class="col-md-2">Môn học phần __INDEX__</span>
-            </div>
-            <div class="row">
-                <div class="col-md-3 d-flex flex-column">
-                    <label class="fw-semibold nv-label">Tên môn</label>
-                    <input type="text" class="custom-input" placeholder="Nhập Tên môn" />
-                </div>
-                <div class="col-md-3 d-flex flex-column">
-                    <label class="fw-semibold nv-label">DVHT/TC</label>
-                    <input type="number" class="custom-input" placeholder="0.00" />
-                </div>
-                <div class="col-md-3 d-flex flex-column">
-                    <label class="fw-semibold nv-label">Điểm môn</label>
-                    <input type="number" class="custom-input" placeholder="0.00" />
-                </div>
-                <div class="col-md-1 d-flex align-items-end">
-                    <div class="btn-delete-hp">
-                        <i class="fa fa-trash"></i>
+                    <div class="col-md-1">
+                        <div class="btn-delete">
+                            <i class="fa fa-trash"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </script>
-}*@
+            </script>
+
+            <script type="text/template" id="nv-template-thpt">
+                <div class="row nguyen-vong-item nguyen-vong-thpt d-flex justify-between align-items-end gap-3">
+                    <div class="col-md-4 d-flex flex-column">
+                        <label class="fw-semibold nv-label">
+                            Nguyện vọng __INDEX__ <span class="text-danger">*</span>
+                        </label>
+                        <select class="custom-selection nv-select" style="min-width: 260px;">
+                            <option value="">Chọn ngành</option>
+                            <option value="CNTT">Công nghệ thông tin</option>
+                            <option value="TMDT">Thương mại điện tử</option>
+                            <option value="HH">Công nghệ kỹ thuật hóa học</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 d-flex flex-column gap-1">
+                        <label class="fw-semibold fs-13px">Tổ hợp môn <span class="text-danger">*</span></label>
+                        <select class="custom-selection nv-combo-select" style="min-width: 260px;">
+                            <option value="">Chọn tổ hợp môn</option>
+                            <option value="(A00): Toán, Lý, Hóa">(A00): Toán, Lý, Hóa</option>
+                            <option value="(D01): Toán, Tiếng Anh, Văn">(D01): Toán, Tiếng Anh, Văn</option>
+                            <option value="(B00): Toán, Hóa, Sinh">(B00): Toán, Hóa, Sinh</option>
+                            <option value="(C00): Văn, Sử, Địa">(C00): Văn, Sử, Địa</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-1 d-flex flex-column gap-1 nv-total-score-wrap">
+                        <label class="fw-semibold fs-13px">Tổng điểm</label>
+                        <span class="score-pill">0.00 điểm</span>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="btn-delete">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" id="hp-template">
+                <div class="row mb-2">
+                    <div class="row text-primary fw-semibold fs-13px">
+                        <span class="col-md-2">Môn học phần __INDEX__</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="fw-semibold nv-label">Tên môn</label>
+                            <input type="text" class="custom-input" placeholder="Nhập Tên môn" />
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="fw-semibold nv-label">DVHT/TC</label>
+                            <input type="number" class="custom-input" placeholder="0.00" />
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <label class="fw-semibold nv-label">Điểm môn</label>
+                            <input type="number" class="custom-input" placeholder="0.00" />
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <div class="btn-delete-hp">
+                                <i class="fa fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </script>
+        }*@

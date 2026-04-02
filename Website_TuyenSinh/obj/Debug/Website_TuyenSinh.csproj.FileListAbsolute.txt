@@ -235,3 +235,12 @@ D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_Tuy
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\Website_.9E6BD646.Up2Date
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.dll
 D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\obj\Debug\WebApplicationTest3.pdb
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Text.Json.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Threading.Tasks.Extensions.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Memory.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.IO.Pipelines.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.ValueTuple.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Text.Encodings.Web.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Numerics.Vectors.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Project\TTS_Website_TuyenSinh_MVC_ASC\Website_TuyenSinh\bin\System.Runtime.CompilerServices.Unsafe.dll

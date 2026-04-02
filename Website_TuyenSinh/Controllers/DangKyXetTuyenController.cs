@@ -38,11 +38,6 @@ namespace Website_TuyenSinh.Controllers
 
             ViewBag.ShowSidebar = true;
 
-            if (model.TieuChiList.Count > 0)
-            {
-                
-            }
-
             var data = repo.getByLoai(typeCauHinh);
 
             if (model.TieuChiList != null && model.TieuChiList.Count > 0 && typeCauHinh == 43)

@@ -39,7 +39,7 @@ $(function () {
         });
 
     // ADD
-    $(".btn-add").click(function () {
+    $(document).on("click", ".btn-add", function () {
         const $button = $(this);
         const $container = $button.closest(".phuongthuc-container");
         const targetId = $button.data("target");

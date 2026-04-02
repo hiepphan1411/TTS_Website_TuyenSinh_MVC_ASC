@@ -288,19 +288,33 @@ $(function () {
     //Build nội dung của tab tương ứng
     function buildTabPanel(tab) {
 
-        //if (tab.tabKey === "ThongTinXetTuyen") {
-        //    var $panel = $('<div class="df-tab-panel"></div>');
+        if (tab.tabKey === "ThongTinXetTuyen") {
+            var $panel = $('<div class="df-tab-panel"></div>');
 
-        //    $panel.html('<div class="text-center p-3">Đang tải dữ liệu...</div>');
+            $panel.html('<div class="text-center p-3">Đang tải dữ liệu...</div>');
 
-        //    $.get("/DangKyXetTuyen/RazorLogicChinhQuy", function (html) {
-        //        $panel.html(html);
-        //    }).fail(function () {
-        //        $panel.html('<div class="alert alert-danger">Không tải được dữ liệu xét tuyển</div>');
-        //    });
+            $.ajax({
+                url: "/DangKyXetTuyen/RazorLogicChinhQuy",
+                type: "GET",
+                cache: false, 
+                success: function (html) {
+                    $panel.html(html);
 
-        //    return $panel;
-        //}
+                    if (window.kendo) {
+                        kendo.init($panel);
+                    }
+                },
+                error: function (xhr) {
+                    $panel.html(
+                        '<div class="alert alert-danger">' +
+                        'Lỗi: ' + (xhr.responseText || 'Không tải được dữ liệu') +
+                        '</div>'
+                    );
+                }
+            });
+
+            return $panel;
+        }
 
         if (tab.isReviewTab) {
             return buildReviewPanel(tab);
