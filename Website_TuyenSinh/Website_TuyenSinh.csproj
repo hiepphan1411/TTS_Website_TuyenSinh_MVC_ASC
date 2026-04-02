@@ -159,6 +159,7 @@
     <Content Include="Content\css\ho-so-thi-sinh.css" />
     <Content Include="Content\css\razor-logic-style.css" />
     <Content Include="Content\css\thongke-ktx-theo-lop.css" />
+    <Content Include="Content\css\tra-cuu-ket-qua.css" />
     <Content Include="Content\images\logo-ASC.png" />
     <Content Include="Content\images\login-background.png" />
     <Content Include="Content\kendo\2016.3.1118-source\gulpfile.js" />
